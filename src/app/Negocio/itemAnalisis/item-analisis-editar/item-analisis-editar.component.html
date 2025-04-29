@@ -1,0 +1,49 @@
+<form (submit)="onSubmit()" [formGroup]="form">
+    <br><br>
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+           
+            <p-floatlabel>
+                <input pInputText id="nombreItemAnalisis" formControlName="nombreItemAnalisis" pTooltip="Ingrese el NombreItemAnalisis" tooltipPosition="bottom" />
+                <label for="nombreItemAnalisis">Nombre</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+           
+            <p-floatlabel>
+                <input pInputText id="abreviatura" formControlName="abreviatura" pTooltip="Ingrese el Abreviatura" tooltipPosition="bottom" />
+                <label for="abreviatura">Abreviatura</label>
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+    <br />
+    <br />
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+           
+            <p-floatlabel>
+                <input pInputText id="valorMaximo" formControlName="valorMaximo" pTooltip="Ingrese el ValorMaximo" tooltipPosition="bottom" />
+                <label for="valorMaximo">Valor Maximo</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+           
+            <p-floatlabel>
+                <input pInputText id="valorMinimo" formControlName="valorMinimo" pTooltip="Ingrese el ValorMinimo" tooltipPosition="bottom" />
+                <label for="valorMinimo">Valor Minimo</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+           
+            <p-floatlabel>
+                <input pInputText id="medida" formControlName="medida" pTooltip="Ingrese la Medida" tooltipPosition="bottom" />
+                <label for="medida">Medida</label>
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+    <br />
+    <br />
+    <p-button label="Guardar" icon="pi pi-check" type="submit" severity="success"></p-button>
+    &nbsp;&nbsp;
+    <p-button label="Cancelar" icon="pi pi-times" type="button" (click)="onCancel()" severity="danger"></p-button>
+</form>

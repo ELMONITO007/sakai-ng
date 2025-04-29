@@ -1,0 +1,106 @@
+<p-toast></p-toast>
+<p-card>
+    <app-breadcrumb-router [items]="items"></app-breadcrumb-router>
+
+    <p-toolbar styleClass="mb-6">
+        <ng-template #start>
+            <div class="flex">
+                <p-button label="Limpiar" icon="pi pi-filter-slash" severity="primary" (click)="clear(dt1)" [rounded]="true" [outlined]="true" />
+                &nbsp;
+
+                <p-button label="Exportar" icon="pi pi-file-excel" severity="info" (onClick)="exportExcel(dt1)" [rounded]="true" [outlined]="true" />
+            </div>
+        </ng-template>
+
+        <ng-template #end>
+            <p-iconfield iconPosition="left" class="ml-auto">
+                <p-inputicon>
+                    <i class="pi pi-search"></i>
+                </p-inputicon>
+                <input pInputText type="text" (input)="applyGlobalFilterToDataTable($event, dt1)" placeholder="Buscar ..." />
+            </p-iconfield>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table
+        styleClass="p-datatable-gridlines"
+        #dt1
+        [value]="modelo"
+        dataKey="id"
+        [rows]="10"
+        showGridlines
+        stripedRows
+        [rowsPerPageOptions]="[10, 25, 50]"
+        [loading]="loading"
+        [paginator]="true"
+        [tableStyle]="{ 'min-width': '35rem' }"
+        [resizableColumns]="true"
+        [globalFilterFields]="['nombreItemAnalisis', 'abreviatura', 'valorMaximo', 'valorMinimo', 'medida']"
+        currentPageReportTemplate="Mostrando {first} de {last} de un total de {totalRecords} registros"
+    >
+        <ng-template #header>
+            <tr>
+                
+
+                <th pResizableColumn pSortableColumn="nombreItemAnalisis">
+                    <div class="flex items-center">
+                      Item
+                        <p-columnFilter type="text" field="nombreItemAnalisis" display="menu" />
+                    </div>
+                </th>
+
+                <th pResizableColumn pSortableColumn="abreviatura">
+                    <div class="flex items-center">
+                        Abreviatura
+                        <p-columnFilter type="text" field="abreviatura" display="menu" />
+                    </div>
+                </th>
+
+                <th pResizableColumn pSortableColumn="valorMaximo">
+                    <div class="flex items-center">
+                        Valor Maximo
+                        <p-columnFilter type="text" field="valorMaximo" display="menu" />
+                    </div>
+                </th>
+
+                <th pResizableColumn pSortableColumn="valorMinimo">
+                    <div class="flex items-center">
+                        Valor Minimo
+                        <p-columnFilter type="text" field="valorMinimo" display="menu" />
+                    </div>
+                </th>
+
+                <th pResizableColumn pSortableColumn="medida">
+                    <div class="flex items-center">
+                        Medida
+                        <p-columnFilter type="text" field="medida" display="menu" />
+                    </div>
+                </th>
+
+                <th pResizableColumn>
+                    <div class="flex items-center">Acciones</div>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-orden>
+            <tr>
+                
+                <td class="cursor-pointer hover:!bg-neutral-200/20" (click)="ir(orden.id_ItemAnalisis)">{{ orden.nombreItemAnalisis }}</td>
+                <td class="cursor-pointer hover:!bg-neutral-200/20" (click)="ir(orden.id_ItemAnalisis)">{{ orden.abreviatura }}</td>
+                <td class="cursor-pointer hover:!bg-neutral-200/20" (click)="ir(orden.id_ItemAnalisis)">{{ orden.valorMaximo }}</td>
+                <td class="cursor-pointer hover:!bg-neutral-200/20" (click)="ir(orden.id_ItemAnalisis)">{{ orden.valorMinimo }}</td>
+                <td class="cursor-pointer hover:!bg-neutral-200/20" (click)="ir(orden.id_ItemAnalisis)">{{ orden.medida }}</td>
+                <td>
+                    <p-button icon="pi pi-pencil" class="mr-2" (onClick)="editar(orden.id_ItemAnalisis)" [rounded]="true" [outlined]="true" size="small" />
+                   
+                </td>
+            </tr>
+           
+        </ng-template>
+        <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+                <td [colSpan]="5">No se encontraron Items registradas</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-card>

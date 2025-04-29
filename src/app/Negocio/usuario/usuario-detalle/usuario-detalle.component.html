@@ -1,0 +1,87 @@
+<p-toast></p-toast>
+<app-breadcrumb-router [items]="items"></app-breadcrumb-router>
+<p-card>
+<div class="font-medium text-2xl text-900 mb-3 " style="text-align: center;">Datos del usuario  {{usuario.nombre}}  </div> 
+
+<p-tabs value="0">
+  <p-tablist>
+    <p-tab value="0">Header I</p-tab>
+    <p-tab value="1">Header II</p-tab>
+    <p-tab value="2">Header III</p-tab>
+  </p-tablist>
+  <p-tabpanels>
+    <p-tabpanel value="0">
+      <p-card>
+        <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
+          <div class="text-500 w-full md:w-2 font-medium">Nombre</div>
+          <div class="text-900 w-full md:w-10">{{ usuario.nombre }}</div>
+        </li>
+        <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
+          <div class="text-500 w-full md:w-2 font-medium">Apellido</div>
+          <div class="text-900 w-full md:w-10">{{ usuario.apellido }}</div>
+        </li>
+        <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
+          <div class="text-500 w-full md:w-2 font-medium">Email</div>
+          <div class="text-900 w-full md:w-10">{{ usuario.email }}</div>
+        </li>
+        <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
+          <div class="text-500 w-full md:w-2 font-medium">UserName</div>
+          <div class="text-900 w-full md:w-10">{{ usuario.userName }}</div>
+        </li>
+        <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
+          <div class="text-500 w-full md:w-2 font-medium">Puesto</div>
+          <div class="text-900 w-full md:w-10">{{ usuario.puesto }}</div>
+        </li>
+
+        <br>
+        <p-button
+          icon="pi pi-pencil"
+          class="mr-2"
+          (onClick)="editarUsuario(usuario.id_Usuario)"
+        label="Editar"
+          [outlined]="true"
+          [rounded]="true"
+        ></p-button>
+        &nbsp;
+        <p-button
+          icon="pi pi-trash"
+          (onClick)="openDelete()"
+          severity="danger"
+          label="Eliminar"
+          [rounded]="true"
+          [outlined]="true"></p-button>
+          <p-dialog [(visible)]="visibleDelete" appendTo="body" [modal]="true" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '40vw'}">
+            <ng-template pTemplate="header">
+                <div class="flex align-items-center">
+                    <span class="flex align-items-center justify-content-center bg-cyan-100 text-cyan-800 mr-3 border-circle" style="width:32px;height:32px">
+                        <i class="pi pi-times text-lg"></i>
+                    </span>
+                    <span class="font-medium text-2xl text-900">Esta Seguro de Eliminar el Usuario</span>
+                </div>
+            </ng-template>
+            <p class="line-height-3 p-0 m-0">
+               Esta por eliminar el usuario {{ usuario.nombre }} {{ usuario.apellido }}. <br />
+               Esta acción no se puede deshacer. <br />
+            </p>
+    
+            <br>
+            <div class=" border-top-1 surface-border pt-3">
+                <button pButton pRipple icon="pi pi-times" [loading]="loading"  (click)="eliminarUsuario(usuario.id_Usuario)" label="Cancel" class="p-button-text"></button>
+                <button pButton pRipple icon="pi pi-check" (click)="closeDelete()" label="Save"></button>
+            </div>
+        </p-dialog>
+      </p-card>
+    </p-tabpanel>
+    <p-tabpanel value="1">
+      <p class="m-0">
+       
+      </p>
+    </p-tabpanel>
+    <p-tabpanel value="2">
+      <p class="m-0">
+       
+      </p>
+    </p-tabpanel>
+  </p-tabpanels>
+</p-tabs>
+</p-card>

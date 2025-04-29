@@ -1,0 +1,105 @@
+<form (submit)="onSubmit()" [formGroup]="form">
+
+
+    
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            
+            <p-inputgroup-addon>
+                <i class="pi pi-user"></i>
+            </p-inputgroup-addon>
+            
+            <p-floatlabel>
+                <input pInputText id="over_label" formControlName="nombre"  />
+                <label for="over_label" >Nombre</label>
+            </p-floatlabel>
+    
+         
+            
+            
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <i class="pi pi-user"></i>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="over_label" formControlName="apellido" />
+                <label for="over_label" >Apellido</label>
+            </p-floatlabel>
+    
+            
+        </p-inputgroup>
+     
+    </div>
+    <br>
+    <br>
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            
+            <p-inputgroup-addon>
+                <i class="pi pi-envelope"></i>
+            </p-inputgroup-addon>
+            
+            <p-floatlabel>
+                <input pInputText id="over_label" formControlName="email" />
+                <label for="over_label" >Email</label>
+            </p-floatlabel>
+    
+         
+            
+            
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <i class="pi pi-user"></i>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="over_label" formControlName="userName" />
+                <label for="over_label" >Usuario</label>
+            </p-floatlabel>
+    
+            
+        </p-inputgroup>
+    </div>
+    
+    <br>
+    <br>
+    <div class="flex flex-col md:flex-row gap-6">
+    
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <i class="pi pi-briefcase"></i>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="over_label" formControlName="puesto" />
+                <label for="over_label" >Puesto</label>
+            </p-floatlabel>
+    
+            
+        </p-inputgroup>
+    
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <i class="pi pi-bell"></i>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="over_label" formControlName="contraseña" />
+                <label for="over_label" >Contraseña</label>
+            </p-floatlabel>
+    
+            
+        </p-inputgroup>
+    
+    </div>
+    <br>
+    <br>
+    <p-button label="Guardar" icon="pi pi-check" type="submit" severity="success"></p-button>
+    &nbsp;&nbsp;
+    <p-button label="Cancelar" icon="pi pi-times" type="button" (click)="onCancel()"severity="danger"></p-button>
+
+    
+    
+    </form>
+    
+    
+    
