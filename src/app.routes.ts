@@ -8,6 +8,12 @@ import { UsuarioDetalleComponent } from './app/Negocio/usuario/usuario-detalle/u
 import { UsuarioListarComponent } from './app/Negocio/usuario/usuario-listar/usuario-listar.component';
 import { ItemAnalisisListarComponent } from './app/Negocio/itemAnalisis/item-analisis-listar/item-analisis-listar.component';
 import { TipoAnalisisListarComponent } from './app/Negocio/tipoAnalisis/tipo-analisis-listar/tipo-analisis-listar.component';
+import { TipoAnalisisDetallesComponent } from './app/Negocio/tipoAnalisis/tipo-analisis-detalles/tipo-analisis-detalles.component';
+import { CubaListarComponent } from './app/Negocio/cuba/cuba-listar/cuba-listar.component';
+import { SectorListarComponent } from './app/Negocio/sector/sector-listar/sector-listar.component';
+import { UsuarioColaborarFijoComponent } from './app/Negocio/usuario/usuario-colaborar-fijo/usuario-colaborar-fijo.component';
+import { LaboratorioListarComponent } from './app/Negocio/laboratorio/laboratorio-listar/laboratorio-listar.component';
+import { LaboratorioDetalleComponent } from './app/Negocio/laboratorio/laboratorio-detalle/laboratorio-detalle.component';
 
 export const appRoutes: Routes = [
     {
@@ -22,6 +28,15 @@ export const appRoutes: Routes = [
             { path: 'usuario', component: UsuarioListarComponent },
             { path: 'usuario/:id', component: UsuarioDetalleComponent },
             {path: 'tipo', component:TipoAnalisisListarComponent },
+            {path: 'tipo/:id', component:TipoAnalisisDetallesComponent },
+            {path:'cuba',component:CubaListarComponent},
+            {path:'sector',component:SectorListarComponent},
+           
+            {path: 'colaborador/:id', component:UsuarioColaborarFijoComponent },
+            {path:'laboratorio',component:LaboratorioListarComponent},
+            {path:'laboratorio/:id',component:LaboratorioDetalleComponent},
+
+
         ]
     },
     { path: 'landing', component: Landing },

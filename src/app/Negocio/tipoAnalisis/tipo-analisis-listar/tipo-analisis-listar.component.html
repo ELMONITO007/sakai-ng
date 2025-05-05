@@ -67,9 +67,10 @@
                 <td class="cursor-pointer hover:!bg-neutral-200/20" (click)="ir(orden.id_TipoAnalisis)">{{ orden.nombreTipoAnalisis }}</td>
                 <td class="cursor-pointer hover:!bg-neutral-200/20" (click)="ir(orden.id_TipoAnalisis)">{{ orden.descripcion }}</td>
                 <td>
-                    <p-button icon="pi pi-pencil" class="mr-2" (onClick)="editar(orden.id_TipoAnalisis)" [rounded]="true" [outlined]="true" size="small" />
+                    <p-button  class="mr-2" (onClick)="editar(orden.id_TipoAnalisis)" [rounded]="true" [outlined]="true" size="small" > <mat-icon>edit</mat-icon></p-button>
 
-                    <p-button icon="pi pi-eye" class="mr-2" (onClick)="itemAnalisis(orden.id_TipoAnalisis)" [rounded]="true" [outlined]="true" size="small" />
+                   
+                    <p-button  class="mr-2" (onClick)="ir(orden.id_TipoAnalisis)" [rounded]="true" [outlined]="true" size="small" ><mat-icon>info</mat-icon></p-button>
                    
                 </td>
             </tr>

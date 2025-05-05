@@ -1,1 +1,11 @@
-<p>tipo-analisis-detalles works!</p>
+<p-toast></p-toast>
+<app-breadcrumb-router [items]="items"></app-breadcrumb-router>
+
+<p-card>
+<div class="font-medium text-2xl text-900 mb-3 " style="text-align: center;">Datos del Tipo  {{modelo.nombreTipoAnalisis}} </div> 
+<app-item-analisis-listar [id]="modelo.id_TipoAnalisis"></app-item-analisis-listar>
+
+</p-card>
+
+
+

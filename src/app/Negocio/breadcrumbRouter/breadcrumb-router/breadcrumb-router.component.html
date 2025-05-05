@@ -1,13 +1,13 @@
 <p-breadcrumb class="max-w-full" [model]="items">
     <ng-template #item let-item>
-        <ng-container *ngIf="item.route; else elseBlock">
+        <ng-container *ngIf="item.primary; else elseBlock">
             <a [routerLink]="item.route" class="p-breadcrumb-item-link">
-                <span [ngClass]="[item.icon ? item.icon : '', 'text-color']"></span>
+            
                 <span class="text-primary font-semibold">{{ item.label }}</span>
             </a>
         </ng-container>
         <ng-template #elseBlock>
-            <a [href]="item.url">
+            <a [routerLink]="item.route">
                 <span class="text-color">{{ item.label }}</span>
             </a>
         </ng-template>

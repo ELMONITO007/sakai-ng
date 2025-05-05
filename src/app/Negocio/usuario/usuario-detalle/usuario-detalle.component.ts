@@ -51,9 +51,9 @@ export class UsuarioDetalleComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       const id = params['id'];
       this.items = [
-        { label: 'Home', icon: 'pi pi-home', route: '/index' },
-        { label: 'Usuario', icon: 'pi pi-fw pi-user', route: '/usuario' },
-        { label: 'Detalle', icon: 'pi pi-fw pi-user', route: '/usuario/' + id },
+        { label: 'Home', icon: 'pi pi-home', route: '',primary:false },
+        { label: 'Usuario', icon: 'pi pi-fw pi-user', route: '/usuario',primary:false },
+        { label: 'Detalle', icon: 'pi pi-fw pi-user', route: '/usuario/' + id,primary:true },
       ];
       this.service.obtenerUno(id).subscribe(data => {
         this.usuario = data;

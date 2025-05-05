@@ -1,1 +1,18 @@
-<p>tipo-analisis-editar works!</p>
+<form (submit)="onSubmit()" [formGroup]="form">
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>wysiwyg</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="descripcion" formControlName="descripcion" pTooltip="Ingrese el Descripcion" tooltipPosition="bottom" />
+                <label for="descripcion">Descripción</label>
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+    <br />
+    <br />
+    <p-button label="Guardar" icon="pi pi-check" type="submit" severity="success" [loading]="desactivar"></p-button>
+    &nbsp;&nbsp;
+    <p-button label="Cancelar" icon="pi pi-times" type="button" (click)="onCancel()" severity="danger"></p-button>
+</form>

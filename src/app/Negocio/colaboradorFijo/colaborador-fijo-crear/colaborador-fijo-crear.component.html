@@ -1,0 +1,80 @@
+
+<p-card>
+    <p-table
+        styleClass="p-datatable-gridlines"
+        #dt1
+        [value]="usuarios"
+        dataKey="id"
+        [rows]="10"
+        showGridlines
+        stripedRows
+        [rowsPerPageOptions]="[10, 25, 50]"
+        [loading]="loading"
+        [paginator]="true"
+        [tableStyle]="{ 'min-width': '35rem' }"
+        [resizableColumns]="true"
+        [globalFilterFields]="['nombre', 'apellido', 'email', 'userName', 'puesto']"
+    >
+        <ng-template #header>
+            <tr>
+                <th pResizableColumn pSortableColumn="nombre" [style.width]="'25%'">
+                    <div class="flex items-center">
+                        Nombre
+                        <p-columnFilter type="text" field="nombre" display="menu" />
+                    </div>
+                </th>
+                <th pResizableColumn>
+                    <div class="flex items-center">
+                        Usuario
+                        <p-columnFilter type="text" field="userName" display="menu" />
+                    </div>
+                </th>
+                <th pResizableColumn>
+                    <div class="flex items-center">
+                        Email
+                        <p-columnFilter type="text" field="email" display="menu" />
+                    </div>
+                </th>
+                <th pResizableColumn>
+                    <div class="flex items-center">
+                        Puesto
+                        <p-columnFilter type="text" field="puesto" display="menu" />
+                    </div>
+                </th>
+                <th pResizableColumn>
+                    <div class="flex items-center">Acciones</div>
+                </th>
+            </tr>
+        </ng-template>
+
+        <ng-template #body let-customer>
+            <tr>
+                <td>{{ customer.nombre }} {{ customer.apellido }}</td>
+                <td>{{ customer.userName }}</td>
+                <td>{{ customer.email }}</td>
+                <td>{{ customer.puesto }}</td>
+                <td>
+                    <p-button icon="pi pi-check" class="mr-2" (onClick)="onSelect(customer)" [rounded]="true" [outlined]="true" size="small" />
+                    <p-dialog [(visible)]="visible" appendTo="body" [modal]="true" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }" [style]="{ width: '40vw' }">
+                        <ng-template pTemplate="header">
+                            <div class="flex align-items-center">
+                                <span class="flex align-items-center justify-content-center bg-cyan-100 text-cyan-800 mr-3 border-circle" style="width: 32px; height: 32px">
+                                    <i class="pi pi-times text-lg"></i>
+                                </span>
+                                <span class="font-medium text-2xl text-900">Esta Seguro de Agregar al Colaborador</span>
+                            </div>
+                        </ng-template>
+                        <p class="line-height-3 p-0 m-0">Esta por agregar al Colaborador {{ customer.nombre }} {{ customer.apellido }}. <br /></p>
+
+                        <br />
+                        <div class="border-top-1 surface-border pt-3">
+                            <button pButton pRipple icon="pi pi-check" (click)="onSubmit(usuarioSeleccionado.id_Usuario)"  label="Agregar"></button>
+                            <button pButton pRipple icon="pi pi-times"  (click)="closeDialog()"label="Cancel" class="p-button-text"></button>
+                            
+                        </div>
+                    </p-dialog>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-card>

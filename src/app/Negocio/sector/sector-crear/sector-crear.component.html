@@ -1,0 +1,64 @@
+<form (submit)="onSubmit()" [formGroup]="form">
+    <div class="flex flex-col md:flex-row gap-6">
+ 
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>pin_drop</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="nombreSector" formControlName="nombreSector" pTooltip="Ingrese el Nombre" tooltipPosition="bottom" />
+                <label for="nombreSector">Nombre</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+               <mat-icon>apartment</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="coordenada" formControlName="coordenada" pTooltip="Ingrese la Empresa" tooltipPosition="bottom" />
+                <label for="coordenada">Empresa</label>
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+   
+    <br />
+    <br />
+    <div class="flex flex-col md:flex-row gap-6">
+       
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>map</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="codigo" formControlName="codigo" pTooltip="Ingrese el Codigo" tooltipPosition="bottom" />
+                <label for="codigo">Codigo</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>info</mat-icon>
+
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="detalle" formControlName="detalle" pTooltip="Ingrese el Detalle" tooltipPosition="bottom" />
+                <label for="detalle">Detalle</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>science</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-select formControlName="id_Laboratorio" [options]="laboratorios" optionLabel="nombreLaboratorio" optionValue="id_Laboratorio"  placeholder="Seleccione un laborotorio" class="w-full md:w-56" />
+             
+                <label for="id_Laboratorio">id_Laboratorio</label>
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+    
+    <br />
+    <br />
+    <p-button label="Guardar" icon="pi pi-check" type="submit" severity="success"  [loading]="desactivar"></p-button>
+    &nbsp;&nbsp;
+    <p-button label="Cancelar" icon="pi pi-times" type="button" (click)="onCancel()" severity="danger"></p-button>
+</form>

@@ -11,6 +11,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DialogModule } from 'primeng/dialog';
 import { Router } from '@angular/router';
 import { ngxCsv } from 'ngx-csv/ngx-csv';
+import { MatIconModule } from '@angular/material/icon';
 import { BreadcrumbRouterComponent } from '../../breadcrumbRouter/breadcrumb-router/breadcrumb-router.component';
 import { ToolbarModule } from 'primeng/toolbar';
 import { MessageModule } from 'primeng/message';
@@ -18,13 +19,14 @@ import { ToastModule } from 'primeng/toast';
 import { tipoAnalisisDTO, tipoAnalisisCreacionDTO } from '../../../Entidades/tipoAnalisis';
 import { TipoAnalisisServiceService } from '../../../Servicios/TipoAnalisis-service.service';
 import { TipoAnalisisEditarComponent } from '../tipo-analisis-editar/tipo-analisis-editar.component';
+import { ItemAnalisisListarComponent } from '../../itemAnalisis/item-analisis-listar/item-analisis-listar.component';
 @Component({
     selector: 'app-tipo-analisis-listar',
 
     templateUrl: './tipo-analisis-listar.component.html',
     styleUrl: './tipo-analisis-listar.component.scss',
     standalone: true,
-    imports: [ButtonModule, CardModule, TableModule, HttpClientModule, ToolbarModule, IconFieldModule, BreadcrumbRouterComponent, InputIconModule, InputTextModule, DialogModule, MessageModule, ToastModule],
+    imports: [ButtonModule,MatIconModule, CardModule, TableModule, HttpClientModule, ToolbarModule, IconFieldModule, BreadcrumbRouterComponent, InputIconModule, InputTextModule, DialogModule, MessageModule, ToastModule],
     providers: [TipoAnalisisServiceService, DialogService, MessageService]
 })
 export class TipoAnalisisListarComponent implements OnInit {
@@ -64,16 +66,27 @@ export class TipoAnalisisListarComponent implements OnInit {
     }
 
     itemAnalisis(id: number) {
-       
-    }
-    editar(id: number) {
-        this.ref = this.dialogService.open(TipoAnalisisEditarComponent, {
+        this.ref = this.dialogService.open(ItemAnalisisListarComponent, {
             width: '70%',
             height: '50%',
             data: {
                 id: id
             },
-            maximizable: true
+            maximizable: true,
+        
+        });
+        
+
+       
+    }
+    editar(id: number) {
+        this.ref = this.dialogService.open(TipoAnalisisEditarComponent, {
+            width: '40%',
+            height: '29%',
+            data: {
+                id: id
+            },
+            maximizable: true,  
         });
         this.ref.onClose.subscribe((d) => {
             if (d !== null) {
@@ -97,7 +110,7 @@ export class TipoAnalisisListarComponent implements OnInit {
         this.visibleDelete = true;
     }
     ir(id: number) {
-        this.route.navigate(['/tipoAnalisis/detalles', id]);
+        this.route.navigate(['/tipo/', id],{ skipLocationChange: true });
     }
     exportExcel(dt1: Table) {
         var options = {
@@ -105,7 +118,7 @@ export class TipoAnalisisListarComponent implements OnInit {
             fieldSeparator: ';',
             quoteStrings: '"',
             decimalseparator: ',',
-            headers: ['id_TipoAnalisis', 'id_Norma', 'nombreTipoAnalisis', 'descripcion']
+            headers: ['id_TipoAnalisis', 'id_Norma', 'Nombre', 'Descripcion']
         };
         new ngxCsv(this.modelo, 'TipoAnalisis', options);
     }

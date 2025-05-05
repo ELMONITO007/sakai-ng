@@ -1,6 +1,6 @@
 <p-toast></p-toast>
 <p-card>
-    <app-breadcrumb-router [items]="items"></app-breadcrumb-router>
+ 
 
     <p-toolbar styleClass="mb-6">
         <ng-template #start>
@@ -85,11 +85,11 @@
         <ng-template #body let-orden>
             <tr>
                 
-                <td class="cursor-pointer hover:!bg-neutral-200/20" (click)="ir(orden.id_ItemAnalisis)">{{ orden.nombreItemAnalisis }}</td>
-                <td class="cursor-pointer hover:!bg-neutral-200/20" (click)="ir(orden.id_ItemAnalisis)">{{ orden.abreviatura }}</td>
-                <td class="cursor-pointer hover:!bg-neutral-200/20" (click)="ir(orden.id_ItemAnalisis)">{{ orden.valorMaximo }}</td>
-                <td class="cursor-pointer hover:!bg-neutral-200/20" (click)="ir(orden.id_ItemAnalisis)">{{ orden.valorMinimo }}</td>
-                <td class="cursor-pointer hover:!bg-neutral-200/20" (click)="ir(orden.id_ItemAnalisis)">{{ orden.medida }}</td>
+                <td >{{ orden.nombreItemAnalisis }}</td>
+                <td >{{ orden.abreviatura }}</td>
+                <td >{{ orden.valorMaximo }}</td>
+                <td >{{ orden.valorMinimo }}</td>
+                <td >{{ orden.medida }}</td>
                 <td>
                     <p-button icon="pi pi-pencil" class="mr-2" (onClick)="editar(orden.id_ItemAnalisis)" [rounded]="true" [outlined]="true" size="small" />
                    

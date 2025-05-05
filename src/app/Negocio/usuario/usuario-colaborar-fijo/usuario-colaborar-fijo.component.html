@@ -1,0 +1,118 @@
+<p-toast></p-toast>
+<p-card>
+    <app-breadcrumb-router [items]="items"></app-breadcrumb-router>
+
+    <p-toolbar styleClass="mb-6">
+        <ng-template #start>
+            <div class="flex">
+ 
+                <p-button label="Limpiar" icon="pi pi-filter-slash" severity="primary" (click)="clear(dt1)"  [rounded]="true" [outlined]="true"/>
+                &nbsp;
+            
+                <p-button label="Nuevo" icon="pi pi-plus" severity="secondary" (onClick)="AgregarUsuario()"  [rounded]="true" [outlined]="true"/>
+                &nbsp;
+                <p-button label="Exportar" icon="pi pi-file-excel" severity="info" (onClick)="exportExcel(dt1)" [rounded]="true" [outlined]="true"/>
+              
+            </div>
+          
+        </ng-template>
+
+        <ng-template #end>
+            <p-iconfield iconPosition="left" class="ml-auto">
+                <p-inputicon>
+                    <i class="pi pi-search"></i>
+                </p-inputicon>
+                <input pInputText type="text" (input)="applyGlobalFilterToDataTable($event, dt1)" placeholder="Buscar ..." />
+            </p-iconfield>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table
+    styleClass="p-datatable-gridlines"
+    #dt1
+    [value]="usuarios"
+    dataKey="id"
+    [rows]="10"
+    showGridlines
+    stripedRows 
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [loading]="loading"
+    [paginator]="true"
+
+    [tableStyle]="{ 'min-width': '35rem' }"
+    [resizableColumns]="true" 
+    [globalFilterFields]="['nombre', 'apellido', 'email', 'userName', 'puesto']"
+>
+
+<ng-template #header>
+    <tr>
+        <th pResizableColumn pSortableColumn="nombre" [style.width]="'25%'">
+            <div class="flex items-center">
+                Nombre
+                <p-columnFilter type="text" field="nombre" display="menu" />
+            </div>
+        </th>
+        <th pResizableColumn>
+            <div class="flex items-center">
+                Usuario
+                <p-columnFilter type="text" field="userName" display="menu" />
+            </div>
+        </th>
+        <th pResizableColumn>
+            <div class="flex items-center">
+                Email
+                <p-columnFilter type="text" field="email" display="menu" />
+            </div>
+        </th>
+        <th pResizableColumn>
+            <div class="flex items-center">
+                Puesto
+                <p-columnFilter type="text" field="puesto" display="menu" />
+            </div>
+
+        </th>
+        <th pResizableColumn>
+            <div class="flex items-center">
+                Acciones
+            </div>
+    </tr>
+</ng-template>
+
+<ng-template #body let-customer>
+    <tr>
+        <td  class="cursor-pointer hover:!bg-neutral-200/20" (click)="detalleUsuario(customer.id_Usuario)">
+            {{ customer.nombre }} {{ customer.apellido }}
+        </td>
+        <td  class="cursor-pointer hover:!bg-neutral-200/20" (click)="detalleUsuario(customer.id_Usuario)">{{ customer.userName }}</td>
+        <td  class="cursor-pointer hover:!bg-neutral-200/20" (click)="detalleUsuario(customer.id_Usuario)">{{ customer.email }}</td>
+        <td  class="cursor-pointer hover:!bg-neutral-200/20" (click)="detalleUsuario(customer.id_Usuario)">{{ customer.puesto }}</td>
+        <td>
+            
+            <p-button icon="pi pi-trash" (onClick)="openDelete(customer.id_Usuario)" severity="danger" [rounded]="true" [outlined]="true"  size="small"/>
+             <p-dialog [(visible)]="visibleDelete" appendTo="body" [modal]="true" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '40vw'}">
+        <ng-template pTemplate="header">
+            <div class="flex align-items-center">
+                <span class="flex align-items-center justify-content-center bg-cyan-100 text-cyan-800 mr-3 border-circle" style="width:32px;height:32px">
+                    <i class="pi pi-times text-lg"></i>
+                </span>
+                <span class="font-medium text-2xl text-900">Esta Seguro de Eliminar el Usuario</span>
+            </div>
+        </ng-template>
+        <p class="line-height-3 p-0 m-0">
+           Esta por eliminar el usuario {{ customer.nombre }} {{ customer.apellido }}. <br />
+           Esta acción no se puede deshacer. <br />
+        </p>
+
+        <br>
+        <div class=" border-top-1 surface-border pt-3">
+            <button pButton pRipple icon="pi pi-check"  (click)="eliminarUsuario(idDelete)"  label="Borrar"></button>
+            <button pButton pRipple icon="pi pi-times" label="Cancel" (click)="closeDelete()" class="p-button-text"></button>
+         
+        </div>
+    </p-dialog>
+    </tr>
+   
+</ng-template>
+</p-table>
+
+</p-card>

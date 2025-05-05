@@ -1,0 +1,28 @@
+<form (submit)="onSubmit()" [formGroup]="form">
+    <br>
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>science</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-select formControlName="id_Laboratorio" [options]="laboratorios" optionLabel="nombreLaboratorio" optionValue="id_Laboratorio"  placeholder="Seleccione un laborotorio" class="w-full md:w-56" />
+                <label for="id_Laboratorio">Laboratorio</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>question_mark</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-select formControlName="enUso" [options]="SINO" optionLabel="label" optionValue="value"  placeholder="Seleccione si esta en uso" class="w-full md:w-56" />
+                <label for="enUso">En Uso?</label>
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+    <br>
+    <br>
+  <p-button label="Guardar" icon="pi pi-check" [loading]="desactivar" type="submit" severity="success"></p-button>
+    &nbsp;&nbsp;
+    <p-button label="Cancelar" icon="pi pi-times" type="button" (click)="onCancel()"severity="danger"></p-button>
+</form>

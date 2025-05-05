@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import {
   FormBuilder,
@@ -19,6 +19,7 @@ import { TooltipModule } from 'primeng/tooltip';
 
 import { UsuarioServiceService } from '../../../Servicios/Usuario-service.service';
 import { usuarioDTO } from '../../../Entidades/usuario';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-usuario-crear',
@@ -41,6 +42,7 @@ export class UsuarioCrearComponent implements OnInit {
   form: FormGroup;
   modelo: usuarioDTO;
   loading: boolean = false;
+    @ViewChild('dt1') dt1!: Table;
   constructor(
     private fb: FormBuilder,
     public ref: DynamicDialogRef,
