@@ -1,0 +1,157 @@
+<p-toast></p-toast>
+<p-card>
+    <app-breadcrumb-router [items]="items"></app-breadcrumb-router>
+
+    <p-toolbar styleClass="mb-6">
+        <ng-template #start>
+            <div class="flex">
+                <p-button label="Limpiar" icon="pi pi-filter-slash" severity="primary" (click)="clear(dt1)" [rounded]="true" [outlined]="true" />
+                &nbsp;
+
+                <p-button label="Nuevo" icon="pi pi-plus" severity="secondary" (onClick)="crear()" [rounded]="true" [outlined]="true" />
+                &nbsp;
+                <p-button label="Exportar" icon="pi pi-file-excel" severity="info" (onClick)="exportExcel(dt1)" [rounded]="true" [outlined]="true" />
+            </div>
+        </ng-template>
+
+        <ng-template #end>
+            <p-iconfield iconPosition="left" class="ml-auto">
+                <p-inputicon>
+                    <i class="pi pi-search"></i>
+                </p-inputicon>
+                <input pInputText type="text" (input)="applyGlobalFilterToDataTable($event, dt1)" placeholder="Buscar ..." />
+            </p-iconfield>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table
+        styleClass="p-datatable-gridlines"
+        #dt1
+        [value]="modelo"
+        dataKey="id"
+        [rows]="10"
+        showGridlines
+        stripedRows
+        [rowsPerPageOptions]="[10, 25, 50]"
+        [loading]="loading"
+        [paginator]="true"
+        [tableStyle]="{ 'min-width': '35rem' }"
+        [resizableColumns]="true"
+        [globalFilterFields]="[
+            'id_Equipo',
+            'codigo',
+            'tipoEquipo',
+            'marca',
+            'modelo',
+            'numeroSerie',
+            'fechaInstalacion',
+            'fechaFabricacion',
+            'ubicacion',
+            'id_Sector',
+            'detalle',
+            'estado',
+            'fase',
+            'potenciaPrimario',
+            'potenciaSecundario',
+            'potenciaTerciario',
+            'tensionPrimario',
+            'tensionSecundario',
+            'tensionTerciario',
+            'tipoAceite',
+            'volumenAceite',
+            'inhibido',
+            'fechaVencimiento'
+        ]"
+        currentPageReportTemplate="Mostrando {first} de {last} de un total de {totalRecords} registros"
+    >
+        <ng-template #header>
+            <tr>
+               
+
+                <th pResizableColumn pSortableColumn="codigo">
+                    <div class="flex items-center">
+                        Codigo
+                        <p-columnFilter type="text" field="codigo" display="menu" />
+                    </div>
+                </th>
+
+                <th pResizableColumn pSortableColumn="tipoEquipo">
+                    <div class="flex items-center">
+                        Tipo
+                        <p-columnFilter type="text" field="tipoEquipo" display="menu" />
+                    </div>
+                </th>
+
+                <th pResizableColumn pSortableColumn="marca">
+                    <div class="flex items-center">
+                        Marca
+                        <p-columnFilter type="text" field="marca" display="menu" />
+                    </div>
+                </th>
+
+               
+
+             
+                <th pResizableColumn pSortableColumn="estado">
+                    <div class="flex items-center">
+                        Estado
+                        <p-columnFilter type="text" field="estado" display="menu" />
+                    </div>
+                </th>
+
+           
+
+                <th pResizableColumn pSortableColumn="fechaVencimiento">
+                    <div class="flex items-center">
+                        FechaVencimiento
+                        <p-columnFilter type="text" field="fechaVencimiento" display="menu" />
+                    </div>
+                </th>
+
+                <th pResizableColumn>
+                    <div class="flex items-center">Acciones</div>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-orden>
+            <tr>
+                <td class="cursor-pointer hover:!bg-neutral-200/20" (click)="ir(orden.id_Equipo)">{{ orden.codigo }}</td>
+                <td class="cursor-pointer hover:!bg-neutral-200/20" (click)="ir(orden.id_Equipo)">{{ orden.tipoEquipo }}</td>
+                <td class="cursor-pointer hover:!bg-neutral-200/20" (click)="ir(orden.id_Equipo)">{{ orden.marca }} {{ orden.modelo }}</td>
+
+                <td class="cursor-pointer hover:!bg-neutral-200/20" (click)="ir(orden.id_Equipo)">{{ orden.estado }}</td>
+
+                <td class="cursor-pointer hover:!bg-neutral-200/20" (click)="ir(orden.id_Equipo)">{{ orden.fechaVencimiento }}</td>
+                <td>
+                    <p-button icon="pi pi-pencil" class="mr-2" (onClick)="editar(orden.id_Equipo)" [rounded]="true" [outlined]="true" size="small" />
+                    <p-button icon="pi pi-trash" (onClick)="openDelete(orden.id_Equipo)" severity="danger" [rounded]="true" [outlined]="true" size="small" />
+                </td>
+            </tr>
+            <p-dialog [(visible)]="visibleDelete" appendTo="body" [modal]="true" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }" [style]="{ width: '40vw' }">
+                <ng-template pTemplate="header">
+                    <div class="flex align-items-center">
+                        <span class="flex align-items-center justify-content-center bg-cyan-100 text-cyan-800 mr-3 border-circle" style="width: 32px; height: 32px">
+                            <i class="pi pi-times text-lg"></i>
+                        </span>
+                        <span class="font-medium text-2xl text-900">Esta Seguro de Eliminar el Equipo</span>
+                    </div>
+                </ng-template>
+                <p class="line-height-3 p-0 m-0">
+                    Esta por eliminar el Equipo {{ orden.Codigo }}. <br />
+                    Esta acción no se puede deshacer. <br />
+                </p>
+
+                <br />
+                <div class="border-top-1 surface-border pt-3">
+                    <button pButton pRipple icon="pi pi-times" (click)="eliminar(idDelete)" label="Cancel" class="p-button-text"></button>
+                    <button pButton pRipple icon="pi pi-check" (click)="closeDelete()" label="Borrar"></button>
+                </div>
+            </p-dialog>
+        </ng-template>
+        <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+                <td [colSpan]="5">No se encontraron Equipo registradas</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-card>

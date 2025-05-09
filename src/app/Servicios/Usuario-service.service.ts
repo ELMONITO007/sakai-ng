@@ -20,6 +20,9 @@ export class UsuarioServiceService {
   public ReadColaboradorFaltante(id: number) {
     return this.http.get<usuarioDTO[]>(`${this.apiURL}/ReadColaboradorFaltante?id=${id}`);
   }
+  public ReadLaboratistaFaltante(id: number) {
+    return this.http.get<usuarioDTO[]>(`${this.apiURL}/ReadLaboratistaFaltante?id=${id}`);
+  }
   public readLaboratorio(id: number) {
     return this.http.get<usuarioDTO[]>(`${this.apiURL}/readLaboratorio?id=${id}`);
   }

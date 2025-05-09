@@ -1,0 +1,227 @@
+<form (submit)="onSubmit()" [formGroup]="form">
+    
+    <br />
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            <p-inputgroup-addon>
+               <mat-icon>settings_b_roll</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-select formControlName="tipoEquipo" [options]="tipoEquipo" optionLabel="item" optionValue="item" placeholder="Seleccione un Tipo*" class="w-full md:w-56" />
+               
+                <label for="tipoEquipo">Tipo*</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>build</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="marca" formControlName="marca" pTooltip="Ingrese el Marca" tooltipPosition="bottom" />
+                <label for="marca">Marca*</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+               <mat-icon>handyman</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="modelo" formControlName="modelo" pTooltip="Ingrese el Modelo" tooltipPosition="bottom" />
+                <label for="modelo">Modelo*</label>
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+    <br />
+    <br />
+    <div class="flex flex-col md:flex-row gap-6">
+       
+        <p-inputgroup>
+            <p-inputgroup-addon>
+              <mat-icon>iron</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="numeroSerie" formControlName="numeroSerie" pTooltip="Ingrese el Numero de Serie*" tooltipPosition="bottom" required/>
+                <label for="numeroSerie">Numero de Serie*</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+              <mat-icon>calendar_today</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                
+                <input   pInputText type="date" id="fechaInstalacion" formControlName="fechaInstalacion" pTooltip="Ingrese el Fecha de Instalacion" tooltipPosition="bottom" />
+                <label for="fechaInstalacion">Fecha Instalación*</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+               <mat-icon>history</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input   pInputText type="date" id="fechaFabricacion" formControlName="fechaFabricacion" pTooltip="Ingrese el fecha de Fabricacion" tooltipPosition="bottom" />
+
+                <label for="fechaFabricacion">FechaFabricación*</label>
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+    <br />
+    <br />
+   
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>location_on</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="ubicacion" formControlName="ubicacion" pTooltip="Ingrese el Ubicacion" tooltipPosition="bottom" />
+                <label for="ubicacion">Ubicación</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>location_city</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-select formControlName="id_Sector" [options]="sectores" optionLabel="detalle" optionValue="id_Sector" placeholder="Seleccione un Sector*" class="w-full md:w-56" />
+            
+                <label for="id_Sector">Sector*</label>
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+    <br />
+    <br />
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            <p-inputgroup-addon>
+              <mat-icon>info</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="detalle" formControlName="detalle" pTooltip="Ingrese el Detalle*" tooltipPosition="bottom" />
+                <label for="detalle">Detalle*</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+               <mat-icon>trending_up</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-select formControlName="estado" [options]="estado" optionLabel="item" optionValue="item" placeholder="Seleccione el Estado*" class="w-full md:w-56" />
+
+                <label for="estado">Estado*</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>more_horiz</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="fase" formControlName="fase" pTooltip="Ingrese el Fase" tooltipPosition="bottom" />
+                <label for="fase">Fase</label>
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+    
+    <br />
+    <br />
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            <p-inputgroup-addon>
+              <mat-icon>123</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="potenciaPrimario" formControlName="potenciaPrimario" pTooltip="Ingrese la Potencia Primaria" tooltipPosition="bottom" />
+                <label for="potenciaPrimario">Potencia Primario</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>123</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="potenciaSecundario" formControlName="potenciaSecundario" pTooltip="Ingrese la Potencia Secundaria" tooltipPosition="bottom" />
+                <label for="potenciaSecundario">Potencia Secundario</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>123</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="potenciaTerciario" formControlName="potenciaTerciario" pTooltip="Ingrese la Potencia Terciaria" tooltipPosition="bottom" />
+                <label for="potenciaTerciario">Potencia Terciario</label>
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+    <br />
+    <br />
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            <p-inputgroup-addon>
+              <mat-icon>filter_1</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="tensionPrimario" formControlName="tensionPrimario" pTooltip="Ingrese la Tensión Primaria" tooltipPosition="bottom" />
+                <label for="tensionPrimario">Tensión Primario</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>filter_2</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="tensionSecundario" formControlName="tensionSecundario" pTooltip="Ingrese el Tensión Secundaria" tooltipPosition="bottom" />
+                <label for="tensionSecundario">Tensión Secundario</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>filter_3</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="tensionTerciario" formControlName="tensionTerciario" pTooltip="Ingrese la Tensión Terciaria" tooltipPosition="bottom" />
+                <label for="tensionTerciario">Tensión Terciario</label>
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+    <br />
+    <br />
+   
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>oil_barrel</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-select formControlName="tipoAceite" [options]="tipoAceite" optionLabel="item" optionValue="item" placeholder="Seleccione el tipo de Aceite*" class="w-full md:w-56" />
+
+                <label for="tipoAceite">Tipo Aceite*</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>straighten</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="volumenAceite" formControlName="volumenAceite" pTooltip="Ingrese el Volumen del Aceite" tooltipPosition="bottom" />
+                <label for="volumenAceite">Volumen Aceite</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>check_circle</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-select formControlName="inhibido" [options]="inhibido" optionLabel="item" optionValue="item" placeholder="Seleccione si esta Inhibido*" class="w-full md:w-56" />
+
+             
+                <label for="inhibido">Inhibido*</label>
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+    <br />
+    <br />
+    <p-button label="Guardar" icon="pi pi-check" type="submit"  [disabled]="!form.valid" severity="success"></p-button>
+    &nbsp;&nbsp;
+    <p-button label="Cancelar" icon="pi pi-times" type="button" (click)="onCancel()" severity="danger"></p-button>
+</form>

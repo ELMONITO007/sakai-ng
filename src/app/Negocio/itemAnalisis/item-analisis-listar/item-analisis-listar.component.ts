@@ -24,7 +24,7 @@ import { InputGroup } from 'primeng/inputgroup';
 @Component({
     selector: 'app-item-analisis-listar',
     standalone: true,
-    imports: [ButtonModule, CardModule, TableModule, HttpClientModule, ToolbarModule, IconFieldModule, BreadcrumbRouterComponent, InputIconModule, InputTextModule, DialogModule, MessageModule, ToastModule],
+    imports: [ButtonModule, CardModule, TableModule, HttpClientModule, ToolbarModule, IconFieldModule, InputIconModule, InputTextModule, DialogModule, MessageModule, ToastModule],
     providers: [ItemAnalisisServiceService, DialogService, MessageService],
     templateUrl: './item-analisis-listar.component.html',
     styleUrl: './item-analisis-listar.component.scss'

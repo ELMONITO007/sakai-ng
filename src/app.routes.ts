@@ -14,6 +14,10 @@ import { SectorListarComponent } from './app/Negocio/sector/sector-listar/sector
 import { UsuarioColaborarFijoComponent } from './app/Negocio/usuario/usuario-colaborar-fijo/usuario-colaborar-fijo.component';
 import { LaboratorioListarComponent } from './app/Negocio/laboratorio/laboratorio-listar/laboratorio-listar.component';
 import { LaboratorioDetalleComponent } from './app/Negocio/laboratorio/laboratorio-detalle/laboratorio-detalle.component';
+import { EquipoListarComponent } from './app/Negocio/equipo/equipo-listar/equipo-listar.component';
+import { EquipoDetalleComponent } from './app/Negocio/equipo/equipo-detalle/equipo-detalle.component';
+import { OrdenEnsayoListarComponent } from './app/Negocio/ordenEnsayo/orden-ensayo-listar/orden-ensayo-listar.component';
+import { OrdenEnsayoDetalleComponent } from './app/Negocio/ordenEnsayo/orden-ensayo-detalle/orden-ensayo-detalle.component';
 
 export const appRoutes: Routes = [
     {
@@ -35,8 +39,12 @@ export const appRoutes: Routes = [
             {path: 'colaborador/:id', component:UsuarioColaborarFijoComponent },
             {path:'laboratorio',component:LaboratorioListarComponent},
             {path:'laboratorio/:id',component:LaboratorioDetalleComponent},
+            {path:'equipo',component:EquipoListarComponent},
+            {path:'equipo/:id',component:EquipoDetalleComponent},
+            {path:'ordenEnsayo',component:OrdenEnsayoListarComponent},
+            {path:'ordenEnsayo/:id',component:OrdenEnsayoDetalleComponent},
 
-
+            
         ]
     },
     { path: 'landing', component: Landing },

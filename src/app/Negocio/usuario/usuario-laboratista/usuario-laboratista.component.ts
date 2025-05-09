@@ -24,12 +24,13 @@ import { colaboradoresFijosDTO } from '../../../Entidades/colaboradoresFijos';
 import { ColaboradoresFijosServiceService } from '../../../Servicios/ColaboradoresFijos-service.service';
 import { RefreshIcon } from 'primeng/icons';
 import { LaboratistaCrearComponent } from '../../laboratista/laboratista-crear/laboratista-crear.component';
+import { LaboratistaServiceService } from '../../../Servicios/Laboratista-service.service';
 
 
 @Component({
   selector: 'app-usuario-laboratista',
   standalone: true,
-  imports: [ButtonModule, CardModule, TableModule, HttpClientModule, ToolbarModule, IconFieldModule, BreadcrumbRouterComponent, InputIconModule, InputTextModule, DialogModule, MessageModule, ToastModule],
+  imports: [ButtonModule, CardModule, TableModule, HttpClientModule, ToolbarModule, IconFieldModule, InputIconModule, InputTextModule, DialogModule, MessageModule, ToastModule],
   providers: [UsuarioServiceService, DialogService, MessageService, ColaboradoresFijosServiceService],
   templateUrl: './usuario-laboratista.component.html',
   styleUrl: './usuario-laboratista.component.scss'
@@ -45,7 +46,7 @@ export class UsuarioLaboratistaComponent implements OnInit {
     @ViewChild('dt1') dt1!: Table;
     constructor(
         private usuarioService: UsuarioServiceService,
-        private colaboradoresFijosService: ColaboradoresFijosServiceService,
+        private service: LaboratistaServiceService,
         public dialogService: DialogService,
         private messageService: MessageService,
         private route: Router,
@@ -95,7 +96,7 @@ export class UsuarioLaboratistaComponent implements OnInit {
     eliminarUsuario(id: number) {
         this.loading = true;
         this.activeRoute.params.subscribe((params) => {
-            this.colaboradoresFijosService.borrar(id, Number(params['id'])).subscribe((data) => {
+            this.service.borrar(id,this.id).subscribe((data) => {
                 this.messageService.add({ severity: 'success', summary: 'Usuario Eliminado', detail: 'El usuario se ha eliminado correctamente', life: 3000 });
                 this.ngOnInit();
                 this.visibleDelete = false;

@@ -14,7 +14,7 @@ export class SectorServiceService {
   }
 
   public obtenerPorPadre(id: number){
-    return this.http.get<sectorDTO[]>(`${this.apiURL}/ReadByXXX?id=${id}`);
+    return this.http.get<sectorDTO[]>(`${this.apiURL}/ReadByLaboratorio?id=${id}`);
   }
 
   public obtenerUno(id: number){
@@ -25,10 +25,12 @@ export class SectorServiceService {
        return this.http.post(this.apiURL, codigo);
    }
 
-   public actualizar(codigo: sectorCreacionDTO) {
-       return this.http.put(this.apiURL, codigo);
+   public actualizarLaboratorio(codigo: sectorCreacionDTO) {
+       return this.http.put(`${this.apiURL}/UpdateLaboratorio`, codigo);
    }
-
+   public actualizar(codigo: sectorCreacionDTO) {
+    return this.http.put(this.apiURL, codigo);
+}
    public borrar(id: number) {
         return this.http.delete(`${this.apiURL}?id=${id}`);
    }

@@ -1,5 +1,5 @@
 <p-toast></p-toast>
-
+<app-breadcrumb-router [items]="items"></app-breadcrumb-router>
 <p-card>
     <div class="font-medium text-2xl text-900 mb-3" style="text-align: center">Datos del laboratorio de {{ modelo.nombreLaboratorio }}</div>
     <p-tabs value="Datos">
@@ -57,7 +57,7 @@
                <app-usuario-laboratista [id]="modelo.id_Laboratorio"></app-usuario-laboratista>
             </p-tabpanel>
             <p-tabpanel value="2">
-                <p class="m-0"></p>
+               <app-sector-listar-laboratorio [id]="modelo.id_Laboratorio"></app-sector-listar-laboratorio>
             </p-tabpanel>
         </p-tabpanels>
     </p-tabs>

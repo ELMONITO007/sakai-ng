@@ -17,8 +17,9 @@ export class LaboratistaServiceService {
 
 
 
-   public borrar(id: number,) {
-        return this.http.delete(`${this.apiURL}?id=${id}`);
+   public borrar(id: number,id_laboratorio: number) {
+       return this.http.delete(`${this.apiURL}?id=${id}&id_laboratorio=${id_laboratorio}`);
+   
    }
 
 }

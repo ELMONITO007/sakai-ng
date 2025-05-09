@@ -1,0 +1,205 @@
+<form (submit)="onSubmit()" [formGroup]="form">
+    <br />   <br />
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <span class="material-symbols-outlined">
+                    H₂
+                    </span>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-inputnumber (ngModelChange)="CalcularGasesTotales()" formControlName="hidrogeno" inputId="locale-user" [minFractionDigits]="1" />
+             
+                <label style="font-size: 16px;" for="hidrogeno">Hidrogeno</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <span class="material-symbols-outlined">
+                    CH₄
+                    </span>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-inputnumber (ngModelChange)="CalcularGasesTotales()" formControlName="metano" inputId="locale-user" [minFractionDigits]="1" />
+             
+                <label style="font-size: 16px;" for="metano">Metano</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <span class="material-symbols-outlined">
+                    C₂H₆
+                    </span>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-inputnumber (ngModelChange)="CalcularGasesTotales()" formControlName="etano" inputId="locale-user" [minFractionDigits]="1" />
+                
+                <label style="font-size: 16px;" for="etano">Etano</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <span class="material-symbols-outlined">
+                    C₂H₄
+                    </span>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-inputnumber (ngModelChange)="CalcularGasesTotales()" formControlName="etileno" inputId="locale-user" [minFractionDigits]="1" />
+                <label style="font-size: 16px;" for="etileno">Etileno</label>
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+
+    <br />
+    <br />
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <span class="material-symbols-outlined">
+                    C₂H₂
+                    </span>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-inputnumber (ngModelChange)="CalcularGasesTotales()" formControlName="acetileno" inputId="locale-user" [minFractionDigits]="1" />
+
+                <label style="font-size: 16px;" for="acetileno">Acetileno</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <span class="material-symbols-outlined">
+                    CO
+                    </span>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-inputnumber (ngModelChange)="CalcularGasesTotales()" formControlName="monoxidodeCarbono" inputId="locale-user" [minFractionDigits]="1" />
+                <label style="font-size: 16px;" for="monoxidodeCarbono">Monóxido de Carbono</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <span class="material-symbols-outlined">
+                    CO₂
+                    </span>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-inputnumber (ngModelChange)="CalcularGasesTotales()" formControlName="dioxidodeCarbono" inputId="locale-user" [minFractionDigits]="1" />
+                <label style="font-size: 16px;" for="dioxidodeCarbono">Dióxido de Carbono</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <span class="material-symbols-outlined">
+                    N₂
+                    </span>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+
+
+                <p-inputnumber (ngModelChange)="CalcularGasesTotales()" formControlName="nitrogeno" inputId="locale-user" [minFractionDigits]="1" />
+
+                <label style="font-size: 16px;" for="nitrogeno">Nitrógeno</label>
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+
+    <br />
+    <br />
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <span class="material-symbols-outlined">
+                    O₂
+                    </span>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-inputnumber (ngModelChange)="CalcularGasesTotales()"  formControlName="oxigeno" inputId="locale-user" [minFractionDigits]="1" />
+                <label style="font-size: 16px;" for="oxigeno">Oxígeno</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <span class="material-symbols-outlined">
+                  ppm
+                    </span>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+
+                <p-inputnumber  formControlName="gasesTotales" inputId="locale-user" [minFractionDigits]="1" />
+
+             
+                <label  style="font-size: 16px;" for="gasesTotales">GT</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <span class="material-symbols-outlined">
+                    %
+                    </span>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-inputnumber  formControlName="totaldeGasesCombustibles" inputId="locale-user" [minFractionDigits]="1" />
+                           
+                <label  style="font-size: 16px;" for="totaldeGasesCombustibles">TGC</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>calendar_today</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input   pInputText type="date" id="fechaEnsayo" formControlName="fechaEnsayo" pTooltip="Ingrese el fecha de Fabricacion" tooltipPosition="bottom" [max]="hoy" />
+
+            
+                <label for="fechaEnsayo">Fecha Ensayo</label>
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+
+    <br />
+    <br />
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>science</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="observaciones" formControlName="observaciones" pTooltip="Ingrese el Observaciones" tooltipPosition="bottom" />
+                <label for="observaciones">Observaciones</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        
+    </div>
+    <br />
+    <br />
+    <div class="flex flex-col md:flex-row gap-6">
+       
+        <p-inputgroup>
+         
+            <p-floatlabel>
+                <p-fileUpload
+                    name="demo[]"
+                    url="https://www.primefaces.org/cdn/api/upload.php"
+                    (onUpload)="onUpload($event)"
+                    [multiple]="true"
+                    chooseLabel="Seleccionar Archivos"
+                    cancelLabel="Cancelar"
+                    uploadLabel="Subir"
+                    accept="image/*,application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                >
+                    <ng-template pTemplate="content">
+                        <ul *ngIf="uploadedFiles.length">
+                            <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+                        </ul>
+                    </ng-template>
+                </p-fileUpload>
+              
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+    <br />
+    <br />
+    <p-button label="Guardar" icon="pi pi-check" type="submit" severity="success" [disabled]="!form.valid" [loading]="loading"></p-button>
+    &nbsp;&nbsp;
+    <p-button label="Cancelar" icon="pi pi-times" type="button" (click)="onCancel()" severity="danger"></p-button>
+</form>

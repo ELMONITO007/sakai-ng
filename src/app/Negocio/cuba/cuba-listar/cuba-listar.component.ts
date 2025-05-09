@@ -31,7 +31,7 @@ export interface CubaLaboratorio {
 @Component({
     selector: 'app-cuba-listar',
     standalone: true,
-    imports: [ButtonModule, CardModule, TableModule, HttpClientModule, CubaCrearComponent, ToolbarModule, IconFieldModule, BreadcrumbRouterComponent, InputIconModule, InputTextModule, DialogModule, MessageModule, ToastModule],
+    imports: [ButtonModule, CardModule, TableModule, HttpClientModule, ToolbarModule, IconFieldModule, BreadcrumbRouterComponent, InputIconModule, InputTextModule, DialogModule, MessageModule, ToastModule],
     providers: [CubaServiceService, DialogService, MessageService,LaboratorioServiceService],
     templateUrl: './cuba-listar.component.html',
     styleUrl: './cuba-listar.component.scss'

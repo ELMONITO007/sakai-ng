@@ -38,7 +38,7 @@ export interface sectorLaboratorioDTO {
 @Component({
     selector: 'app-sector-listar',
     standalone: true,
-    imports: [ButtonModule, CardModule, TableModule, HttpClientModule,ColaboradorFijoCrearComponent, ToolbarModule, IconFieldModule, BreadcrumbRouterComponent, InputIconModule, InputTextModule, DialogModule, MessageModule, ToastModule],
+    imports: [ButtonModule, CardModule, TableModule, HttpClientModule, ToolbarModule, IconFieldModule, BreadcrumbRouterComponent, InputIconModule, InputTextModule, DialogModule, MessageModule, ToastModule],
     providers: [SectorServiceService, DialogService, MessageService],
     templateUrl: './sector-listar.component.html',
     styleUrl: './sector-listar.component.scss'

@@ -19,10 +19,12 @@ import { LaboratorioCrearComponent } from '../laboratorio-crear/laboratorio-crea
 import { LaboratorioEditarComponent } from '../laboratorio-editar/laboratorio-editar.component';
 import { LaboratorioServiceService } from '../../../Servicios/Laboratorio-service.service';
 import { UsuarioLaboratistaComponent } from '../../usuario/usuario-laboratista/usuario-laboratista.component';
+import { BreadcrumbRouterComponent } from "../../breadcrumbRouter/breadcrumb-router/breadcrumb-router.component";
+import { SectorListarLaboratorioComponent } from "../../sector/sector-listar-laboratorio/sector-listar-laboratorio.component";
 
 @Component({
     selector: 'app-laboratorio-detalle',
-    imports: [ButtonModule, InputTextModule, ToastModule, MessageModule, TabsModule, CardModule, HttpClientModule, DialogModule,UsuarioLaboratistaComponent],
+    imports: [ButtonModule, InputTextModule, ToastModule, MessageModule, TabsModule, CardModule, HttpClientModule, DialogModule, UsuarioLaboratistaComponent, BreadcrumbRouterComponent, SectorListarLaboratorioComponent],
     providers: [MessageService, DialogService, LaboratorioServiceService],
     templateUrl: './laboratorio-detalle.component.html',
     styleUrl: './laboratorio-detalle.component.scss'
@@ -46,7 +48,7 @@ export class LaboratorioDetalleComponent implements OnInit {
             this.items = [
                 { label: 'Home', icon: 'pi pi-home', route: '/index', primary: false },
                 { label: 'Laboratorio', icon: 'pi pi-fw pi-user', route: '/laboratorio', primary: false },
-                { label: 'Laboratorio', icon: 'pi pi-fw pi-user', route: '/laboratorio/' + id, primary: true }
+                { label: 'Detalle', icon: 'pi pi-fw pi-user', route: '/laboratorio/' + id, primary: true }
             ];
             this.service.obtenerUno(id).subscribe((data) => {
                 this.modelo = data;

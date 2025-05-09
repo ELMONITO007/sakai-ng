@@ -1,0 +1,117 @@
+<form (submit)="onSubmit()" [formGroup]="form">
+    <br />
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>location_on</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-select (onChange)="obtenerEquipos()" formControlName="sector" [options]="sectores" optionLabel="detalle" optionValue="id_Sector" placeholder="Seleccione un sector*" class="w-full md:w-56" />
+
+                <label for="id_Sector">Sector*</label>
+            </p-floatlabel>
+        </p-inputgroup>
+
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>inventory_2</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-select [filter]="true" filterBy="codigoCuba" formControlName="cuba" [options]="cuba" optionLabel="codigoCuba" optionValue="codigoCuba" placeholder="Seleccione una Cuba*" class="w-full md:w-56" />
+
+                <label for="cuba">Cuba*</label>
+            </p-floatlabel>
+        </p-inputgroup>
+
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>gas_meter</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-select [filter]="true" filterBy="codigo" formControlName="id_Equipo" [options]="equipos" optionLabel="codigo" optionValue="id_Equipo" placeholder="Seleccione un equipo*" class="w-full md:w-56" />
+
+                <label for="id_Equipo">Equipo*</label>
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+    <br />
+    <br />
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>question_mark</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-select formControlName="inhibido" [options]="inhibido" optionLabel="tipo" optionValue="tipo" placeholder="Seleccione SI o NO*" class="w-full md:w-56" />
+
+                <label for="inhibido">Inhibido*</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>oil_barrel</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-select formControlName="tipoAceite" [options]="tipo" optionLabel="tipo" optionValue="tipo" placeholder="Seleccione el tipo*" class="w-full md:w-56" />
+
+                <label for="tipoAceite">Tipo de Aceite*</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>question_mark</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-select (onChange)="cambiarTodosAnalisis()" formControlName="todos" [options]="inhibido" optionLabel="tipo" optionValue="tipo" placeholder="Seleccione SI o NO*" class="w-full md:w-56" />
+
+                <label for="todos">Todos los analisis*</label>
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+<br><br>
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>description</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="observaciones" formControlName="observaciones" pTooltip="Ingrese las Observaciones*" tooltipPosition="bottom" />
+                <label for="observaciones">Observaciones*</label>
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+
+    <div *ngIf="!todosAnalisis">
+        <div class="card flex justify-content-center gap-3">
+            <div class="flex align-items-center">
+                <p-checkbox formControlName="agd" label="AGD" name="analisis" value="AGD" [binary]="true" />
+                <label for="ny" class="ml-2">AGD</label>
+            </div>
+            <div class="flex align-items-center">
+                <p-checkbox formControlName="contenidoFurano" label="Contenido Furano" name="analisis" value="Contenido Furano" [binary]="true" />
+                <label for="ny" class="ml-2">Contenido Furano</label>
+            </div>
+            <div class="flex align-items-center">
+                <p-checkbox formControlName="corrosividad" label="Corrovisidad Aceite" name="analisis" value="Corrovisidad Aceite" [binary]="true"/>
+                <label for="ny" class="ml-2">Corrovisidad Aceite</label>
+            </div>
+            <div class="flex align-items-center">
+                <p-checkbox formControlName="fisico" label="Físico-Químico" name="analisis" value="Físico-Químico" [binary]="true"/>
+                <label for="ny" class="ml-2">Físico-Químico</label>
+            </div>
+            <div class="flex align-items-center">
+                <p-checkbox formControlName="pasivador" label="Pasivador" name="analisis" value="Pasivador" [binary]="true"/>
+                <label for="ny" class="ml-2">Pasivador</label>
+            </div>
+            <div class="flex align-items-center">
+                <p-checkbox formControlName="pcb" label="PCB" name="analisis" value="PCB" [binary]="true"/>
+                <label for="ny" class="ml-2">PCB</label>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <p-button label="Guardar" icon="pi pi-check" type="submit" severity="success" [disabled]="!form.valid" [loading]="loading"></p-button>
+    &nbsp;&nbsp;
+    <p-button label="Cancelar" icon="pi pi-times" type="button" (click)="onCancel()" severity="danger"></p-button>
+</form>
