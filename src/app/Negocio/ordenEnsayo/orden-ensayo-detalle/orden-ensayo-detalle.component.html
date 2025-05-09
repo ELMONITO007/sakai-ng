@@ -1,8 +1,7 @@
 <p-toast></p-toast>
 <app-breadcrumb-router [items]="items"></app-breadcrumb-router>
 <p-card>
-    <div class="font-medium text-2xl text-900 mb-3" style="text-align: center">Datos de la Orden de Ensayo N° {{ modelo?.numeroOrden }}</div>
-    <p-tabs value="Datos">
+    <p-tabs value="0">
         <p-tablist>
             <p-tab value="0">Datos</p-tab>
             <p-tab value="1">Analisis</p-tab>
@@ -25,23 +24,30 @@
                     </li>
                     <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
                         <div class="text-500 w-full md:w-2 font-medium">Creador</div>
-                        <div class="text-900 w-full md:w-10"><b>Usuario:</b> {{ modelo?.nombreUsuario }} &nbsp;&nbsp;<b>Email:</b> {{ modelo?.emailUsuario }} </div>
+                        <div class="text-900 w-full md:w-10"><b>Usuario:</b> {{ modelo?.nombreUsuario }} &nbsp;&nbsp;<b>Email:</b> {{ modelo?.emailUsuario }}</div>
                     </li>
-                  
+
                     <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
                         <div class="text-500 w-full md:w-2 font-medium">Fechas</div>
-                        <div class="text-900 w-full md:w-10"><b>Creación: </b>{{ modelo?.fechaCreacion }}&nbsp;&nbsp; <span *ngIf="modelo?.fechaFinalizacion!=''"><b>Finalización: </b>{{ modelo?.fechaFinalizacion }} </span> </div>
+                        <div class="text-900 w-full md:w-10">
+                            <b>Creación: </b>{{ modelo?.fechaCreacion }}&nbsp;&nbsp; <span *ngIf="modelo?.fechaFinalizacion != ''"><b>Finalización: </b>{{ modelo?.fechaFinalizacion }} </span>
+                        </div>
                     </li>
-                 
+
                     <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
                         <div class="text-500 w-full md:w-2 font-medium">Extracción</div>
-                        <div class="text-900 w-full md:w-10"><span *ngIf="modelo?.fechaPedidoExtraccion!=''"><b>Pedido Extracción: </b>{{ modelo?.fechaPedidoExtraccion }} &nbsp;&nbsp;</span><span *ngIf="modelo?.fechaPedidoExtraccion!=''"> <b>Extracción:</b> {{ modelo?.fechaExtraccion }}</span> </div>
+                        <div class="text-900 w-full md:w-10">
+                            <span *ngIf="modelo?.fechaPedidoExtraccion != ''"><b>Pedido Extracción: </b>{{ modelo?.fechaPedidoExtraccion }} &nbsp;&nbsp;</span
+                            ><span *ngIf="modelo?.fechaPedidoExtraccion != ''"> <b>Extracción:</b> {{ modelo?.fechaExtraccion }}</span>
+                        </div>
                     </li>
                     <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
                         <div class="text-500 w-full md:w-2 font-medium">Cuba</div>
-                        <div class="text-900 w-full md:w-10">{{ modelo?.cuba }} <span *ngIf="modelo?.temperatura!='0'">({{ modelo?.temperatura }}°) </span></div>
+                        <div class="text-900 w-full md:w-10">
+                            {{ modelo?.cuba }} <span *ngIf="modelo?.temperatura != '0'">({{ modelo?.temperatura }}°) </span>
+                        </div>
                     </li>
-                   
+
                     <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
                         <div class="text-500 w-full md:w-2 font-medium">Observaciones</div>
                         <div class="text-900 w-full md:w-10">{{ modelo?.observaciones }}</div>
@@ -54,14 +60,12 @@
                         <div class="text-500 w-full md:w-2 font-medium">Inhibido</div>
                         <div class="text-900 w-full md:w-10"></div>
                     </li>
-                   
-                   
-                  
+
                     <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
                         <div class="text-500 w-full md:w-2 font-medium">Laboratista</div>
                         <div class="text-900 w-full md:w-10">{{ modelo?.nombreLaboratista }} {{ modelo?.emailLaboratista }}</div>
                     </li>
-                   
+
                     <br />
                     <p-button icon="pi pi-pencil" class="mr-2" (onClick)="editar(modelo.id_OrdenEnsayo)" label="Editar" [outlined]="true" [rounded]="true"></p-button>
                     <p-button icon="pi pi-trash" (onClick)="openDelete(modelo.id_OrdenEnsayo)" severity="danger" label="Eliminar" [rounded]="true" [outlined]="true"></p-button>
@@ -87,9 +91,28 @@
                     </p-dialog>
                 </p-card>
             </p-tabpanel>
+
             <p-tabpanel value="1">
-                
-               <app-agd-detalle [id]="modelo.id_OrdenEnsayo" ></app-agd-detalle>
+                <p-tabs>
+                    <p-tablist>
+                        @for (tab of analisis; track tab.orden) {
+                            <p-tab value="{{tab.orden}}">{{ tab.nombre.toLocaleUpperCase() }}</p-tab>
+                        }
+                    </p-tablist>
+
+                    <p-tabpanels>
+
+                         @for (tab of analisis; track tab.orden) {
+                             <p-tabpanel value="{{tab.orden}}">
+                                <app-agd [id]="modelo.id_OrdenEnsayo" *ngIf="tab.nombre=='agd'"></app-agd>
+
+                             </p-tabpanel>
+                        }
+
+                       
+                     
+                    </p-tabpanels>
+                </p-tabs>
             </p-tabpanel>
             <p-tabpanel value="2">
                 <p class="m-0"></p>

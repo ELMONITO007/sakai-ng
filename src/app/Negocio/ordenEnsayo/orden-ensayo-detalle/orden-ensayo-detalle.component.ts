@@ -14,14 +14,20 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { DialogModule } from 'primeng/dialog';
 import { ToastModule } from 'primeng/toast';
-import { ordenEnsayoDTO, ordenEnsayoCreacionDTO } from '../../../Entidades/ordenEnsayo';
+import { ordenEnsayoDTO } from '../../../Entidades/ordenEnsayo';
 import { OrdenEnsayoServiceService } from '../../../Servicios/OrdenEnsayo-service.service';
 import { CommonModule } from '@angular/common';
-import { AgdDetalleComponent } from "../../agd/agd-detalle/agd-detalle.component";
 
+import { AgdComponent } from '../../agd/agd/agd.component';
+
+export interface Analisis {
+    nombre: string;
+    modulo: string;
+    orden: number;
+}
 @Component({
     selector: 'app-orden-ensayo-detalle',
-    imports: [ButtonModule, InputTextModule, ToastModule, MessageModule, CommonModule, BreadcrumbRouterComponent, TabsModule, CardModule, HttpClientModule, DialogModule, AgdDetalleComponent],
+    imports: [ButtonModule, InputTextModule, ToastModule, MessageModule, CommonModule, BreadcrumbRouterComponent, TabsModule, CardModule, HttpClientModule, DialogModule, AgdComponent],
     providers: [MessageService, DialogService, OrdenEnsayoServiceService],
     templateUrl: './orden-ensayo-detalle.component.html',
     styleUrl: './orden-ensayo-detalle.component.scss'
@@ -39,16 +45,25 @@ export class OrdenEnsayoDetalleComponent implements OnInit {
     ref: DynamicDialogRef | undefined;
     visibleDelete: boolean = false;
     loading: boolean = false;
+    analisis: Analisis[] = [];
+
     ngOnInit(): void {
         this.activatedRoute.params.subscribe((params) => {
             const id = params['id'];
-            this.items = [
-                { label: 'Home', icon: 'pi pi-home', route: '/index',primary: false },
-                { label: 'OrdenEnsayo', icon: 'pi pi-fw pi-user', route: '/ordenEnsayo',primary: false },
-                { label: 'Detalle', icon: 'pi pi-fw pi-user', route: '/ordenEnsayo' + id ,primary: true}
-            ];
+
             this.service.obtenerUno(id).subscribe((data) => {
                 this.modelo = data;
+                this.items = [
+                    { label: 'Home', icon: 'pi pi-home', route: '/index', primary: false },
+                    { label: 'OrdenEnsayo', icon: 'pi pi-fw pi-user', route: '/ordenEnsayo', primary: false },
+                    { label: 'Detalle OE N° ' + data.numeroOrden, icon: 'pi pi-fw pi-user', route: '/ordenEnsayo' + id, primary: true }
+                ];
+            });
+            this.service.Ensayos(id).subscribe((ensayo) => {
+                for (let i = 0; i < ensayo.length; i++) {
+                    this.analisis.push({ nombre: ensayo[i], modulo: '<app-'+ensayo[i]+' [id]="modelo.id_OrdenEnsayo"></app-'+ensayo[i]+'>', orden: i });
+                }
+
             });
         });
     }

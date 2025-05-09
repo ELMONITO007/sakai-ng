@@ -14,7 +14,11 @@ export class OrdenEnsayoServiceService {
     return this.http.get<ordenEnsayoDTO[]>(`${this.apiURL}/index`);
   }
 
-  public obtenerPorEquipo(id: number) {
+  public Ensayos(id: number) {
+    return this.http.get<string[]>(`${this.apiURL}/Ensayos?id=${id}`);
+  }
+
+    public obtenerPorEquipo(id: number) {
     return this.http.get<ordenEnsayoDTO[]>(`${this.apiURL}/ReadByEquipo?id=${id}`);
   }
   public ReadbyLaboratista(id: string) {

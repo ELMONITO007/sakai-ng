@@ -9,7 +9,7 @@ import { TabsModule } from 'primeng/tabs';
 import { CardModule } from 'primeng/card';
 import { MessageModule } from 'primeng/message';
 import { HttpClientModule } from '@angular/common/http';
-import { BreadcrumbRouterComponent } from '../../breadcrumbRouter/breadcrumb-router/breadcrumb-router.component';
+
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { DialogModule } from 'primeng/dialog';
@@ -19,11 +19,11 @@ import { agdDTO } from '../../../Entidades/agd';
 
 import { AgdServiceService } from '../../../Servicios/Agd-service.service';
 import { CommonModule } from '@angular/common';
-import { AgdEditarComponent } from "../agd-editar/agd-editar.component";
+
 
 @Component({
     selector: 'app-agd-detalle',
-    imports: [ButtonModule, InputTextModule, ToastModule, MessageModule, CommonModule, TabsModule, CardModule, HttpClientModule, DialogModule, AgdEditarComponent],
+    imports: [ButtonModule, InputTextModule, ToastModule, MessageModule, CommonModule, TabsModule, CardModule, HttpClientModule, DialogModule],
     providers: [MessageService, DialogService, AgdServiceService],
     standalone: true,
     templateUrl: './agd-detalle.component.html',
@@ -46,19 +46,13 @@ export class AgdDetalleComponent implements OnInit {
    
             this.service.obtenerTodos(this.id).subscribe((data) => {
                 this.modelo = data;
-                if (this.modelo.hidrogeno == null && this.modelo.oxigeno == null && this.modelo.nitrogeno == null && this.modelo.dioxidodeCarbono == null) {
-                 this.detalle=false;
-               
-                   
-                }
+             
             });
         
     }
 
-    detalle:boolean=true;
-    editar(id: number) {
-      this.detalle=false;
-    }
+   
+  
 link(link: string) {
         window.open("https://drive.google.com/file/d/"+link, '_blank');
     }
