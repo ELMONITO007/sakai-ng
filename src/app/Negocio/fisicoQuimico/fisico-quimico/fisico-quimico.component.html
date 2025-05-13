@@ -1,0 +1,7 @@
+
+<app-fisico-editar *ngIf="editar" [temperatura]="temperatura" [id]="id"></app-fisico-editar>
+<app-fisico-editar *ngIf="vacio" [id]="id" [temperatura]="temperatura"></app-fisico-editar>
+<app-fisico-detalle *ngIf="detalle" [id]="id"></app-fisico-detalle>
+<p-divider></p-divider>
+<p-button *ngIf="!vacio && editar" icon="pi pi-times" (onClick)="verDetalles()" class="mr-2"  label="Cancelar" [severity]="'warn'" [rounded]="true"></p-button>
+<p-button *ngIf="!vacio && detalle" icon="pi pi-pencil" (onClick)="edit()" class="mr-2"  label="Editar" [severity]="'warn'" [rounded]="true"></p-button>

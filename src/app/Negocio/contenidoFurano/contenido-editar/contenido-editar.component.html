@@ -1,0 +1,98 @@
+<form (submit)="onSubmit(modelo.id_ContenidoFurano)" [formGroup]="form">
+    <br />
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <span class="material-symbols-outlined"> ppm </span>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-inputnumber formControlName="hMF" inputId="locale-user" [minFractionDigits]="2" />
+
+                <label for="hMF">HMF</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <span class="material-symbols-outlined"> ppm </span>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-inputnumber formControlName="aCF" inputId="locale-user" [minFractionDigits]="2" />
+
+            
+                <label for="aCF">ACF</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <span class="material-symbols-outlined"> ppm </span>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-inputnumber formControlName="fOL" inputId="locale-user" [minFractionDigits]="2" />
+                <label for="fOL">FOL</label>
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+
+    <br />
+    <br />
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <span class="material-symbols-outlined"> ppm </span>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                  <p-inputnumber formControlName="mEF" inputId="locale-user" [minFractionDigits]="2" />
+                <label for="mEF">MEF</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <span class="material-symbols-outlined"> ppm </span>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+               <p-inputnumber formControlName="fAL" inputId="locale-user" [minFractionDigits]="2" />
+                <label for="fAL">FAL</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>calendar_today</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText type="date" id="fechaEnsayo" formControlName="fechaEnsayo" pTooltip="Ingrese el fecha " tooltipPosition="bottom" [max]="hoy" />
+
+                <label for="fechaEnsayo">Fecha Ensayo</label>
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+    <br />
+    <br />
+
+  
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            <p-floatlabel>
+                <p-fileUpload
+                    name="demo[]"
+                    url="https://www.primefaces.org/cdn/api/upload.php"
+                    (onUpload)="onUpload($event)"
+                    [multiple]="true"
+                    chooseLabel="Seleccionar Archivos"
+                    cancelLabel="Cancelar"
+                    uploadLabel="Subir"
+                    accept="image/*,application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                >
+                    <ng-template pTemplate="content">
+                        <ul *ngIf="uploadedFiles.length">
+                            <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+                        </ul>
+                    </ng-template>
+                </p-fileUpload>
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+    <br />
+
+    <p-button label="Guardar" icon="pi pi-check" type="submit" severity="success" [disabled]="!form.valid" [loading]="loading"></p-button>
+    <br />
+</form>

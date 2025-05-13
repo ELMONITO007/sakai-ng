@@ -1,6 +1,7 @@
-<app-agd-editar *ngIf="editar" [id]="id"></app-agd-editar>
-<app-agd-editar *ngIf="vacio" [id]="id"></app-agd-editar>
-<app-agd-detalle *ngIf="detalle" [id]="id"></app-agd-detalle>
+
+<app-pasivador-editar *ngIf="editar" [id]="id"></app-pasivador-editar>
+<app-pasivador-editar *ngIf="vacio" [id]="id"></app-pasivador-editar>
+<app-pasivador-detalle *ngIf="detalle" [id]="id"></app-pasivador-detalle>
 
 <p-divider></p-divider>
 <p-button *ngIf="!vacio && editar" icon="pi pi-times" (onClick)="verDetalles()" class="mr-2"  label="Cancelar" [severity]="'warn'" [rounded]="true"></p-button>

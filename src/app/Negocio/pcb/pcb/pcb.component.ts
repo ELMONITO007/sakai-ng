@@ -1,32 +1,36 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AgdEditarComponent } from '../agd-editar/agd-editar.component';
+
 import { ButtonModule } from 'primeng/button';
 import { InputIconModule } from 'primeng/inputicon';
-import { AgdServiceService } from '../../../Servicios/Agd-service.service';
+
 import { CommonModule } from '@angular/common';
-import { AgdDetalleComponent } from "../agd-detalle/agd-detalle.component";
+
 import { DividerModule } from 'primeng/divider';
 
+
+import { PcbEditarComponent } from '../pcb-editar/pcb-editar.component';
+import { PcbDetalleComponent } from '../pcb-detalle/pcb-detalle.component';
+import { PCBServiceService } from '../../../Servicios/PCB-service.service';
+
+
 @Component({
-    selector: 'app-agd',
-    imports: [ButtonModule, InputIconModule, AgdEditarComponent, AgdEditarComponent, CommonModule, AgdDetalleComponent,DividerModule],
-    templateUrl: './agd.component.html',
-    styleUrl: './agd.component.scss',
-    providers: [AgdServiceService],
-    standalone: true
+  selector: 'app-pcb',
+  imports: [ButtonModule, InputIconModule, PcbEditarComponent, CommonModule, PcbDetalleComponent,DividerModule],
+  templateUrl: './pcb.component.html',
+  styleUrl: './pcb.component.scss'
 })
-export class AgdComponent implements OnInit {
+export class PcbComponent implements OnInit {
     editar: boolean = false;
     vacio: boolean = false;
     detalle: boolean = true;
     @Input() id: number;
 
-    constructor(private service: AgdServiceService) {}
+    constructor(private service: PCBServiceService) {}
 
     ngOnInit(): void {
         this.service.obtenerTodos(this.id).subscribe((data) => {
         
-            if (data.hidrogeno == null && data.oxigeno == null && data.nitrogeno == null && data.dioxidodeCarbono == null) {
+            if (data.fechaEnsayo == null && data.contenidodePCB == 0) {
                 this.vacio = true;
                 this.detalle = false;
                 this.editar = false;
@@ -45,4 +49,5 @@ export class AgdComponent implements OnInit {
         this.vacio = false;
         this.detalle = false;
     }
+
 }

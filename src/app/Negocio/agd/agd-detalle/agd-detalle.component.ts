@@ -19,11 +19,17 @@ import { agdDTO } from '../../../Entidades/agd';
 
 import { AgdServiceService } from '../../../Servicios/Agd-service.service';
 import { CommonModule } from '@angular/common';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { MatIconModule } from '@angular/material/icon';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @Component({
     selector: 'app-agd-detalle',
-    imports: [ButtonModule, InputTextModule, ToastModule, MessageModule, CommonModule, TabsModule, CardModule, HttpClientModule, DialogModule],
+    imports: [ FormsModule, ReactiveFormsModule,ButtonModule, InputTextModule, ToastModule, MessageModule, CommonModule, TabsModule, CardModule, HttpClientModule, DialogModule,FloatLabelModule,InputGroupModule,MatIconModule,InputGroupAddonModule,InputNumberModule],
     providers: [MessageService, DialogService, AgdServiceService],
     standalone: true,
     templateUrl: './agd-detalle.component.html',
@@ -34,18 +40,123 @@ export class AgdDetalleComponent implements OnInit {
         private messageService: MessageService,
      
         private service: AgdServiceService,
-        public dialogService: DialogService
+        public dialogService: DialogService,
+        private formBuilder: FormBuilder
     ) {}
     modelo: agdDTO;
-  
+    form: FormGroup;
     ref: DynamicDialogRef | undefined;
     visibleDelete: boolean = false;
 
     @Input() id: number ;
     ngOnInit(): void {
+         this.form = this.formBuilder.group({
+                    hidrogeno: [
+                        '',
+                        {
+                            
+                        }
+                    ],
+                    metano: [
+                        '',
+                        {
+                            
+                        }
+                    ],
+                    etano: [
+                        '',
+                        {
+                           
+                        }
+                    ],
+                    etileno: [
+                        '',
+                        {
+                           
+                        }
+                    ],
+                    acetileno: [
+                        '',
+                        {
+                           
+                        }
+                    ],
+                    monoxidodeCarbono: [
+                        '',
+                        {
+                           
+                        }
+                    ],
+                    dioxidodeCarbono: [
+                        '',
+                        {
+                           
+                        }
+                    ],
+                    nitrogeno: [
+                        '',
+                        {
+                            
+                        }
+                    ],
+                    oxigeno: [
+                        '',
+                        {
+                           
+                        }
+                    ],
+                    gasesTotales: [
+                        '',
+                        {
+                            
+                        }
+                    ],
+                    totaldeGasesCombustibles: [
+                        '',
+                        {
+                           
+                        }
+                    ],
+                    observaciones: [
+                        '',
+                        {
+                           
+                        }
+                    ],
+        
+                    fechaEnsayo: [
+                    '',
+                        {
+                          
+                        }
+                    ],
+                    linkArchivo: [
+                        '',
+                        {
+                            
+                        }
+                    ]
+                });
    
             this.service.obtenerTodos(this.id).subscribe((data) => {
                 this.modelo = data;
+                this.form.patchValue({
+                    hidrogeno: this.modelo.hidrogeno,
+                    metano: this.modelo.metano,
+                    etano: this.modelo.etano,
+                    etileno: this.modelo.etileno,
+                    acetileno: this.modelo.acetileno,
+                    monoxidodeCarbono: this.modelo.monoxidodeCarbono,
+                    dioxidodeCarbono: this.modelo.dioxidodeCarbono,
+                    nitrogeno: this.modelo.nitrogeno,
+                    oxigeno: this.modelo.oxigeno,
+                    gasesTotales: this.modelo.gasesTotales,
+                    totaldeGasesCombustibles: this.modelo.totaldeGasesCombustibles,
+                    observaciones: this.modelo.observaciones,
+                    fechaEnsayo: this.modelo.fechaEnsayo,
+                    linkArchivo: this.modelo.linkArchivo
+                });
+                this.form.get('fechaEnsayo')?.setValue(new Date(this.modelo.fechaEnsayo).toISOString().split('T')[0]);
              
             });
         

@@ -19,6 +19,11 @@ import { OrdenEnsayoServiceService } from '../../../Servicios/OrdenEnsayo-servic
 import { CommonModule } from '@angular/common';
 
 import { AgdComponent } from '../../agd/agd/agd.component';
+import { ContenidoFuranoComponent } from "../../contenidoFurano/contenido-furano/contenido-furano.component";
+import { CorrosividadComponent } from '../../corrosividad/corrosividad/corrosividad.component';
+import { FisicoQuimicoComponent } from '../../fisicoQuimico/fisico-quimico/fisico-quimico.component';
+import { PasivadorComponent } from '../../pasivador/pasivador/pasivador.component';
+import { PcbComponent } from '../../pcb/pcb/pcb.component';
 
 export interface Analisis {
     nombre: string;
@@ -27,7 +32,8 @@ export interface Analisis {
 }
 @Component({
     selector: 'app-orden-ensayo-detalle',
-    imports: [ButtonModule, InputTextModule, ToastModule, MessageModule, CommonModule, BreadcrumbRouterComponent, TabsModule, CardModule, HttpClientModule, DialogModule, AgdComponent],
+    imports: [ButtonModule, InputTextModule, ToastModule, MessageModule, CommonModule, BreadcrumbRouterComponent,PasivadorComponent,PcbComponent,
+         TabsModule, CardModule, HttpClientModule, DialogModule, AgdComponent, ContenidoFuranoComponent,CorrosividadComponent,FisicoQuimicoComponent],
     providers: [MessageService, DialogService, OrdenEnsayoServiceService],
     templateUrl: './orden-ensayo-detalle.component.html',
     styleUrl: './orden-ensayo-detalle.component.scss'

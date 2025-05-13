@@ -1,0 +1,63 @@
+<form  [formGroup]="form">
+    <br />
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <span class="material-symbols-outlined"> ppm </span>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-inputnumber formControlName="contenidodePCB" inputId="locale-user" [minFractionDigits]="1" />
+
+                <label for="contenidodePCB">ContenidodePCB</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>info</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="observaciones" formControlName="observaciones" pTooltip="Ingrese el Observaciones" tooltipPosition="bottom" />
+                <label for="observaciones">Observaciones</label>
+            </p-floatlabel>
+        </p-inputgroup>
+      
+    </div>
+    <br />
+  <br />
+
+       <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
+        <div class="text-500 w-full md:w-2 font-medium">Fecha de Ensayo</div>
+        <div class="text-900 w-full md:w-10">{{ modelo?.fechaEnsayo }}</div>
+    </li>
+    <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
+        <div class="text-500 w-full md:w-2 font-medium">Fecha de Subida</div>
+        <div class="text-900 w-full md:w-10">{{ modelo?.fechaSubida }}</div>
+    </li>
+    <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
+        <div class="text-500 w-full md:w-2 font-medium">Link Archivo</div>
+        <div class="text-900 w-full md:w-10"><p-button (onClick)="link(modelo?.linkArchivo)" icon="pi pi-file"></p-button></div>
+    </li>
+    <br />
+
+    <p-button icon="pi pi-trash" (onClick)="openDelete(modelo?.id_OrdenEnsayo)" severity="danger" label="Eliminar" [rounded]="true"></p-button>
+    <p-dialog [(visible)]="visibleDelete" appendTo="body" [modal]="true" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }" [style]="{ width: '40vw' }">
+        <ng-template pTemplate="header">
+            <div class="flex align-items-center">
+                <span class="flex align-items-center justify-content-center bg-cyan-100 text-cyan-800 mr-3 border-circle" style="width: 32px; height: 32px">
+                    <i class="pi pi-times text-lg"></i>
+                </span>
+                <span class="font-medium text-2xl text-900">Esta Seguro de Eliminar PCB</span>
+            </div>
+        </ng-template>
+        <p class="line-height-3 p-0 m-0">
+            Esta por eliminar el PCB <br />
+            Esta acción no se puede deshacer. <br />
+        </p>
+
+        <br />
+        <div class="border-top-1 surface-border pt-3">
+            <button pButton pRipple icon="pi pi-times" (click)="eliminar(idDelete)" label="Cancel" class="p-button-text"></button>
+            <button pButton pRipple icon="pi pi-check" (click)="closeDelete()" label="Save"></button>
+        </div>
+    </p-dialog>
+</form>

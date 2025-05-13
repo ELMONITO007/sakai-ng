@@ -105,6 +105,11 @@
                          @for (tab of analisis; track tab.orden) {
                              <p-tabpanel value="{{tab.orden}}">
                                 <app-agd [id]="modelo.id_OrdenEnsayo" *ngIf="tab.nombre=='agd'"></app-agd>
+                                <app-contenido-furano [id]="modelo.id_OrdenEnsayo" *ngIf="tab.nombre=='contenidofurano'"></app-contenido-furano>
+                                <app-corrosividad [id]="modelo.id_OrdenEnsayo" *ngIf="tab.nombre=='corrosividad'"></app-corrosividad>
+                                <app-fisico-quimico [id]="modelo.id_OrdenEnsayo" [temperatura]="modelo.temperatura" *ngIf="tab.nombre=='fisicoquimico'"></app-fisico-quimico>
+                                <app-pasivador [id]="modelo.id_OrdenEnsayo" *ngIf="tab.nombre=='pasivador'"></app-pasivador>
+                                <app-pcb [id]="modelo.id_OrdenEnsayo" *ngIf="tab.nombre=='pcb'"></app-pcb>
 
                              </p-tabpanel>
                         }

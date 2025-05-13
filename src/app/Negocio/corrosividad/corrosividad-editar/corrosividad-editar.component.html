@@ -1,0 +1,60 @@
+<form (submit)="onSubmit(modelo.id_Corrosividad)" [formGroup]="form">
+    <br />
+
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            <div class="flex flex-wrap gap-4">
+                <div class="flex items-center">
+                    <p-checkBox name="DIN" value="DIN" formControlName="corrosivoDIN" inputId="ingredient1" binary="true" />
+                    <label for="ingredient1" class="ml-2">DIN</label>
+                </div>
+
+                <div class="flex items-center">
+                    <p-checkBox name="ASTM" value="ASTM" formControlName="corrosivoASTM" inputId="ingredient2" binary="true" />
+                    <label for="ingredient2" class="ml-2">ASTM</label>
+                </div>
+            </div>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>calendar_today</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+
+            
+                <input  pInputText type="date" id="fechaEnsayo" formControlName="fechaEnsayo" pTooltip="Ingrese el fecha " tooltipPosition="bottom"  />
+
+                <label for="fechaEnsayo">Fecha Ensayo</label>
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+    <br />
+    <br />
+
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            <p-floatlabel>
+                <p-fileUpload
+                    name="demo[]"
+                    url="https://www.primefaces.org/cdn/api/upload.php"
+                    (onUpload)="onUpload($event)"
+                    [multiple]="true"
+                    chooseLabel="Seleccionar Archivos"
+                    cancelLabel="Cancelar"
+                    uploadLabel="Subir"
+                    accept="image/*,application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                >
+                    <ng-template pTemplate="content">
+                        <ul *ngIf="uploadedFiles.length">
+                            <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+                        </ul>
+                    </ng-template>
+                </p-fileUpload>
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+    <br />
+
+    <p-button label="Guardar" icon="pi pi-check" type="submit" severity="success" [disabled]="!form.valid" [loading]="loading"></p-button>
+    <br />
+</form>
