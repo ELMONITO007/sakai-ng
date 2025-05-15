@@ -25,12 +25,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UsuarioServiceService } from '../../../Servicios/Usuario-service.service';
+import { usuarioDTO } from '../../../Entidades/usuario';
 
 
 @Component({
     selector: 'app-agd-detalle',
     imports: [ FormsModule, ReactiveFormsModule,ButtonModule, InputTextModule, ToastModule, MessageModule, CommonModule, TabsModule, CardModule, HttpClientModule, DialogModule,FloatLabelModule,InputGroupModule,MatIconModule,InputGroupAddonModule,InputNumberModule],
-    providers: [MessageService, DialogService, AgdServiceService],
+    providers: [MessageService, DialogService, AgdServiceService,UsuarioServiceService],
     standalone: true,
     templateUrl: './agd-detalle.component.html',
     styleUrl: './agd-detalle.component.scss'
@@ -38,14 +40,17 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 export class AgdDetalleComponent implements OnInit {
     constructor(
         private messageService: MessageService,
+
      
         private service: AgdServiceService,
         public dialogService: DialogService,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private usuarioService: UsuarioServiceService,
     ) {}
     modelo: agdDTO;
     form: FormGroup;
     ref: DynamicDialogRef | undefined;
+    usuario:usuarioDTO;
     visibleDelete: boolean = false;
 
     @Input() id: number ;
@@ -169,7 +174,8 @@ link(link: string) {
     }
 
     eliminar(id: number) {
-        this.service.borrar(id).subscribe((data) => {
+        this.usuario = this.usuarioService.getUsuarioLogeado();
+        this.service.borrar(id, this.usuario.email).subscribe((data) => {
             this.messageService.add({ severity: 'success', summary: 'Agd Eliminado', detail: 'El agd se ha eliminado correctamente', life: 3000 });
         });
         this.ngOnInit();

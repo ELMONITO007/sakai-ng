@@ -17,6 +17,8 @@ import { Observable, ReplaySubject } from 'rxjs';
 import { FileUploadModule } from 'primeng/fileupload';
 import { MatIconModule } from '@angular/material/icon';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { UsuarioServiceService } from '../../../Servicios/Usuario-service.service';
+import { usuarioDTO } from '../../../Entidades/usuario';
 
 export const MY_DATE_FORMATS = {
     parse: {
@@ -34,7 +36,7 @@ export const MY_DATE_FORMATS = {
     selector: 'app-pcb-editar',
     imports: [ButtonModule, CardModule, HttpClientModule,MatIconModule,InputNumberModule, InputTextModule,FileUploadModule, FormsModule, ReactiveFormsModule, CommonModule, FloatLabelModule, InputGroupModule, InputGroupAddonModule, TooltipModule],
 
-    providers: [PCBServiceService,   { provide: MAT_DATE_FORMATS, useValue:  MY_DATE_FORMATS}],
+    providers: [PCBServiceService,   { provide: MAT_DATE_FORMATS, useValue:  MY_DATE_FORMATS},UsuarioServiceService],
     standalone: true,
     templateUrl: './pcb-editar.component.html',
     styleUrl: './pcb-editar.component.scss'
@@ -43,11 +45,13 @@ export class PcbEditarComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
     
-        private service: PCBServiceService
+        private service: PCBServiceService,
+        private usuarioService: UsuarioServiceService
     ) {}
     form: FormGroup;
     loading: boolean = false;
     @Input() id: number;
+    usuario: usuarioDTO;
     modelo: pcbDTO;
     hoy:string;
     ngOnInit(): void {
@@ -90,6 +94,7 @@ export class PcbEditarComponent implements OnInit {
 
     onSubmit(id: number) {
         this.loading = true;
+        this.usuario= this.usuarioService.getUsuarioLogeado();
         this.modelo = {
             id_Pcb: id,
 
@@ -99,7 +104,7 @@ export class PcbEditarComponent implements OnInit {
 
             id_OrdenEnsayo: this.id,
 
-            fechaSubida: '',
+            fechaSubida: this.usuario.email,
 
             fechaEnsayo: this.form.get('fechaEnsayo').value,
 

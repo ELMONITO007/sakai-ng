@@ -25,13 +25,15 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { TooltipModule } from 'primeng/tooltip';
+import { UsuarioServiceService } from '../../../Servicios/Usuario-service.service';
+import { usuarioDTO } from '../../../Entidades/usuario';
 
 @Component({
     selector: 'app-contenido-detalle',
        imports: [ButtonModule, CardModule, HttpClientModule, InputTextModule,DialogModule,ToastModule, MatIconModule,
         FormsModule, ReactiveFormsModule,MatIconModule, CommonModule, FloatLabelModule, InputGroupModule, InputGroupAddonModule, TooltipModule],
 
-    providers: [MessageService, ContenidoFuranoServiceService],
+    providers: [MessageService, ContenidoFuranoServiceService,UsuarioServiceService],
     templateUrl: './contenido-detalle.component.html',
     styleUrl: './contenido-detalle.component.scss',standalone: true
 })
@@ -41,6 +43,7 @@ export class ContenidoDetalleComponent implements OnInit {
   
         private service: ContenidoFuranoServiceService,
         public dialogService: DialogService,  private formBuilder: FormBuilder,
+        private usuarioService: UsuarioServiceService
     ) {}
     modelo: contenidoFuranoDTO;
 
@@ -48,6 +51,7 @@ export class ContenidoDetalleComponent implements OnInit {
  form: FormGroup;
     loading: boolean = false;
     @Input() id: number;
+    usuario: usuarioDTO;
     ngOnInit(): void {
          this.form = this.formBuilder.group({
                     hMF: [
@@ -112,7 +116,8 @@ export class ContenidoDetalleComponent implements OnInit {
     }
 
     eliminar(id: number) {
-        this.service.borrar(id).subscribe((data) => {
+        this.usuario = this.usuarioService.getUsuarioLogeado();
+        this.service.borrar(id,this.usuario.email).subscribe((data) => {
             this.messageService.add({ severity: 'success', summary: 'ContenidoFurano Eliminado', detail: 'El Analísis de Contenido Furano se ha eliminado correctamente', life: 3000 });
         });
         this.ngOnInit();

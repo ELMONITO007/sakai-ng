@@ -18,6 +18,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { InputNumberModule } from 'primeng/inputnumber';
 
 import { FileUploadModule } from 'primeng/fileupload';
+import { UsuarioServiceService } from '../../../Servicios/Usuario-service.service';
+import { usuarioDTO } from '../../../Entidades/usuario';
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -34,7 +36,7 @@ export const MY_DATE_FORMATS = {
     selector: 'app-fisico-editar',
     imports: [ButtonModule, CardModule, HttpClientModule, InputTextModule, FileUploadModule, InputNumberModule, MatIconModule, FormsModule, ReactiveFormsModule, CommonModule, FloatLabelModule, InputGroupModule, InputGroupAddonModule, TooltipModule],
 
-    providers: [FisicoQuimicoServiceService  ,   { provide: MAT_DATE_FORMATS, useValue:  MY_DATE_FORMATS}],
+    providers: [FisicoQuimicoServiceService  ,   { provide: MAT_DATE_FORMATS, useValue:  MY_DATE_FORMATS},UsuarioServiceService],
     standalone: true,
     templateUrl: './fisico-editar.component.html',
     styleUrl: './fisico-editar.component.scss'
@@ -43,7 +45,8 @@ export class FisicoEditarComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
 
-        private service: FisicoQuimicoServiceService
+        private service: FisicoQuimicoServiceService,
+        private usuarioService: UsuarioServiceService,
     ) {}
     form: FormGroup;
     @Input() id: number;
@@ -191,8 +194,10 @@ export class FisicoEditarComponent implements OnInit {
         this.form.get('aguaRelativa').setValue(hr.toFixed(5));
    
     }
+    usario:usuarioDTO;
     onSubmit(id: number) {
         this.loading = true;
+this.usario=this.usuarioService.getUsuarioLogeado();
         this.modelo = {
             id_FisicoQuimico: id,
 
@@ -230,7 +235,7 @@ export class FisicoEditarComponent implements OnInit {
 
             aguaRelativa: this.form.get('aguaRelativa').value,
 
-            fechaSubida: '',
+            fechaSubida: this.usario.email,
 
             fechaEnsayo: this.form.get('fechaEnsayo').value,
 

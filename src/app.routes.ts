@@ -18,14 +18,20 @@ import { EquipoListarComponent } from './app/Negocio/equipo/equipo-listar/equipo
 import { EquipoDetalleComponent } from './app/Negocio/equipo/equipo-detalle/equipo-detalle.component';
 import { OrdenEnsayoListarComponent } from './app/Negocio/ordenEnsayo/orden-ensayo-listar/orden-ensayo-listar.component';
 import { OrdenEnsayoDetalleComponent } from './app/Negocio/ordenEnsayo/orden-ensayo-detalle/orden-ensayo-detalle.component';
+import { GoogleLoginComponent } from './app/Negocio/login/google-login/google-login.component';
+import { WaitingLoginComponent } from './app/Negocio/login/waiting-login/waiting-login.component';
+import { LandingPageComponent } from './app/pages/landing/landing-page/landing-page.component';
 
 export const appRoutes: Routes = [
+    {path:'login',component:GoogleLoginComponent},
+    { path: 'waiting', component:WaitingLoginComponent },
+    {path:'' ,component:LandingPageComponent},
     {
-        path: '',
+        path: 'index',
         component: AppLayout,
         children: [
             { path: 'index', component: Dashboard },
-            { path: '', component: Dashboard },
+         
             { path: 'uikit', loadChildren: () => import('./app/pages/uikit/uikit.routes') },
             { path: 'documentation', component: Documentation },
             { path: 'pages', loadChildren: () => import('./app/pages/pages.routes') },

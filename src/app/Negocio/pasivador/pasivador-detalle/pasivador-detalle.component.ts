@@ -17,6 +17,8 @@ import { Observable, ReplaySubject } from 'rxjs';
 import { DialogModule } from 'primeng/dialog';
 import { FileUploadModule } from 'primeng/fileupload';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { UsuarioServiceService } from '../../../Servicios/Usuario-service.service';
+import { usuarioDTO } from '../../../Entidades/usuario';
 
 @Component({
     selector: 'app-pasivador-detalle',
@@ -38,7 +40,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
         TooltipModule
     ],
 
-    providers: [PasivadorServiceService],
+    providers: [PasivadorServiceService,UsuarioServiceService],
     standalone: true,
     templateUrl: './pasivador-detalle.component.html',
     styleUrl: './pasivador-detalle.component.scss'
@@ -47,11 +49,13 @@ export class PasivadorDetalleComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
 
-        private service: PasivadorServiceService
+        private service: PasivadorServiceService,
+        private usuarioService: UsuarioServiceService
     ) {}
     form: FormGroup;
     loading: boolean = false;
     modelo: pasivadorDTO;
+    usuario:usuarioDTO
     @Input() id: number;
     ngOnInit(): void {
         this.form = this.formBuilder.group({
@@ -88,7 +92,8 @@ export class PasivadorDetalleComponent implements OnInit {
     }
     visibleDelete: boolean = false;
     eliminar(id: number) {
-        this.service.borrar(id).subscribe((data) => {});
+        this.usuario= this.usuarioService.getUsuarioLogeado();
+        this.service.borrar(id,this.usuario.email).subscribe((data) => {});
         this.ngOnInit();
         this.visibleDelete = false;
     }

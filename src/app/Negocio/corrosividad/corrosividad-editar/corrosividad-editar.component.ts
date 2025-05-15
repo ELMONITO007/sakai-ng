@@ -19,6 +19,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { FileUploadModule } from 'primeng/fileupload';
 
 import { DatePickerModule } from 'primeng/datepicker';
+import { UsuarioServiceService } from '../../../Servicios/Usuario-service.service';
+import { usuarioDTO } from '../../../Entidades/usuario';
 export const MY_DATE_FORMATS = {
     parse: {
         dateInput: 'DD/MM/YYYY'
@@ -51,7 +53,7 @@ export const MY_DATE_FORMATS = {
         TooltipModule
     ],
 
-    providers: [CorrosividadServiceService, { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }],
+    providers: [CorrosividadServiceService, { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },UsuarioServiceService],
     standalone: true,
     templateUrl: './corrosividad-editar.component.html',
     styleUrl: './corrosividad-editar.component.scss'
@@ -60,10 +62,12 @@ export class CorrosividadEditarComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
 
-        private service: CorrosividadServiceService
+        private service: CorrosividadServiceService,
+        private usuarioService: UsuarioServiceService
     ) {}
     form: FormGroup;
     loading: boolean = false;
+    usuario:usuarioDTO
     @Input() id: number;
     modelo: corrosividadDTO;
     ngOnInit(): void {
@@ -105,6 +109,7 @@ export class CorrosividadEditarComponent implements OnInit {
 
     onSubmit(id: number) {
         this.loading = true;
+        this.usuario=this.usuarioService.getUsuarioLogeado();
         var astm = this.form.get('corrosivoASTM').value;
         var din = this.form.get('corrosivoDIN').value;
         if (astm == '') {
@@ -123,7 +128,7 @@ export class CorrosividadEditarComponent implements OnInit {
 
             id_OrdenEnsayo: this.id,
 
-            fechaSubida: '',
+            fechaSubida: this.usuario.email,
 
             fechaEnsayo: this.form.get('fechaEnsayo').value,
 

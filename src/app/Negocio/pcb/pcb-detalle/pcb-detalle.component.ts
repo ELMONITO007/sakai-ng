@@ -18,12 +18,14 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { MatIconModule } from '@angular/material/icon';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DialogModule } from 'primeng/dialog';
+import { UsuarioServiceService } from '../../../Servicios/Usuario-service.service';
+import { usuarioDTO } from '../../../Entidades/usuario';
 
 @Component({
     selector: 'app-pcb-detalle',
     imports: [ButtonModule, CardModule, HttpClientModule,DialogModule,MatIconModule, InputNumberModule, InputTextModule, FileUploadModule, FormsModule, ReactiveFormsModule, CommonModule, FloatLabelModule, InputGroupModule, InputGroupAddonModule, TooltipModule],
 
-    providers: [PCBServiceService],
+    providers: [PCBServiceService,UsuarioServiceService],
     standalone: true,
     templateUrl: './pcb-detalle.component.html',
     styleUrl: './pcb-detalle.component.scss'
@@ -32,9 +34,11 @@ export class PcbDetalleComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
 
-        private service: PCBServiceService
+        private service: PCBServiceService,
+        private usuarioService: UsuarioServiceService
     ) {}
     form: FormGroup;
+    usuario: usuarioDTO;
     loading: boolean = false;
     @Input() id: number;
     modelo: pcbDTO;
@@ -73,7 +77,8 @@ export class PcbDetalleComponent implements OnInit {
     }
     visibleDelete: boolean = false;
     eliminar(id: number) {
-        this.service.borrar(id).subscribe((data) => {});
+        this.usuario= this.usuarioService.getUsuarioLogeado();
+        this.service.borrar(id,this.usuario.email).subscribe((data) => {});
         this.ngOnInit();
         this.visibleDelete = false;
     }

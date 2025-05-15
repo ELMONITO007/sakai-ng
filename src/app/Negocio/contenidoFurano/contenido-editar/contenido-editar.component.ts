@@ -18,6 +18,8 @@ import { ToastModule } from 'primeng/toast';
 import { Observable, ReplaySubject } from 'rxjs';
 import { FileUploadModule } from 'primeng/fileupload';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { UsuarioServiceService } from '../../../Servicios/Usuario-service.service';
+import { usuarioDTO } from '../../../Entidades/usuario';
 export const MY_DATE_FORMATS = {
     parse: {
         dateInput: 'DD/MM/YYYY'
@@ -49,7 +51,7 @@ export const MY_DATE_FORMATS = {
         TooltipModule
     ],
 
-    providers: [ContenidoFuranoServiceService, MessageService, { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }],
+    providers: [ContenidoFuranoServiceService, MessageService, { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },UsuarioServiceService],
     standalone: true,
     templateUrl: './contenido-editar.component.html',
     styleUrl: './contenido-editar.component.scss'
@@ -59,12 +61,14 @@ export class ContenidoEditarComponent implements OnInit {
         private formBuilder: FormBuilder,
 
         private service: ContenidoFuranoServiceService,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private usuarioService: UsuarioServiceService
     ) {}
     form: FormGroup;
     hoy: string;
     loading: boolean = false;
     modelo: contenidoFuranoDTO;
+    usuario:usuarioDTO;
     @Input() id: number;
     ngOnInit(): void {
         const currentYear = new Date().getFullYear();
@@ -138,6 +142,7 @@ export class ContenidoEditarComponent implements OnInit {
 
     onSubmit(id: number) {
         this.loading = true;
+        this.usuario= this.usuarioService.getUsuarioLogeado();
         this.modelo = {
             id_ContenidoFurano: id,
 
@@ -153,7 +158,7 @@ export class ContenidoEditarComponent implements OnInit {
 
             id_OrdenEnsayo: this.id,
 
-            fechaSubida: '',
+            fechaSubida: this.usuario.email,
 
             fechaEnsayo: this.form.get('fechaEnsayo').value,
 

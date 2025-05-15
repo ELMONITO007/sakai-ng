@@ -17,6 +17,8 @@ import { Observable, ReplaySubject } from 'rxjs';
 import { DialogModule } from 'primeng/dialog';
 import { FileUploadModule } from 'primeng/fileupload';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { UsuarioServiceService } from '../../../Servicios/Usuario-service.service';
+import { usuarioDTO } from '../../../Entidades/usuario';
 export const MY_DATE_FORMATS = {
     parse: {
         dateInput: 'DD/MM/YYYY'
@@ -49,7 +51,7 @@ export const MY_DATE_FORMATS = {
         TooltipModule
     ],
 
-    providers: [PasivadorServiceService, { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }],
+    providers: [PasivadorServiceService, { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },UsuarioServiceService],
     standalone: true,
     templateUrl: './pasivador-editar.component.html',
     styleUrl: './pasivador-editar.component.scss'
@@ -58,7 +60,8 @@ export class PasivadorEditarComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
 
-        private service: PasivadorServiceService
+        private service: PasivadorServiceService,
+        private usuarioService: UsuarioServiceService
     ) {}
     form: FormGroup;
     loading: boolean = false;
@@ -105,8 +108,9 @@ export class PasivadorEditarComponent implements OnInit {
             }
         });
     }
-
+usuario:usuarioDTO
     onSubmit(id: number) {
+        this.usuario= this.usuarioService.getUsuarioLogeado();
         this.loading = true;
         this.modelo = {
             id_Pasivador: id,
@@ -117,7 +121,7 @@ export class PasivadorEditarComponent implements OnInit {
 
             observaciones: this.form.get('observaciones').value,
 
-            fechaSubida: '',
+            fechaSubida: this.usuario.email,
 
             fechaEnsayo: this.form.get('fechaEnsayo').value,
 

@@ -17,12 +17,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { InputNumberModule } from 'primeng/inputnumber';
 
 import { DialogModule } from 'primeng/dialog';
+import { UsuarioServiceService } from '../../../Servicios/Usuario-service.service';
+import { usuarioDTO } from '../../../Entidades/usuario';
 
 @Component({
     selector: 'app-fisico-detalle',
     imports: [ButtonModule, CardModule, HttpClientModule, InputTextModule, DialogModule, InputNumberModule, MatIconModule, FormsModule, ReactiveFormsModule, CommonModule, FloatLabelModule, InputGroupModule, InputGroupAddonModule, TooltipModule],
 
-    providers: [FisicoQuimicoServiceService],
+    providers: [FisicoQuimicoServiceService,UsuarioServiceService],
     standalone: true,
     templateUrl: './fisico-detalle.component.html',
     styleUrl: './fisico-detalle.component.scss'
@@ -31,13 +33,15 @@ export class FisicoDetalleComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
 
-        private service: FisicoQuimicoServiceService
+        private service: FisicoQuimicoServiceService,
+        private usuarioService: UsuarioServiceService
     ) {}
     form: FormGroup;
     @Input() id: number;
     @Input() temperatura: string;
     loading: boolean = false;
     modelo: fisicoQuimicoDTO;
+    usuario: usuarioDTO;
     
     ngOnInit(): void {
        
@@ -138,7 +142,8 @@ export class FisicoDetalleComponent implements OnInit {
     }
     visibleDelete: boolean = false;
     eliminar(id: number) {
-        this.service.borrar(id).subscribe((data) => {});
+        this.usuario = this.usuarioService.getUsuarioLogeado();
+        this.service.borrar(id,this.usuario.email).subscribe((data) => {});
         this.ngOnInit();
         this.visibleDelete = false;
     }

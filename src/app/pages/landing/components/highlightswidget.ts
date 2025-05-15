@@ -3,44 +3,66 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'highlights-widget',
     template: `
-        <div id="highlights" class="py-6 px-6 lg:px-20 mx-0 my-12 lg:mx-20">
-            <div class="text-center">
-                <div class="text-surface-900 dark:text-surface-0 font-normal mb-2 text-4xl">Powerful Everywhere</div>
-                <span class="text-muted-color text-2xl">Amet consectetur adipiscing elit...</span>
-            </div>
-
-            <div class="grid grid-cols-12 gap-4 mt-20 pb-2 md:pb-20">
-                <div class="flex justify-center col-span-12 lg:col-span-6 bg-purple-100 p-0 order-1 lg:order-none" style="border-radius: 8px">
-                    <img src="https://primefaces.org/cdn/templates/sakai/landing/mockup.png" class="w-11/12" alt="mockup mobile" />
-                </div>
-
-                <div class="col-span-12 lg:col-span-6 my-auto flex flex-col lg:items-end text-center lg:text-right gap-4">
-                    <div class="flex items-center justify-center bg-purple-200 self-center lg:self-end" style="width: 4.2rem; height: 4.2rem; border-radius: 10px">
-                        <i class="pi pi-fw pi-mobile !text-4xl text-purple-700"></i>
-                    </div>
-                    <div class="leading-none text-surface-900 dark:text-surface-0 text-3xl font-normal">Congue Quisque Egestas</div>
-                    <span class="text-surface-700 dark:text-surface-100 text-2xl leading-normal ml-0 md:ml-2" style="max-width: 650px"
-                        >Lectus arcu bibendum at varius vel pharetra vel turpis nunc. Eget aliquet nibh praesent tristique magna sit amet purus gravida. Sit amet mattis vulputate enim nulla aliquet.</span
-                    >
-                </div>
-            </div>
-
-            <div class="grid grid-cols-12 gap-4 my-20 pt-2 md:pt-20">
-                <div class="col-span-12 lg:col-span-6 my-auto flex flex-col text-center lg:text-left lg:items-start gap-4">
-                    <div class="flex items-center justify-center bg-yellow-200 self-center lg:self-start" style="width: 4.2rem; height: 4.2rem; border-radius: 10px">
-                        <i class="pi pi-fw pi-desktop !text-3xl text-yellow-700"></i>
-                    </div>
-                    <div class="leading-none text-surface-900 dark:text-surface-0 text-3xl font-normal">Celerisque Eu Ultrices</div>
-                    <span class="text-surface-700 dark:text-surface-100 text-2xl leading-normal mr-0 md:mr-2" style="max-width: 650px"
-                        >Adipiscing commodo elit at imperdiet dui. Viverra nibh cras pulvinar mattis nunc sed blandit libero. Suspendisse in est ante in. Mauris pharetra et ultrices neque ornare aenean euismod elementum nisi.</span
-                    >
-                </div>
-
-                <div class="flex justify-end order-1 sm:order-2 col-span-12 lg:col-span-6 bg-yellow-100 p-0" style="border-radius: 8px">
-                    <img src="https://primefaces.org/cdn/templates/sakai/landing/mockup-desktop.png" class="w-11/12" alt="mockup" />
-                </div>
-            </div>
+       
+           <div id="highlights" class="surface-section px-4 py-8 md:px-6 lg:px-8 overflow-hidden">
+    <div class="font-bold text-900 text-3xl mb-3 text-center">Explore The Features</div>
+    <div class="text-700 text-center mb-5 line-height-3">Libero justo laoreet sit amet cursus sit amet dictum. Auctor neque vitae tempus quam pellentesque nec nam.</div>
+    <div class="flex lg:justify-content-center mb-5">
+        <div class="py-3 pr-8 pl-3 w-30rem hidden lg:block">
+            <img src="img/feature-timeline-1.png" alt="Image" class="w-full mr-8">
         </div>
+        <div class="flex flex-column align-items-center w-2rem">
+            <span class="bg-blue-500 text-0 flex align-items-center justify-content-center border-circle" style="min-width:2.5rem; min-height: 2.5rem">1</span>
+            <div class="h-full bg-blue-500" style="width: 2px; min-height: 4rem"></div>
+        </div>
+        <div class="py-3 pl-5 lg:pl-8 pl-3 lg:w-30rem">
+            <div class="text-900 text-xl mb-2 font-medium">Ornare Arcu Odio</div>
+            <span class="block text-700 line-height-3 mb-3">Quisque sagittis purus sit amet volutpat consequat mauris nunc. Scelerisque eleifend.</span>
+            <div class="pt-3 border-top-1 border-300">
+                <div class="mb-2 line-height-3"><span class="text-900 font-medium">Sed lectus vestibulum</span> mattis ullamcorper velit. Laoreet sit amet cursus sit.</div>
+                <div class="line-height-3"><span class="text-900 font-medium">Fames ac turpis</span> egestas sed tempus urna et. Cursus turpis massa.</div>
+            </div>
+            <img src="img/feature-timeline-1.png" alt="Image" class="w-full mt-3 block lg:hidden">
+        </div>
+    </div>
+    <div class="flex justify-content-center mb-5">
+        <div class="py-3 pl-5 pr-3 lg:pr-8 lg:pl-3 lg:w-30rem flex-order-1 lg:flex-order-0">
+            <div class="text-900 text-xl mb-2 font-medium">A diam maecenas</div>
+            <span class="block text-700 line-height-3 mb-3">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</span>
+            <div class="pt-3 border-top-1 border-300">
+                <div class="mb-2 line-height-3"><span class="text-900 font-medium">Quis hendrerit dolor</span> magna eget est. Pellentesque pulvinar pellentesque.</div>
+                <div class="line-height-3"><span class="text-900 font-medium">Lectus urna duis</span> convallis convallis tellus id interdum velit laoreet.</div>
+            </div>
+            <img src="img/feature-timeline-2.png" alt="Image" class="w-full mt-3 block lg:hidden">
+        </div>
+        <div class="flex flex-column align-items-center w-2rem flex-order-0 lg:flex-order-1">
+            <span class="bg-yellow-500 text-0 flex align-items-center justify-content-center border-circle" style="min-width:2.5rem; min-height: 2.5rem">2</span>
+            <div class="h-full bg-yellow-500" style="width: 2px; min-height: 4rem"></div>
+        </div>
+        <div class="py-3 pl-8 pr-3 w-30rem hidden lg:block flex-order-2">
+            <img src="img/feature-timeline-2.png" alt="Image" class="w-full mr-8">
+        </div>
+    </div>
+    <div class="flex justify-content-center">
+        <div class="py-3 pr-8 pl-3 w-30rem hidden lg:block">
+            <img src="img/feature-timeline-3.png" alt="Image" class="w-full mr-8">
+        </div>
+        <div class="flex flex-column align-items-center w-2rem">
+            <span class="bg-cyan-500 text-0 flex align-items-center justify-content-center border-circle" style="min-width:2.5rem; min-height: 2.5rem">3</span>
+            <div class="h-full bg-cyan-500" style="width: 2px; min-height: 4rem"></div>
+        </div>
+        <div class="py-3 pl-5 lg:pl-8 pl-3 lg:w-30rem">
+            <div class="text-900 text-xl mb-2 font-medium">Pharetra et ultrices neque</div>
+            <span class="block text-700 line-height-3 mb-3">Id interdum velit laoreet id. A iaculis at erat pellentesque adipiscing commodo elit at imperdiet.</span>
+            <div class="pt-3 border-top-1 border-300">
+                <div class="mb-2 line-height-3"><span class="text-900 font-medium">Egestas dui id</span> ornare arcu odio ut. Mi bibendum neque egestas congue.</div>
+                <div class="line-height-3"><span class="text-900 font-medium">Sed velit dignissim</span> sodales ut eu. Massa placerat duis ultricies lacus.</div>
+            </div>
+            <img src="img/feature-timeline-3.png" alt="Image" class="w-full mt-3 block lg:hidden">
+        </div>
+    </div>
+</div>
+        
     `
 })
 export class HighlightsWidget {}

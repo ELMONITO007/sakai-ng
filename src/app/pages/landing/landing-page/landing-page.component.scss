@@ -1,0 +1,13 @@
+@use "./primeng.min.css";
+@import 'primeflex/primeflex.css';
+.fondo {
+  background: url('/img/fondo.png') no-repeat center center fixed;
+  background-size: cover;
+  height: 100vh;
+}
+@media (max-width: 768px) {
+  .fondo {
+    background: url('/img/hero-illustration-mobile.svg') no-repeat center center fixed;
+    background-size: cover;
+  }
+}

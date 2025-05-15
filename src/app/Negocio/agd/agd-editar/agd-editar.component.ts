@@ -18,6 +18,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { Observable, ReplaySubject } from 'rxjs';
 import { FileUploadModule } from 'primeng/fileupload';
 import { InputNumber } from 'primeng/inputnumber';
+import { usuarioDTO } from '../../../Entidades/usuario';
+import { UsuarioServiceService } from '../../../Servicios/Usuario-service.service';
 export const MY_DATE_FORMATS = {
     parse: {
         dateInput: 'DD/MM/YYYY'
@@ -34,7 +36,7 @@ export const MY_DATE_FORMATS = {
     imports: [ButtonModule, CardModule, HttpClientModule, InputTextModule, InputNumber, FileUploadModule, MatIconModule, FormsModule, ReactiveFormsModule, CommonModule, FloatLabelModule, InputGroupModule, InputGroupAddonModule, TooltipModule],
     templateUrl: './agd-editar.component.html',
     styleUrl: './agd-editar.component.scss',
-    providers: [AgdServiceService, MessageService, { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }],
+    providers: [AgdServiceService, MessageService, { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },UsuarioServiceService],
     standalone: true
 })
 export class AgdEditarComponent implements OnInit {
@@ -42,7 +44,8 @@ export class AgdEditarComponent implements OnInit {
         private formBuilder: FormBuilder,
 
         private service: AgdServiceService,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private usuarioService: UsuarioServiceService
     ) {}
     form: FormGroup;
     @Input() id: number;
@@ -168,9 +171,11 @@ export class AgdEditarComponent implements OnInit {
             }
         });
     }
-
+usuario:usuarioDTO;
     onSubmit(id: number) {
+
         this.loading = true;
+        this.usuario=this.usuarioService.getUsuarioLogeado();
         this.modelo = {
             id_Agd: id,
 
@@ -200,7 +205,7 @@ export class AgdEditarComponent implements OnInit {
 
             observaciones: this.form.get('observaciones').value,
 
-            fechaSubida: '',
+            fechaSubida: this.usuario.email,
 
             fechaEnsayo: this.form.get('fechaEnsayo').value,
 

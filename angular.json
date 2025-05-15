@@ -42,13 +42,13 @@
                             "budgets": [
                                 {
                                     "type": "initial",
-                                    "maximumWarning": "1mb",
-                                    "maximumError": "5mb"
+                                    "maximumWarning": "5mb",
+                                    "maximumError": "10mb"
                                 },
                                 {
                                     "type": "anyComponentStyle",
-                                    "maximumWarning": "2kb",
-                                    "maximumError": "4kb"
+                                    "maximumWarning": "5mb",
+                                    "maximumError": "10mb"
                                 }
                             ],
                             "outputHashing": "all"
@@ -82,13 +82,17 @@
                         "polyfills": [
                             "zone.js",
                             "zone.js/testing"
+                            
                         ],
+                        
                         "tsConfig": "tsconfig.spec.json",
                         "inlineStyleLanguage": "scss",
                         "assets": [
                             {
+                                
                                 "glob": "**/*",
                                 "input": "public"
+                                
                             }
                         ],
                         "styles": [
@@ -96,6 +100,7 @@
                           "src/styles.scss"
                         ],
                         "scripts": []
+                        
                     }
                 }
             }

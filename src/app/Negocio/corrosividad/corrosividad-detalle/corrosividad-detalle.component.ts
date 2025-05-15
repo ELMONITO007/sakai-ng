@@ -27,12 +27,14 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { TooltipModule } from 'primeng/tooltip';
+import { UsuarioServiceService } from '../../../Servicios/Usuario-service.service';
+import { usuarioDTO } from '../../../Entidades/usuario';
 
 @Component({
     selector: 'app-corrosividad-detalle',
     imports: [ButtonModule, CardModule, HttpClientModule, InputTextModule,DialogModule, CheckboxModule, FileUploadModule, MatIconModule, FormsModule, ReactiveFormsModule, CommonModule, FloatLabelModule, InputGroupModule, InputGroupAddonModule, TooltipModule],
 
-    providers: [MessageService, DialogService, CorrosividadServiceService],
+    providers: [MessageService, DialogService, CorrosividadServiceService,UsuarioServiceService],
     templateUrl: './corrosividad-detalle.component.html',
     styleUrl: './corrosividad-detalle.component.scss'
 })
@@ -40,12 +42,14 @@ export class CorrosividadDetalleComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
 
-        private service: CorrosividadServiceService
+        private service: CorrosividadServiceService,
+        private usuarioService: UsuarioServiceService,
     ) {}
     form: FormGroup;
     loading: boolean = false;
     @Input() id: number;
     modelo: corrosividadDTO;
+    usuario: usuarioDTO;
     ngOnInit(): void {
         this.form = this.formBuilder.group({
             corrosivoASTM: ['', {}],
@@ -71,7 +75,8 @@ export class CorrosividadDetalleComponent implements OnInit {
     }
     visibleDelete: boolean = false;
     eliminar(id: number) {
-        this.service.borrar(id).subscribe((data) => {});
+        this.usuario= this.usuarioService.getUsuarioLogeado();
+        this.service.borrar(id, this.usuario.email).subscribe((data) => {});
         this.ngOnInit();
         this.visibleDelete = false;
     }

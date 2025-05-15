@@ -29,8 +29,9 @@ export class PasivadorServiceService {
        return this.http.put(this.apiURL, codigo);
    }
 
-   public borrar(id: number) {
-        return this.http.delete(`${this.apiURL}?id=${id}`);
+   public borrar(id: number, email: string) {
+        return this.http.delete(`${this.apiURL}?id=${id}&email=${email}`);
+     
    }
 
 }
