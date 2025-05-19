@@ -51,6 +51,9 @@ export class SectorListarComponent implements OnInit {
     items: MenuItem[] = [];
     visible: boolean = false;
     modelo: sectorLaboratorioDTO[] = [];
+      first = 0;
+
+    rows = 10;
     unLabo:laboratorioDTO;
     constructor(
         private service: SectorServiceService,
@@ -171,5 +174,31 @@ this.laboratorioService.obtenerUno(data[i].id_Laboratorio).subscribe((x) => {
     VerColaboradores(id: number) {
      this.route.navigate(['/colaborador/', id]);
         
+    }
+
+
+     next() {
+        this.first = this.first + this.rows;
+    }
+
+    prev() {
+        this.first = this.first - this.rows;
+    }
+
+    reset() {
+        this.first = 0;
+    }
+
+    pageChange(event) {
+        this.first = event.first;
+        this.rows = event.rows;
+    }
+
+    isLastPage(): boolean {
+        return this.modelo ? this.first + this.rows >= this.modelo.length : true;
+    }
+
+    isFirstPage(): boolean {
+        return this.modelo ? this.first === 0 : true;
     }
 }

@@ -34,9 +34,9 @@ export const MY_DATE_FORMATS = {
 
 @Component({
     selector: 'app-pcb-editar',
-    imports: [ButtonModule, CardModule, HttpClientModule,MatIconModule,InputNumberModule, InputTextModule,FileUploadModule, FormsModule, ReactiveFormsModule, CommonModule, FloatLabelModule, InputGroupModule, InputGroupAddonModule, TooltipModule],
+    imports: [ButtonModule, CardModule, HttpClientModule, MatIconModule, InputNumberModule, InputTextModule, FileUploadModule, FormsModule, ReactiveFormsModule, CommonModule, FloatLabelModule, InputGroupModule, InputGroupAddonModule, TooltipModule],
 
-    providers: [PCBServiceService,   { provide: MAT_DATE_FORMATS, useValue:  MY_DATE_FORMATS},UsuarioServiceService],
+    providers: [PCBServiceService, { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }, UsuarioServiceService],
     standalone: true,
     templateUrl: './pcb-editar.component.html',
     styleUrl: './pcb-editar.component.scss'
@@ -44,7 +44,7 @@ export const MY_DATE_FORMATS = {
 export class PcbEditarComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
-    
+
         private service: PCBServiceService,
         private usuarioService: UsuarioServiceService
     ) {}
@@ -53,9 +53,9 @@ export class PcbEditarComponent implements OnInit {
     @Input() id: number;
     usuario: usuarioDTO;
     modelo: pcbDTO;
-    hoy:string;
+    hoy: string;
     ngOnInit(): void {
-         const currentYear = new Date().getFullYear();
+        const currentYear = new Date().getFullYear();
         const month = new Date().getMonth();
         const day = new Date().getDate();
 
@@ -69,77 +69,77 @@ export class PcbEditarComponent implements OnInit {
             ],
             observaciones: ['', {}],
 
-            fechaEnsayo: [ this.hoy , {}],
+            fechaEnsayo: [this.hoy, {}],
             linkArchivo: ['', {}]
         });
         this.service.obtenerTodos(this.id).subscribe((x) => {
             this.modelo = x;
-            if (x.contenidodePCB!=null && x.fechaEnsayo!=null) {
-             
-               var dia = this.modelo.fechaEnsayo.slice(0,2);
-                var mes = this.modelo.fechaEnsayo.slice(3,5);
-                var anio = this.modelo.fechaEnsayo.slice(6,10);
+            if (x.contenidodePCB != null && x.fechaEnsayo != null) {
+                var dia = this.modelo.fechaEnsayo.slice(0, 2);
+                var mes = this.modelo.fechaEnsayo.slice(3, 5);
+                var anio = this.modelo.fechaEnsayo.slice(6, 10);
                 var fecha = anio + '/' + mes + '/' + dia;
-       
-           
-            this.form.get('contenidodePCB')?.setValue(this.modelo.contenidodePCB);
-            this.form.get('observaciones')?.setValue(this.modelo.observaciones);
-           
-         
-           this.form.get('fechaEnsayo')?.setValue( new Date(fecha).toISOString().split('T')[0]);
-            this.form.get('linkArchivo')?.setValue(this.modelo.linkArchivo);
-                 }
+
+                this.form.get('contenidodePCB')?.setValue(this.modelo.contenidodePCB);
+                this.form.get('observaciones')?.setValue(this.modelo.observaciones);
+
+                this.form.get('fechaEnsayo')?.setValue(new Date(fecha).toISOString().split('T')[0]);
+                this.form.get('linkArchivo')?.setValue(this.modelo.linkArchivo);
+            }
         });
     }
 
     onSubmit(id: number) {
         this.loading = true;
-        this.usuario= this.usuarioService.getUsuarioLogeado();
-        this.modelo = {
-            id_Pcb: id,
+        this.usuarioService.getUsuarioLogeado().subscribe((x) => {
+            this.usuario = x;
 
-            contenidodePCB: this.form.get('contenidodePCB').value,
+            this.modelo = {
+                id_Pcb: id,
 
-            observaciones: this.form.get('observaciones').value,
+                contenidodePCB: this.form.get('contenidodePCB').value,
 
-            id_OrdenEnsayo: this.id,
+                observaciones: this.form.get('observaciones').value,
 
-            fechaSubida: this.usuario.email,
+                id_OrdenEnsayo: this.id,
 
-            fechaEnsayo: this.form.get('fechaEnsayo').value,
+                fechaSubida: this.usuario.email,
 
-            linkArchivo: this.archivo,
-        };
-        this.service.actualizar(this.modelo).subscribe((res) => {
-          
-          window.location.reload();
+                fechaEnsayo: this.form.get('fechaEnsayo').value,
+
+                linkArchivo: this.archivo
+            };
+
+            this.service.actualizar(this.modelo).subscribe((res) => {
+                window.location.reload();
+            });
         });
     }
 
     public fileTmp: any;
-    
-        archivoRaw: string;
-        uploadedFiles: any[] = [];
-        archivo: string;
-        onUpload(event) {
-            for (let file of event.files) {
-                this.fileTmp = {
-                    fileRaw: file,
-                    fileName: file.name
-                };
-    
-                this.convertFile(file).subscribe((base64) => {
-                    this.archivo = base64;
-                });
-                this.uploadedFiles.push(file);
-            }
+
+    archivoRaw: string;
+    uploadedFiles: any[] = [];
+    archivo: string;
+    onUpload(event) {
+        for (let file of event.files) {
+            this.fileTmp = {
+                fileRaw: file,
+                fileName: file.name
+            };
+
+            this.convertFile(file).subscribe((base64) => {
+                this.archivo = base64;
+            });
+            this.uploadedFiles.push(file);
         }
-    
-        convertFile(file: File): Observable<string> {
-            const result = new ReplaySubject<string>(1);
-            const reader = new FileReader();
-            reader.readAsBinaryString(file);
-            reader.onload = (event) => result.next(btoa(event.target.result.toString()));
-            return result;
-        }
+    }
+
+    convertFile(file: File): Observable<string> {
+        const result = new ReplaySubject<string>(1);
+        const reader = new FileReader();
+        reader.readAsBinaryString(file);
+        reader.onload = (event) => result.next(btoa(event.target.result.toString()));
+        return result;
+    }
 }

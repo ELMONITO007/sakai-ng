@@ -1,1 +1,75 @@
-<p>orden-ensayo-editar works!</p>
+<form (submit)="onSubmit()" [formGroup]="form">
+    <br />
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>location_on</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-select (onChange)="obtenerEquipos()" formControlName="sector" [options]="sectores"  optionLabel="detalle" optionValue="id_Sector" placeholder="Seleccione un sector*" class="w-full md:w-56" />
+
+                <label for="sector">Sector*</label>
+            </p-floatlabel>
+        </p-inputgroup>
+
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>inventory_2</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-select [filter]="true" filterBy="codigoCuba" formControlName="cuba" [options]="cuba" optionLabel="codigoCuba" optionValue="codigoCuba" placeholder="Seleccione una Cuba*" class="w-full md:w-56" />
+
+                <label for="cuba">Cuba*</label>
+            </p-floatlabel>
+        </p-inputgroup>
+
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>gas_meter</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-select [filter]="true" filterBy="codigo" formControlName="id_Equipo" [options]="equipos" optionLabel="codigo" optionValue="id_Equipo" placeholder="Seleccione un equipo*" class="w-full md:w-56" />
+
+                <label for="id_Equipo">Equipo*</label>
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+    <br />
+    <br />
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>question_mark</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-select formControlName="inhibido" [options]="inhibido" optionLabel="tipo" optionValue="tipo" placeholder="Seleccione SI o NO*" class="w-full md:w-56" />
+
+                <label for="inhibido">Inhibido*</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>oil_barrel</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-select formControlName="tipoAceite" [options]="tipo" optionLabel="tipo" optionValue="tipo" placeholder="Seleccione el tipo*" class="w-full md:w-56" />
+
+                <label for="tipoAceite">Tipo de Aceite*</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>description</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="observaciones" formControlName="observaciones" pTooltip="Ingrese las Observaciones*" tooltipPosition="bottom" />
+                <label for="observaciones">Observaciones*</label>
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+<br><br>
+  
+    <p-button label="Guardar" icon="pi pi-check" type="submit" severity="success" [disabled]="!form.valid" [loading]="loading"></p-button>
+    &nbsp;&nbsp;
+    <p-button label="Cancelar" icon="pi pi-times" type="button" (click)="onCancel()" severity="danger"></p-button>
+</form>

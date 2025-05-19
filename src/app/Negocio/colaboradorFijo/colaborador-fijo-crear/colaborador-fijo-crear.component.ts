@@ -41,6 +41,10 @@ export class ColaboradorFijoCrearComponent implements OnInit {
     selectedProduct:usuarioDTO;
     visible: boolean = false;
     loading: boolean = false;
+    	 
+		  first = 0;
+
+    rows = 10;
     @ViewChild('dt1') dt1!: Table;
     ngOnInit(): void {
         this.usuarioService.ReadColaboradorFaltante(this.config.data['id']).subscribe((data) => {
@@ -83,5 +87,31 @@ export class ColaboradorFijoCrearComponent implements OnInit {
             this.loading = false;
             this.ref.close(1);
         });
+    }
+    
+
+      next() {
+        this.first = this.first + this.rows;
+    }
+
+    prev() {
+        this.first = this.first - this.rows;
+    }
+
+    reset() {
+        this.first = 0;
+    }
+
+    pageChange(event) {
+        this.first = event.first;
+        this.rows = event.rows;
+    }
+
+    isLastPage(): boolean {
+        return this.usuarios ? this.first + this.rows >= this.usuarios.length : true;
+    }
+
+    isFirstPage(): boolean {
+        return this.usuarios ? this.first === 0 : true;
     }
 }

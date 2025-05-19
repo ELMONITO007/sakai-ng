@@ -5,6 +5,7 @@
     <p-toolbar styleClass="mb-6">
         <ng-template #start>
             <div class="flex">
+              
                 <p-button label="Limpiar" icon="pi pi-filter-slash" severity="primary" (click)="clear(dt1)" [rounded]="true" [outlined]="true" />
                 &nbsp;
 
@@ -37,7 +38,7 @@
         [paginator]="true"
         [tableStyle]="{ 'min-width': '35rem' }"
         [resizableColumns]="true"
-        [globalFilterFields]="['id_Sector', 'nombreSector', 'coordenada', 'codigo', 'detalle', 'Laboratorio']"
+        [globalFilterFields]="[ 'nombreSector', 'coordenada', 'codigo', 'detalle', 'Laboratorio']"
         currentPageReportTemplate="Mostrando {first} de {last} de un total de {totalRecords} registros"
     >
         <ng-template #header>

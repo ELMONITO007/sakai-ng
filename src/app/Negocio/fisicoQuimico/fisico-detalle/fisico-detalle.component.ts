@@ -42,6 +42,7 @@ export class FisicoDetalleComponent implements OnInit {
     loading: boolean = false;
     modelo: fisicoQuimicoDTO;
     usuario: usuarioDTO;
+      @Input() estado: string;
     
     ngOnInit(): void {
        
@@ -142,10 +143,12 @@ export class FisicoDetalleComponent implements OnInit {
     }
     visibleDelete: boolean = false;
     eliminar(id: number) {
-        this.usuario = this.usuarioService.getUsuarioLogeado();
+      this.usuarioService.getUsuarioLogeado().subscribe((x) => {
+            this.usuario = x;
         this.service.borrar(id,this.usuario.email).subscribe((data) => {});
         this.ngOnInit();
         this.visibleDelete = false;
+      });
     }
     closeDelete() {
         this.visibleDelete = false;

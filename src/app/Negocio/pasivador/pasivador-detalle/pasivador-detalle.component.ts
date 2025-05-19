@@ -56,6 +56,7 @@ export class PasivadorDetalleComponent implements OnInit {
     loading: boolean = false;
     modelo: pasivadorDTO;
     usuario:usuarioDTO
+      @Input() estado: string;
     @Input() id: number;
     ngOnInit(): void {
         this.form = this.formBuilder.group({
@@ -92,10 +93,13 @@ export class PasivadorDetalleComponent implements OnInit {
     }
     visibleDelete: boolean = false;
     eliminar(id: number) {
-        this.usuario= this.usuarioService.getUsuarioLogeado();
+        
+      this.usuarioService.getUsuarioLogeado().subscribe((x) => {
+            this.usuario = x;
         this.service.borrar(id,this.usuario.email).subscribe((data) => {});
         this.ngOnInit();
         this.visibleDelete = false;
+        });
     }
     closeDelete() {
         this.visibleDelete = false;

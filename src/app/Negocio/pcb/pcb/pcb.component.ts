@@ -24,17 +24,23 @@ export class PcbComponent implements OnInit {
     vacio: boolean = false;
     detalle: boolean = true;
     @Input() id: number;
+      @Input() estado: string;
 
     constructor(private service: PCBServiceService) {}
 
     ngOnInit(): void {
         this.service.obtenerTodos(this.id).subscribe((data) => {
         
-            if (data.fechaEnsayo == null && data.contenidodePCB == 0) {
+            if (data.fechaEnsayo == null && data.contenidodePCB == 0 && this.estado=="En Proceso") {
                 this.vacio = true;
                 this.detalle = false;
                 this.editar = false;
 
+            }
+            if(this.estado!="En Proceso"){
+                this.editar = false;
+                this.vacio = false;
+                this.detalle = true;
             }
         });
     }

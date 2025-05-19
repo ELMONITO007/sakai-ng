@@ -24,16 +24,22 @@ export class FisicoQuimicoComponent implements OnInit {
     vacio: boolean = false;
     detalle: boolean = true;
     @Input() id: number;
+      @Input() estado: string;
  @Input() temperatura: string;
     constructor(private service: FisicoQuimicoServiceService) {}
 
  ngOnInit(): void {
 
         this.service.obtenerTodos(this.id).subscribe((data) => {
-            if (data.fechaEnsayo == null && data.rigidezDielectrica == null && data.aguaRelativa == null && data.tensionInterfasial == null) {
+            if (data.fechaEnsayo == null && data.rigidezDielectrica == null && data.aguaRelativa == null && data.tensionInterfasial == null && this.estado=="En Proceso") {
                 this.vacio = true;
                 this.detalle = false;
                 this.editar = false;
+            }
+            if(this.estado!="En Proceso"){
+                this.editar = false;
+                this.vacio = false;
+                this.detalle = true;
             }
         });
       }

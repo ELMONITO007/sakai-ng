@@ -20,17 +20,26 @@ export class AgdComponent implements OnInit {
     vacio: boolean = false;
     detalle: boolean = true;
     @Input() id: number;
+    @Input() estado: string;
 
     constructor(private service: AgdServiceService) {}
 
     ngOnInit(): void {
         this.service.obtenerTodos(this.id).subscribe((data) => {
-        
-            if (data.hidrogeno == null && data.oxigeno == null && data.nitrogeno == null && data.dioxidodeCarbono == null) {
+    
+            if (data.hidrogeno == null && data.oxigeno == null && data.nitrogeno == null && data.dioxidodeCarbono == null && this.estado=="En Proceso") {
                 this.vacio = true;
+                
                 this.detalle = false;
                 this.editar = false;
+                 
 
+            }
+            if(this.estado!="En Proceso"){
+                this.editar = false;
+                this.vacio = false;
+                this.detalle = true;
+                 console.log(this.estado);
             }
         });
     }
@@ -41,8 +50,14 @@ export class AgdComponent implements OnInit {
         this.detalle = true;
     }
     editarAgd() {
+        if (this.estado == "En Proceso") {
         this.editar = true;
         this.vacio = false;
-        this.detalle = false;
+        this.detalle = false;}
+        else {
+            this.editar = false;
+            this.vacio = false;
+            this.detalle = false;
+        }
     }
 }

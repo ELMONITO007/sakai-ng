@@ -5,12 +5,23 @@
     <p-toolbar styleClass="mb-6">
         <ng-template #start>
             <div class="flex">
+              
+    <p-button type="button" icon="pi pi-chevron-left" (click)="prev()" [disabled]="isFirstPage()" text />
+    <p-button type="button" icon="pi pi-refresh" (click)="reset()" text />
+    <p-button type="button" icon="pi pi-chevron-right" (click)="next()" [disabled]="isLastPage()" text />
+
                 <p-button label="Limpiar" icon="pi pi-filter-slash" severity="primary" (click)="clear(dt1)" [rounded]="true" [outlined]="true" />
                 &nbsp;
 
                 <p-button label="Nuevo" icon="pi pi-plus" severity="secondary" (onClick)="crear()" [rounded]="true" [outlined]="true" />
                 &nbsp;
                 <p-button label="Exportar" icon="pi pi-file-excel" severity="info" (onClick)="exportExcel(dt1)" [rounded]="true" [outlined]="true" />
+           &nbsp;
+             
+           <p-button *ngIf="soloAbiertos" label="Ver cerrados" icon="pi pi-times" severity="warn" (onClick)="mostrarTodo(false)" [rounded]="true" [outlined]="true" />
+                <p-button *ngIf="!soloAbiertos" label="Ver abiertos" icon="pi pi-check" severity="warn" (onClick)="mostrarTodo(true)" [rounded]="true" [outlined]="true" />
+               
+               
             </div>
         </ng-template>
 
@@ -30,6 +41,8 @@
         [value]="modelo"
         dataKey="id"
         [rows]="10"
+            [first]="first"
+             (onPage)="pageChange($event)"
         showGridlines
         stripedRows
         [rowsPerPageOptions]="[10, 25, 50]"

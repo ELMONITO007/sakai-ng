@@ -1,0 +1,94 @@
+<p-toast></p-toast>
+<p-card>
+    <app-breadcrumb-router [items]="items"></app-breadcrumb-router>
+
+    <p-toolbar styleClass="mb-6">
+        <ng-template #start>
+            <div class="flex">
+                <p-button type="button" icon="pi pi-chevron-left" (click)="prev()" [disabled]="isFirstPage()" text />
+    <p-button type="button" icon="pi pi-refresh" (click)="reset()" text />
+    <p-button type="button" icon="pi pi-chevron-right" (click)="next()" [disabled]="isLastPage()" text />
+                <p-button label="Limpiar" icon="pi pi-filter-slash" severity="primary" (click)="clear(dt1)" [rounded]="true" [outlined]="true" />
+                &nbsp;
+
+                <p-button label="Exportar" icon="pi pi-file-excel" severity="info" (onClick)="exportExcel(dt1)" [rounded]="true" [outlined]="true" />
+            </div>
+        </ng-template>
+
+        <ng-template #end>
+            <p-iconfield iconPosition="left" class="ml-auto">
+                <p-inputicon>
+                    <i class="pi pi-search"></i>
+                </p-inputicon>
+                <input pInputText type="text" (input)="applyGlobalFilterToDataTable($event, dt1)" placeholder="Buscar ..." />
+            </p-iconfield>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table
+        styleClass="p-datatable-gridlines"
+        #dt1
+        [value]="modelo"
+        dataKey="id"
+        [rows]="10"
+         [first]="first"
+             (onPage)="pageChange($event)"
+        showGridlines
+        stripedRows
+        [rowsPerPageOptions]="[10, 25, 50]"
+        [loading]="loading"
+        [paginator]="true"
+        [tableStyle]="{ 'min-width': '35rem' }"
+        [resizableColumns]="true"
+        [globalFilterFields]="['registro', 'fecha', 'hora', 'tipo', 'nombre']"
+        currentPageReportTemplate="Mostrando {first} de {last} de un total de {totalRecords} registros"
+    >
+        <ng-template #header>
+            <tr>
+                <th pResizableColumn pSortableColumn="tipo">
+                    <div class="flex items-center">
+                        Tipo
+                        <p-columnFilter type="text" field="tipo" display="menu" />
+                    </div>
+                </th>
+                <th pResizableColumn pSortableColumn="nombre">
+                    <div class="flex items-center">
+                        nombre
+                        <p-columnFilter type="text" field="nombre" display="menu" />
+                    </div>
+                </th>
+                <th pResizableColumn pSortableColumn="registro">
+                    <div class="flex items-center">
+                        Registro
+                        <p-columnFilter type="text" field="registro" display="menu" />
+                    </div>
+                </th>
+
+                <th pResizableColumn pSortableColumn="fecha">
+                    <div class="flex items-center">
+                        Fecha
+                        <p-columnFilter type="text" field="fecha" display="menu" />
+                    </div>
+                </th>
+
+               
+            </tr>
+        </ng-template>
+        <ng-template #body let-orden>
+            <tr>
+                  <td >{{ orden.tipo }}</td>
+                <td >{{ orden.nombre }}</td>
+                <td >{{ orden.registro }}</td>
+                <td >{{ orden.fecha }} {{ orden.hora }}</td>
+             
+                            
+            </tr>
+            
+        </ng-template>
+        <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+                <td [colSpan]="5">No se encontraron Bitacoras registradas</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-card>

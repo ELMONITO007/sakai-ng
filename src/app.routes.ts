@@ -27,7 +27,7 @@ export const appRoutes: Routes = [
     { path: 'waiting', component:WaitingLoginComponent },
     {path:'' ,component:LandingPageComponent},
     {
-        path: 'index',
+        path: '',
         component: AppLayout,
         children: [
             { path: 'index', component: Dashboard },

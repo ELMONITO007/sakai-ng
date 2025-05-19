@@ -42,7 +42,7 @@ export class PcbDetalleComponent implements OnInit {
     loading: boolean = false;
     @Input() id: number;
     modelo: pcbDTO;
-
+  @Input() estado: string;
     ngOnInit(): void {
         this.form = this.formBuilder.group({
             contenidodePCB: [
@@ -77,10 +77,13 @@ export class PcbDetalleComponent implements OnInit {
     }
     visibleDelete: boolean = false;
     eliminar(id: number) {
-        this.usuario= this.usuarioService.getUsuarioLogeado();
+        this.usuarioService.getUsuarioLogeado().subscribe((x) => {
+            this.usuario = x;
+       
         this.service.borrar(id,this.usuario.email).subscribe((data) => {});
         this.ngOnInit();
         this.visibleDelete = false;
+        });
     }
     closeDelete() {
         this.visibleDelete = false;

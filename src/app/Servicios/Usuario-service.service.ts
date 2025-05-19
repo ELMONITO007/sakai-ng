@@ -57,14 +57,15 @@ export class UsuarioServiceService {
    
     existe: string;
 
-    getUsuarioLogeado(): usuarioDTO {
+    getUsuarioLogeado(): Observable< usuarioDTO>  {
+  
         const plainUser = this.auth.getPRofile();
         var email = plainUser['email'];
-        this.obtenerUnoemail(email).subscribe((data: usuarioDTO) => {
-            this.usuarioLogueado = data;
-        });
-
-        return this.usuarioLogueado;
+        var user;
+         return   this.obtenerUnoemail(email)
+            
+      
+      
     }
     public login(codigo: usuarioDTO) {
         return this.http.post<usuarioDTO>(`${this.apiURL}/login`, codigo);

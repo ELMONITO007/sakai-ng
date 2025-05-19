@@ -36,7 +36,7 @@ export const MY_DATE_FORMATS = {
     imports: [ButtonModule, CardModule, HttpClientModule, InputTextModule, InputNumber, FileUploadModule, MatIconModule, FormsModule, ReactiveFormsModule, CommonModule, FloatLabelModule, InputGroupModule, InputGroupAddonModule, TooltipModule],
     templateUrl: './agd-editar.component.html',
     styleUrl: './agd-editar.component.scss',
-    providers: [AgdServiceService, MessageService, { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },UsuarioServiceService],
+    providers: [AgdServiceService, MessageService, { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }, UsuarioServiceService],
     standalone: true
 })
 export class AgdEditarComponent implements OnInit {
@@ -171,49 +171,50 @@ export class AgdEditarComponent implements OnInit {
             }
         });
     }
-usuario:usuarioDTO;
+    usuario: usuarioDTO;
     onSubmit(id: number) {
-
         this.loading = true;
-        this.usuario=this.usuarioService.getUsuarioLogeado();
-        this.modelo = {
-            id_Agd: id,
+        this.usuarioService.getUsuarioLogeado().subscribe((x) => {
+            this.usuario = x;
+            this.modelo = {
+                id_Agd: id,
 
-            id_OrdenEnsayo: this.id,
+                id_OrdenEnsayo: this.id,
 
-            hidrogeno: this.form.get('hidrogeno').value,
+                hidrogeno: this.form.get('hidrogeno').value,
 
-            metano: this.form.get('metano').value,
+                metano: this.form.get('metano').value,
 
-            etano: this.form.get('etano').value,
+                etano: this.form.get('etano').value,
 
-            etileno: this.form.get('etileno').value,
+                etileno: this.form.get('etileno').value,
 
-            acetileno: this.form.get('acetileno').value,
+                acetileno: this.form.get('acetileno').value,
 
-            monoxidodeCarbono: this.form.get('monoxidodeCarbono').value,
+                monoxidodeCarbono: this.form.get('monoxidodeCarbono').value,
 
-            dioxidodeCarbono: this.form.get('dioxidodeCarbono').value,
+                dioxidodeCarbono: this.form.get('dioxidodeCarbono').value,
 
-            nitrogeno: this.form.get('nitrogeno').value,
+                nitrogeno: this.form.get('nitrogeno').value,
 
-            oxigeno: this.form.get('oxigeno').value,
+                oxigeno: this.form.get('oxigeno').value,
 
-            gasesTotales: this.form.get('gasesTotales').value,
+                gasesTotales: this.form.get('gasesTotales').value,
 
-            totaldeGasesCombustibles: this.form.get('totaldeGasesCombustibles').value,
+                totaldeGasesCombustibles: this.form.get('totaldeGasesCombustibles').value,
 
-            observaciones: this.form.get('observaciones').value,
+                observaciones: this.form.get('observaciones').value,
 
-            fechaSubida: this.usuario.email,
+                fechaSubida: this.usuario.email,
 
-            fechaEnsayo: this.form.get('fechaEnsayo').value,
+                fechaEnsayo: this.form.get('fechaEnsayo').value,
 
-            linkArchivo: this.archivo
-        };
-        this.service.actualizar(this.modelo).subscribe((res) => {
-            this.messageService.add({ severity: 'success', summary: 'Agd Creada', detail: 'La agd se ha actualizado correctamente' });
-            window.location.reload();
+                linkArchivo: this.archivo
+            };
+            this.service.actualizar(this.modelo).subscribe((res) => {
+                this.messageService.add({ severity: 'success', summary: 'Agd Creada', detail: 'La agd se ha actualizado correctamente' });
+                window.location.reload();
+            });
         });
     }
     editar: boolean = true;

@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 @Component({
     selector: 'app-dashboard',
     standalone: true,
-        imports: [ BestSellingWidget, RevenueStreamWidget, NotificationsWidget, EstadisticasComponent, EquiposComponent],
+        imports: [],
     templateUrl: './dashboard.component.html',
     providers:[AuthGoogleService]
 

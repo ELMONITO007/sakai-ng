@@ -51,6 +51,7 @@ export class ContenidoDetalleComponent implements OnInit {
  form: FormGroup;
     loading: boolean = false;
     @Input() id: number;
+      @Input() estado: string;
     usuario: usuarioDTO;
     ngOnInit(): void {
          this.form = this.formBuilder.group({
@@ -116,12 +117,14 @@ export class ContenidoDetalleComponent implements OnInit {
     }
 
     eliminar(id: number) {
-        this.usuario = this.usuarioService.getUsuarioLogeado();
+      this.usuarioService.getUsuarioLogeado().subscribe((x) => {
+            this.usuario = x;
         this.service.borrar(id,this.usuario.email).subscribe((data) => {
             this.messageService.add({ severity: 'success', summary: 'ContenidoFurano Eliminado', detail: 'El Analísis de Contenido Furano se ha eliminado correctamente', life: 3000 });
         });
         this.ngOnInit();
         this.visibleDelete = false;
+      });
     }
     link(link: string) {
         window.open("https://drive.google.com/file/d/"+link, '_blank');

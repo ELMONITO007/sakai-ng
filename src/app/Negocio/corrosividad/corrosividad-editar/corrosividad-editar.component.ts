@@ -53,7 +53,7 @@ export const MY_DATE_FORMATS = {
         TooltipModule
     ],
 
-    providers: [CorrosividadServiceService, { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },UsuarioServiceService],
+    providers: [CorrosividadServiceService, { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }, UsuarioServiceService],
     standalone: true,
     templateUrl: './corrosividad-editar.component.html',
     styleUrl: './corrosividad-editar.component.scss'
@@ -67,7 +67,7 @@ export class CorrosividadEditarComponent implements OnInit {
     ) {}
     form: FormGroup;
     loading: boolean = false;
-    usuario:usuarioDTO
+    usuario: usuarioDTO;
     @Input() id: number;
     modelo: corrosividadDTO;
     ngOnInit(): void {
@@ -109,34 +109,36 @@ export class CorrosividadEditarComponent implements OnInit {
 
     onSubmit(id: number) {
         this.loading = true;
-        this.usuario=this.usuarioService.getUsuarioLogeado();
-        var astm = this.form.get('corrosivoASTM').value;
-        var din = this.form.get('corrosivoDIN').value;
-        if (astm == '') {
-            astm = false;
-        }
+        this.usuarioService.getUsuarioLogeado().subscribe((x) => {
+            this.usuario = x;
+            var astm = this.form.get('corrosivoASTM').value;
+            var din = this.form.get('corrosivoDIN').value;
+            if (astm == '') {
+                astm = false;
+            }
 
-        if (din == '') {
-            din = false;
-        }
-        this.modelo = {
-            id_Corrosividad: id,
+            if (din == '') {
+                din = false;
+            }
+            this.modelo = {
+                id_Corrosividad: id,
 
-            corrosivoASTM: astm,
+                corrosivoASTM: astm,
 
-            corrosivoDIN: din,
+                corrosivoDIN: din,
 
-            id_OrdenEnsayo: this.id,
+                id_OrdenEnsayo: this.id,
 
-            fechaSubida: this.usuario.email,
+                fechaSubida: this.usuario.email,
 
-            fechaEnsayo: this.form.get('fechaEnsayo').value,
+                fechaEnsayo: this.form.get('fechaEnsayo').value,
 
-            linkArchivo: this.archivo
-        };
-        console.log(this.modelo);
-        this.service.actualizar(this.modelo).subscribe((res) => {
-            window.location.reload();
+                linkArchivo: this.archivo
+            };
+            console.log(this.modelo);
+            this.service.actualizar(this.modelo).subscribe((res) => {
+                window.location.reload();
+            });
         });
     }
     hoy: Date;

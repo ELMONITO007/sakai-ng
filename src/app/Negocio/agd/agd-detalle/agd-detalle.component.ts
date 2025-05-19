@@ -52,7 +52,7 @@ export class AgdDetalleComponent implements OnInit {
     ref: DynamicDialogRef | undefined;
     usuario:usuarioDTO;
     visibleDelete: boolean = false;
-
+  @Input() estado: string;
     @Input() id: number ;
     ngOnInit(): void {
          this.form = this.formBuilder.group({
@@ -174,12 +174,14 @@ link(link: string) {
     }
 
     eliminar(id: number) {
-        this.usuario = this.usuarioService.getUsuarioLogeado();
+    this.usuarioService.getUsuarioLogeado().subscribe((x) => {
+            this.usuario = x;
         this.service.borrar(id, this.usuario.email).subscribe((data) => {
             this.messageService.add({ severity: 'success', summary: 'Agd Eliminado', detail: 'El agd se ha eliminado correctamente', life: 3000 });
         });
         this.ngOnInit();
         this.visibleDelete = false;
+    });
     }
     closeDelete() {
         this.visibleDelete = false;

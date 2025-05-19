@@ -11,6 +11,9 @@
         [rowsPerPageOptions]="[10, 25, 50]"
         [loading]="loading"
         [paginator]="true"
+        
+	 [first]="first"
+             (onPage)="pageChange($event)"
         [tableStyle]="{ 'min-width': '35rem' }"
         [resizableColumns]="true"
         [globalFilterFields]="['nombre', 'apellido', 'email', 'userName', 'puesto']"

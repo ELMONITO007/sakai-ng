@@ -19,14 +19,20 @@ export class CorrosividadComponent implements OnInit {
     editar: boolean = false;
     vacio: boolean = false;
     detalle: boolean = true;
+      @Input() estado: string;
     @Input() id: number;
     constructor(private service: CorrosividadServiceService) {}
     ngOnInit(): void {
         this.service.obtenerTodos(this.id).subscribe((data) => {
-            if (data.fechaSubida == null) {
+            if (data.fechaSubida == null && this.estado=="En Proceso") {
                 this.vacio = true;
                 this.detalle = false;
                 this.editar = false;
+            }
+            if(this.estado!="En Proceso"){
+                this.editar = false;
+                this.vacio = false;
+                this.detalle = true;
             }
         });
     }

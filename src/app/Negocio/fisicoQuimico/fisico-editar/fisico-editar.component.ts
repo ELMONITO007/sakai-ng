@@ -1,4 +1,4 @@
-import { Component,  LOCALE_ID , Input, OnInit } from '@angular/core';
+import { Component, LOCALE_ID, Input, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
-import {  MAT_DATE_FORMATS } from '@angular/material/core';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { TooltipModule } from 'primeng/tooltip';
 import { fisicoQuimicoDTO, fisicoQuimicoCreacionDTO } from '../../../Entidades/fisicoQuimico';
 import { FisicoQuimicoServiceService } from '../../../Servicios/FisicoQuimico-service.service';
@@ -22,21 +22,21 @@ import { UsuarioServiceService } from '../../../Servicios/Usuario-service.servic
 import { usuarioDTO } from '../../../Entidades/usuario';
 
 export const MY_DATE_FORMATS = {
-  parse: {
-    dateInput: 'DD/MM/YYYY',
-  },
-  display: {
-    dateInput: 'DD/MM/YYYY',
-    monthYearLabel: 'MMMM YYYY',
-    dateA11yLabel: 'DD/MM/YYYY',
-    monthYearA11yLabel: 'MMMM YYYY',
-  },
+    parse: {
+        dateInput: 'DD/MM/YYYY'
+    },
+    display: {
+        dateInput: 'DD/MM/YYYY',
+        monthYearLabel: 'MMMM YYYY',
+        dateA11yLabel: 'DD/MM/YYYY',
+        monthYearA11yLabel: 'MMMM YYYY'
+    }
 };
 @Component({
     selector: 'app-fisico-editar',
     imports: [ButtonModule, CardModule, HttpClientModule, InputTextModule, FileUploadModule, InputNumberModule, MatIconModule, FormsModule, ReactiveFormsModule, CommonModule, FloatLabelModule, InputGroupModule, InputGroupAddonModule, TooltipModule],
 
-    providers: [FisicoQuimicoServiceService  ,   { provide: MAT_DATE_FORMATS, useValue:  MY_DATE_FORMATS},UsuarioServiceService],
+    providers: [FisicoQuimicoServiceService, { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }, UsuarioServiceService],
     standalone: true,
     templateUrl: './fisico-editar.component.html',
     styleUrl: './fisico-editar.component.scss'
@@ -46,7 +46,7 @@ export class FisicoEditarComponent implements OnInit {
         private formBuilder: FormBuilder,
 
         private service: FisicoQuimicoServiceService,
-        private usuarioService: UsuarioServiceService,
+        private usuarioService: UsuarioServiceService
     ) {}
     form: FormGroup;
     @Input() id: number;
@@ -110,18 +110,8 @@ export class FisicoEditarComponent implements OnInit {
                 }
             ],
             observacionesColor: ['', {}],
-            aguaCorregida: [
-                '',
-                {
-                    
-                }
-            ],
-            aguaRelativa: [
-                '',
-                {
-                   
-                }
-            ],
+            aguaCorregida: ['', {}],
+            aguaRelativa: ['', {}],
 
             fechaEnsayo: [
                 this.hoy,
@@ -129,24 +119,18 @@ export class FisicoEditarComponent implements OnInit {
                     validators: [Validators.required]
                 }
             ],
-            linkArchivo: [
-                '',
-                {
-                   
-                }
-            ],
+            linkArchivo: ['', {}],
             observaciones: ['', {}]
         });
         this.service.obtenerTodos(this.id).subscribe((x) => {
             this.modelo = x;
 
             if (x.fechaEnsayo != null && x.indiceAcidez != null && x.inhibidor != null && x.tensionInterfasial != null && x.rigidezDielectrica != null && x.tangente != null && x.color != null && x.aguaCorregida != null && x.aguaRelativa != null) {
-               var dia = this.modelo.fechaEnsayo.slice(0,2);
-                var mes = this.modelo.fechaEnsayo.slice(3,5);
-                var anio = this.modelo.fechaEnsayo.slice(6,10);
+                var dia = this.modelo.fechaEnsayo.slice(0, 2);
+                var mes = this.modelo.fechaEnsayo.slice(3, 5);
+                var anio = this.modelo.fechaEnsayo.slice(6, 10);
                 var fecha = anio + '/' + mes + '/' + dia;
-         
-               
+
                 this.form.get('contenidoAgua')?.setValue(this.modelo.contenidoAgua);
                 this.form.get('observacionesContenidoAgua')?.setValue(this.modelo.observacionesContenidoAgua);
                 this.form.get('indiceAcidez')?.setValue(this.modelo.indiceAcidez);
@@ -165,7 +149,7 @@ export class FisicoEditarComponent implements OnInit {
 
                 this.form.get('aguaRelativa')?.setValue(this.modelo.aguaRelativa);
 
-                this.form.get('fechaEnsayo')?.setValue( new Date(fecha).toISOString().split('T')[0]);
+                this.form.get('fechaEnsayo')?.setValue(new Date(fecha).toISOString().split('T')[0]);
                 this.form.get('linkArchivo')?.setValue(this.modelo.linkArchivo);
                 this.form.get('observaciones')?.setValue(this.modelo.observaciones);
             }
@@ -182,68 +166,69 @@ export class FisicoEditarComponent implements OnInit {
         var aguaCorregida = agua * exp * 2.24;
         this.form.get('aguaCorregida').setValue(aguaCorregida);
         //agua corregida
-        var t= Number.parseInt(this.temperatura);
-        var agua= Number.parseFloat(this.form.get('contenidoAgua').value);
-        var NPTA=100;
-        var NACHR=0;
-        var tempK=273.15+t;
-        var exp=16.2822 - (3698.27 / tempK) + 0.02589 * NPTA + 2.0991 * NACHR;
-    
-        var WS=Math.exp(exp);
-        var hr=(agua/WS)*1000;
+        var t = Number.parseInt(this.temperatura);
+        var agua = Number.parseFloat(this.form.get('contenidoAgua').value);
+        var NPTA = 100;
+        var NACHR = 0;
+        var tempK = 273.15 + t;
+        var exp = 16.2822 - 3698.27 / tempK + 0.02589 * NPTA + 2.0991 * NACHR;
+
+        var WS = Math.exp(exp);
+        var hr = (agua / WS) * 1000;
         this.form.get('aguaRelativa').setValue(hr.toFixed(5));
-   
     }
-    usario:usuarioDTO;
+    usario: usuarioDTO;
     onSubmit(id: number) {
         this.loading = true;
-this.usario=this.usuarioService.getUsuarioLogeado();
-        this.modelo = {
-            id_FisicoQuimico: id,
+        this.usuarioService.getUsuarioLogeado().subscribe((x) => {
+            this.usario = x;
+            this.modelo = {
+                id_FisicoQuimico: id,
 
-            id_OrdenEnsayo: this.id,
+                id_OrdenEnsayo: this.id,
 
-            contenidoAgua: this.form.get('contenidoAgua').value,
+                contenidoAgua: this.form.get('contenidoAgua').value,
 
-            observacionesContenidoAgua: this.form.get('observacionesContenidoAgua').value,
+                observacionesContenidoAgua: this.form.get('observacionesContenidoAgua').value,
 
-            indiceAcidez: this.form.get('indiceAcidez').value,
+                indiceAcidez: this.form.get('indiceAcidez').value,
 
-            observacionesIndiceAcidez: this.form.get('observacionesIndiceAcidez').value,
+                observacionesIndiceAcidez: this.form.get('observacionesIndiceAcidez').value,
 
-            inhibidor: this.form.get('inhibidor').value,
+                inhibidor: this.form.get('inhibidor').value,
 
-            observacionesInhibidor: this.form.get('observacionesInhibidor').value,
+                observacionesInhibidor: this.form.get('observacionesInhibidor').value,
 
-            tensionInterfasial: this.form.get('tensionInterfasial').value,
+                tensionInterfasial: this.form.get('tensionInterfasial').value,
 
-            observacionesTensionInterfasial: this.form.get('observacionesTensionInterfasial').value,
+                observacionesTensionInterfasial: this.form.get('observacionesTensionInterfasial').value,
 
-            rigidezDielectrica: this.form.get('rigidezDielectrica').value,
+                rigidezDielectrica: this.form.get('rigidezDielectrica').value,
 
-            observacionesRigidezDielectrica: this.form.get('observacionesRigidezDielectrica').value,
+                observacionesRigidezDielectrica: this.form.get('observacionesRigidezDielectrica').value,
 
-            tangente: this.form.get('tangente').value,
+                tangente: this.form.get('tangente').value,
 
-            observacionesTangente: this.form.get('observacionesTangente').value,
+                observacionesTangente: this.form.get('observacionesTangente').value,
 
-            color: this.form.get('color').value,
+                color: this.form.get('color').value,
 
-            observacionesColor: this.form.get('observacionesColor').value,
+                observacionesColor: this.form.get('observacionesColor').value,
 
-            aguaCorregida: this.form.get('aguaCorregida').value,
+                aguaCorregida: this.form.get('aguaCorregida').value,
 
-            aguaRelativa: this.form.get('aguaRelativa').value,
+                aguaRelativa: this.form.get('aguaRelativa').value,
 
-            fechaSubida: this.usario.email,
+                fechaSubida: this.usario.email,
 
-            fechaEnsayo: this.form.get('fechaEnsayo').value,
+                fechaEnsayo: this.form.get('fechaEnsayo').value,
 
-            linkArchivo: this.archivo,
-            observaciones: this.form.get('observaciones').value
-        };
-        this.service.actualizar(this.modelo).subscribe((res) => {
-            window.location.reload();
+                linkArchivo: this.archivo,
+                observaciones: this.form.get('observaciones').value
+            };
+            this.service.actualizar(this.modelo).subscribe((res) => {
+                window.location.reload();
+            });
         });
     }
     public fileTmp: any;

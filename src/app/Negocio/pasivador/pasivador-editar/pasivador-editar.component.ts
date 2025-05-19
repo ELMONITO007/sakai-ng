@@ -110,7 +110,8 @@ export class PasivadorEditarComponent implements OnInit {
     }
 usuario:usuarioDTO
     onSubmit(id: number) {
-        this.usuario= this.usuarioService.getUsuarioLogeado();
+      this.usuarioService.getUsuarioLogeado().subscribe((x) => {
+            this.usuario = x;
         this.loading = true;
         this.modelo = {
             id_Pasivador: id,
@@ -129,6 +130,7 @@ usuario:usuarioDTO
         };
         this.service.actualizar(this.modelo).subscribe((res) => {
             window.location.reload();
+        });
         });
     }
     public fileTmp: any;

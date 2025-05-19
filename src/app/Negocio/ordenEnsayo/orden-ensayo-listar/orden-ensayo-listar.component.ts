@@ -25,11 +25,12 @@ import { usuarioDTO } from '../../../Entidades/usuario';
 import { LaboratorioServiceService } from '../../../Servicios/Laboratorio-service.service';
 import { sectorDTO } from '../../../Entidades/sector';
 import { EquipoServiceService } from '../../../Servicios/Equipo-service.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-orden-ensayo-listar',
     standalone: true,
-    imports: [ButtonModule, CardModule, TableModule, HttpClientModule, ToolbarModule, IconFieldModule, BreadcrumbRouterComponent, InputIconModule, InputTextModule, DialogModule, MessageModule, ToastModule],
+    imports: [ButtonModule, CommonModule, CardModule, TableModule, HttpClientModule, ToolbarModule, IconFieldModule, BreadcrumbRouterComponent, InputIconModule, InputTextModule, DialogModule, MessageModule, ToastModule],
     providers: [OrdenEnsayoServiceService, DialogService, MessageService, UsuarioServiceService, LaboratorioServiceService, EquipoServiceService],
     templateUrl: './orden-ensayo-listar.component.html',
     styleUrl: './orden-ensayo-listar.component.scss'
@@ -46,7 +47,10 @@ export class OrdenEnsayoListarComponent implements OnInit {
     sector: sectorDTO;
     idDelete: number = 0;
     usuario: usuarioDTO;
+    first = 0;
+    soloAbiertos = true;
 
+    rows = 10;
     constructor(
         private service: OrdenEnsayoServiceService,
         public dialogService: DialogService,
@@ -59,23 +63,24 @@ export class OrdenEnsayoListarComponent implements OnInit {
         private laboratorioService: LaboratorioServiceService
     ) {}
     ngOnInit(): void {
-       // this.usuario = this.usuarioService.getUsuarioLogeado();
-     
+        // this.usuario = this.usuarioService.getUsuarioLogeado();
+
         this.service.ReadbyLaboratista('benitand').subscribe((data) => {
             for (let i = 0; i < data.length; i++) {
                 this.equipoService.obtenerUno(data[i].id_Equipo).subscribe((equipo) => {
-                    this.modelo.push({
-                        id_OrdenEnsayo: data[i].id_OrdenEnsayo,
-                        numeroOrden: data[i].numeroOrden,
-                        equipo: equipo.codigo,
-                        estado: data[i].estado,
-                        usuario: data[i].nombreUsuario,
-                        fechaCreacion: data[i].fechaCreacion,
-                        fechaExtraccion: data[i].fechaExtraccion,
-                        fechaFinalizacion: data[i].fechaFinalizacion,
-                        nombreSector: data[i].nombreSector,
-                       
-                    });
+                    if (data[i].estado == 'En Proceso') {
+                        this.modelo.push({
+                            id_OrdenEnsayo: data[i].id_OrdenEnsayo,
+                            numeroOrden: data[i].numeroOrden,
+                            equipo: equipo.codigo,
+                            estado: data[i].estado,
+                            usuario: data[i].nombreUsuario,
+                            fechaCreacion: data[i].fechaCreacion,
+                            fechaExtraccion: data[i].fechaExtraccion,
+                            fechaFinalizacion: data[i].fechaFinalizacion,
+                            nombreSector: data[i].nombreSector
+                        });
+                    }
                 });
             }
         });
@@ -93,6 +98,35 @@ export class OrdenEnsayoListarComponent implements OnInit {
     }
     clear(table: Table) {
         table.clear();
+    }
+
+    mostrarTodo(si: boolean) {
+        if (si) {
+            this.modelo = [];
+              this.soloAbiertos=true;
+     this.ngOnInit();
+          
+        } else {
+                this.modelo = [];
+            this.soloAbiertos=false;
+            this.service.ReadbyLaboratista('benitand').subscribe((data) => {
+                for (let i = 0; i < data.length; i++) {
+                    this.equipoService.obtenerUno(data[i].id_Equipo).subscribe((equipo) => {
+                        this.modelo.push({
+                            id_OrdenEnsayo: data[i].id_OrdenEnsayo,
+                            numeroOrden: data[i].numeroOrden,
+                            equipo: equipo.codigo,
+                            estado: data[i].estado,
+                            usuario: data[i].nombreUsuario,
+                            fechaCreacion: data[i].fechaCreacion,
+                            fechaExtraccion: data[i].fechaExtraccion,
+                            fechaFinalizacion: data[i].fechaFinalizacion,
+                            nombreSector: data[i].nombreSector
+                        });
+                    });
+                }
+            });
+        }
     }
     editar(id: number) {
         this.ref = this.dialogService.open(OrdenEnsayoEditarComponent, {
@@ -178,5 +212,30 @@ export class OrdenEnsayoListarComponent implements OnInit {
             ]
         };
         new ngxCsv(this.modelo, 'OrdenEnsayo', options);
+    }
+
+    next() {
+        this.first = this.first + this.rows;
+    }
+
+    prev() {
+        this.first = this.first - this.rows;
+    }
+
+    reset() {
+        this.first = 0;
+    }
+
+    pageChange(event) {
+        this.first = event.first;
+        this.rows = event.rows;
+    }
+
+    isLastPage(): boolean {
+        return this.modelo ? this.first + this.rows >= this.modelo.length : true;
+    }
+
+    isFirstPage(): boolean {
+        return this.modelo ? this.first === 0 : true;
     }
 }

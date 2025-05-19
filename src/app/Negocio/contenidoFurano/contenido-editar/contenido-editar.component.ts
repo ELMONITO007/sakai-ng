@@ -51,7 +51,7 @@ export const MY_DATE_FORMATS = {
         TooltipModule
     ],
 
-    providers: [ContenidoFuranoServiceService, MessageService, { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },UsuarioServiceService],
+    providers: [ContenidoFuranoServiceService, MessageService, { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }, UsuarioServiceService],
     standalone: true,
     templateUrl: './contenido-editar.component.html',
     styleUrl: './contenido-editar.component.scss'
@@ -68,7 +68,7 @@ export class ContenidoEditarComponent implements OnInit {
     hoy: string;
     loading: boolean = false;
     modelo: contenidoFuranoDTO;
-    usuario:usuarioDTO;
+    usuario: usuarioDTO;
     @Input() id: number;
     ngOnInit(): void {
         const currentYear = new Date().getFullYear();
@@ -142,31 +142,33 @@ export class ContenidoEditarComponent implements OnInit {
 
     onSubmit(id: number) {
         this.loading = true;
-        this.usuario= this.usuarioService.getUsuarioLogeado();
-        this.modelo = {
-            id_ContenidoFurano: id,
+        this.usuarioService.getUsuarioLogeado().subscribe((x) => {
+            this.usuario = x;
+            this.modelo = {
+                id_ContenidoFurano: id,
 
-            hmf: this.form.get('hMF').value,
+                hmf: this.form.get('hMF').value,
 
-            acf: this.form.get('aCF').value,
+                acf: this.form.get('aCF').value,
 
-            fol: this.form.get('fOL').value,
+                fol: this.form.get('fOL').value,
 
-            mef: this.form.get('mEF').value,
+                mef: this.form.get('mEF').value,
 
-            fal: this.form.get('fAL').value,
+                fal: this.form.get('fAL').value,
 
-            id_OrdenEnsayo: this.id,
+                id_OrdenEnsayo: this.id,
 
-            fechaSubida: this.usuario.email,
+                fechaSubida: this.usuario.email,
 
-            fechaEnsayo: this.form.get('fechaEnsayo').value,
+                fechaEnsayo: this.form.get('fechaEnsayo').value,
 
-            linkArchivo: this.archivo,
-            observaciones: this.form.get('observaciones').value
-        };
-        this.service.actualizar(this.modelo).subscribe((res) => {
-            window.location.reload();
+                linkArchivo: this.archivo,
+                observaciones: this.form.get('observaciones').value
+            };
+            this.service.actualizar(this.modelo).subscribe((res) => {
+                window.location.reload();
+            });
         });
     }
     public fileTmp: any;

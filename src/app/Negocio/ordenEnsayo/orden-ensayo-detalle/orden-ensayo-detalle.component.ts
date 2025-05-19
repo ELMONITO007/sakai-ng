@@ -19,11 +19,18 @@ import { OrdenEnsayoServiceService } from '../../../Servicios/OrdenEnsayo-servic
 import { CommonModule } from '@angular/common';
 
 import { AgdComponent } from '../../agd/agd/agd.component';
-import { ContenidoFuranoComponent } from "../../contenidoFurano/contenido-furano/contenido-furano.component";
+import { ContenidoFuranoComponent } from '../../contenidoFurano/contenido-furano/contenido-furano.component';
 import { CorrosividadComponent } from '../../corrosividad/corrosividad/corrosividad.component';
 import { FisicoQuimicoComponent } from '../../fisicoQuimico/fisico-quimico/fisico-quimico.component';
 import { PasivadorComponent } from '../../pasivador/pasivador/pasivador.component';
 import { PcbComponent } from '../../pcb/pcb/pcb.component';
+import { BitacoraListarComponent } from '../../bitacora/bitacora-listar/bitacora-listar.component';
+import { OrdenEnsayoEditarComponent } from '../orden-ensayo-editar/orden-ensayo-editar.component';
+import { LaboratorioServiceService } from '../../../Servicios/Laboratorio-service.service';
+import { EquipoServiceService } from '../../../Servicios/Equipo-service.service';
+import { equipoDTO } from '../../../Entidades/equipo';
+import { laboratistaDTO } from '../../../Entidades/laboratista';
+import { laboratorioDTO } from '../../../Entidades/laboratorio';
 
 export interface Analisis {
     nombre: string;
@@ -32,9 +39,26 @@ export interface Analisis {
 }
 @Component({
     selector: 'app-orden-ensayo-detalle',
-    imports: [ButtonModule, InputTextModule, ToastModule, MessageModule, CommonModule, BreadcrumbRouterComponent,PasivadorComponent,PcbComponent,
-         TabsModule, CardModule, HttpClientModule, DialogModule, AgdComponent, ContenidoFuranoComponent,CorrosividadComponent,FisicoQuimicoComponent],
-    providers: [MessageService, DialogService, OrdenEnsayoServiceService],
+    imports: [
+        ButtonModule,
+        InputTextModule,
+        ToastModule,
+        MessageModule,
+        CommonModule,
+        BreadcrumbRouterComponent,
+        PasivadorComponent,
+        PcbComponent,
+        TabsModule,
+        CardModule,
+        HttpClientModule,
+        DialogModule,
+        AgdComponent,
+        ContenidoFuranoComponent,
+        CorrosividadComponent,
+        FisicoQuimicoComponent,
+        BitacoraListarComponent
+    ],
+    providers: [MessageService, DialogService, OrdenEnsayoServiceService, LaboratorioServiceService, EquipoServiceService],
     templateUrl: './orden-ensayo-detalle.component.html',
     styleUrl: './orden-ensayo-detalle.component.scss'
 })
@@ -44,7 +68,9 @@ export class OrdenEnsayoDetalleComponent implements OnInit {
         private route: Router,
         private activatedRoute: ActivatedRoute,
         private service: OrdenEnsayoServiceService,
-        public dialogService: DialogService
+        public dialogService: DialogService,
+        private laboratorioService: LaboratorioServiceService,
+        private equipoService: EquipoServiceService
     ) {}
     modelo: ordenEnsayoDTO;
     items: MenuItem[] = [];
@@ -52,13 +78,23 @@ export class OrdenEnsayoDetalleComponent implements OnInit {
     visibleDelete: boolean = false;
     loading: boolean = false;
     analisis: Analisis[] = [];
+    equipo: equipoDTO;
+    laboratorio: laboratorioDTO;
 
     ngOnInit(): void {
         this.activatedRoute.params.subscribe((params) => {
             const id = params['id'];
 
             this.service.obtenerUno(id).subscribe((data) => {
+                this.laboratorioService.obtenerUno(data.id_Laboratorio).subscribe((labo) => {
+                    this.laboratorio = labo;
+                });
+                this.equipoService.obtenerUno(data.id_Equipo).subscribe((equipo) => {
+                    this.equipo = equipo;
+                });
+
                 this.modelo = data;
+
                 this.items = [
                     { label: 'Home', icon: 'pi pi-home', route: '/index', primary: false },
                     { label: 'OrdenEnsayo', icon: 'pi pi-fw pi-user', route: '/ordenEnsayo', primary: false },
@@ -67,14 +103,13 @@ export class OrdenEnsayoDetalleComponent implements OnInit {
             });
             this.service.Ensayos(id).subscribe((ensayo) => {
                 for (let i = 0; i < ensayo.length; i++) {
-                    this.analisis.push({ nombre: ensayo[i], modulo: '<app-'+ensayo[i]+' [id]="modelo.id_OrdenEnsayo"></app-'+ensayo[i]+'>', orden: i });
+                    this.analisis.push({ nombre: ensayo[i], modulo: '<app-' + ensayo[i] + ' [id]="modelo.id_OrdenEnsayo"></app-' + ensayo[i] + '>', orden: i });
                 }
-
             });
         });
     }
     editar(id: number) {
-        this.ref = this.dialogService.open(OrdenEnsayoDetalleComponent, {
+        this.ref = this.dialogService.open(OrdenEnsayoEditarComponent, {
             width: '70%',
             height: '50%',
             data: {

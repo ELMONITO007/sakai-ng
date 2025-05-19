@@ -118,110 +118,99 @@ export class OrdenEnsayoCrearComponent implements OnInit {
     }
     sector: sectorDTO;
     onSubmit() {
-
-        console.log(this.form.get('agd').value);
         this.loading = true;
-        // this.usuario = this.usuarioService.getUsuarioLogeado();
-        this.usuario = {
-            id_Usuario: 0,
-            userName: 'benitand',
-            email: 'andres.benitez@transener.com.ar',
-            nombre: 'Andres',
-            apellido: 'Benitez',
-            contraseña: '',
-            puesto: 'Laboratista',
-            bloqueado: false,
-            cantidadIntentos: 0
-        };
-        var id = this.form.get('sector').value;
-        this.sectorService.obtenerUno(id).subscribe((x) => {
-            this.sector = x;
-            this.modelo = {
-                id_OrdenEnsayo: 0,
+        this.usuarioService.getUsuarioLogeado().subscribe((x) => {
+            this.usuario = x;
+            var id = this.form.get('sector').value;
+            this.sectorService.obtenerUno(id).subscribe((x) => {
+                this.sector = x;
+                this.modelo = {
+                    id_OrdenEnsayo: 0,
 
-                numeroOrden: 0,
+                    numeroOrden: 0,
 
-                id_Equipo: Number.parseInt(this.form.get('id_Equipo').value),
+                    id_Equipo: Number.parseInt(this.form.get('id_Equipo').value),
 
-                id_Laboratorio: this.sector.id_Laboratorio,
+                    id_Laboratorio: this.sector.id_Laboratorio,
 
-                nombreUsuario: this.usuario.userName,
+                    nombreUsuario: this.usuario.userName,
 
-                emailUsuario: this.usuario.email,
+                    emailUsuario: this.usuario.email,
 
-                fechaCreacion: '',
+                    fechaCreacion: '',
 
-                fechaExtraccion: '',
+                    fechaExtraccion: '',
 
-                fechaFinalizacion: '',
+                    fechaFinalizacion: '',
 
-                fechaPedidoExtraccion: '',
+                    fechaPedidoExtraccion: '',
 
-                cuba: this.form.get('cuba').value,
+                    cuba: this.form.get('cuba').value,
 
-                temperatura: '0',
+                    temperatura: '0',
 
-                observaciones: this.form.get('observaciones').value,
+                    observaciones: this.form.get('observaciones').value,
 
-                tipoAceite: this.form.get('tipoAceite').value,
+                    tipoAceite: this.form.get('tipoAceite').value,
 
-                inhibido: this.form.get('inhibido').value,
+                    inhibido: this.form.get('inhibido').value,
 
-                motivo: '',
+                    motivo: '',
 
-                tipoSolicitud: '',
+                    tipoSolicitud: '',
 
-                urgencia: '',
+                    urgencia: '',
 
-                nombreSector: this.sector.detalle,
+                    nombreSector: this.sector.detalle,
 
-                pais: this.sector.pais,
+                    pais: this.sector.pais,
 
-                provincia: this.sector.provincia,
+                    provincia: this.sector.provincia,
 
-                estado: 'En Proceso',
+                    estado: 'En Proceso',
 
-                nombreLaboratista: '',
+                    nombreLaboratista: '',
 
-                usuarioLaboratista: '',
+                    usuarioLaboratista: '',
 
-                emailLaboratista: ''
-            };
+                    emailLaboratista: ''
+                };
 
-            this.service.crear(this.modelo).subscribe((res) => {
-                var todos = this.form.get('todos').value;
-                if (todos == 'Si') {
-                    this.ensayosRealizar = {
-                        id_Ensayo: res.id_OrdenEnsayo,
-                        lista: ['agd', 'fisicoquimico', 'corrosividad', 'pasivador', 'contenidoFurano', 'pcb']
-                    };
-                } else {
-                    this.ensayosRealizar = {
-                        id_Ensayo: res.id_OrdenEnsayo,
-                        lista: []
-                    };
-                    if (this.form.get('fisico').value == true) {
-                        this.ensayosRealizar.lista.push('fisicoquimico');
+                this.service.crear(this.modelo).subscribe((res) => {
+                    var todos = this.form.get('todos').value;
+                    if (todos == 'Si') {
+                        this.ensayosRealizar = {
+                            id_Ensayo: res.id_OrdenEnsayo,
+                            lista: ['agd', 'fisicoquimico', 'corrosividad', 'pasivador', 'contenidoFurano', 'pcb']
+                        };
+                    } else {
+                        this.ensayosRealizar = {
+                            id_Ensayo: res.id_OrdenEnsayo,
+                            lista: []
+                        };
+                        if (this.form.get('fisico').value == true) {
+                            this.ensayosRealizar.lista.push('fisicoquimico');
+                        }
+                        if (this.form.get('corrosividad').value == true) {
+                            this.ensayosRealizar.lista.push('corrosividad');
+                        }
+                        if (this.form.get('agd').value == true) {
+                            this.ensayosRealizar.lista.push('agd');
+                        }
+                        if (this.form.get('pasivador').value == true) {
+                            this.ensayosRealizar.lista.push('pasivador');
+                        }
+                        if (this.form.get('contenidoFurano').value == true) {
+                            this.ensayosRealizar.lista.push('contenidoFurano');
+                        }
+                        if (this.form.get('pcb').value == true) {
+                            this.ensayosRealizar.lista.push('pcb');
+                        }
                     }
-                    if (this.form.get('corrosividad').value == true) {
-                        this.ensayosRealizar.lista.push('corrosividad');
-                    }
-                    if (this.form.get('agd').value == true) {
-                        this.ensayosRealizar.lista.push('agd');
-                    }
-                    if (this.form.get('pasivador').value == true) {
-                        this.ensayosRealizar.lista.push('pasivador');
-                    }
-                    if (this.form.get('contenidoFurano').value == true) {
-                        this.ensayosRealizar.lista.push('contenidoFurano');
-                    }
-                    if (this.form.get('pcb').value == true) {
-                        this.ensayosRealizar.lista.push('pcb');
-                    }
-                }
-                console.log(this.ensayosRealizar);
-                this.service.crearEnsayos(this.ensayosRealizar).subscribe((x) => {
-                    this.ref.close(res);
+                    console.log(this.ensayosRealizar);
+                    this.service.crearEnsayos(this.ensayosRealizar).subscribe((x) => {
+                        this.ref.close(res);
+                    });
                 });
             });
         });
