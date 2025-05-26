@@ -21,19 +21,25 @@ export class PasivadorComponent implements OnInit {
     vacio: boolean = false;
     detalle: boolean = true;
     @Input() id: number;
-  @Input() estado: string;
+  @Input() puedeEditar:boolean = false;
     constructor(private service: PasivadorServiceService) {}
 
     ngOnInit(): void {
         this.service.obtenerTodos(this.id).subscribe((data) => {
         
-            if (data.fechaEnsayo == null && data.contenidodePasivador == null && this.estado=="En Proceso") {
+            if (data.fechaEnsayo == null && data.contenidodePasivador == null && this.puedeEditar) {
                 this.vacio = true;
                 this.detalle = false;
                 this.editar = false;
 
             }
-            if(this.estado!="En Proceso"){
+             if( data.fechaEnsayo != null && data.contenidodePasivador != null  && this.puedeEditar ){
+                this.editar = false;
+                this.vacio = false;
+                this.detalle = true;
+                 
+            }
+            if(!this.puedeEditar){
                 this.editar = false;
                 this.vacio = false;
                 this.detalle = true;

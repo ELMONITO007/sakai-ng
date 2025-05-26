@@ -23,6 +23,8 @@ import { cubaDTO } from '../../../Entidades/cuba';
 import { MatIconModule } from '@angular/material/icon';
 import { SelectModule } from 'primeng/select';
 import { CheckboxModule } from 'primeng/checkbox';
+import { EquipoOEComponent } from '../../equipo/equipo-oe/equipo-oe.component';
+import { Router } from '@angular/router';
 
 interface tipoAceite {
     tipo: string;
@@ -30,7 +32,23 @@ interface tipoAceite {
 
 @Component({
     selector: 'app-orden-ensayo-crear',
-    imports: [ButtonModule, CardModule, HttpClientModule, InputTextModule, FormsModule, SelectModule, ReactiveFormsModule, CheckboxModule, CommonModule, MatIconModule, FloatLabelModule, InputGroupModule, InputGroupAddonModule, TooltipModule],
+    imports: [
+        ButtonModule,
+    
+        CardModule,
+        HttpClientModule,
+        InputTextModule,
+        FormsModule,
+        SelectModule,
+        ReactiveFormsModule,
+        CheckboxModule,
+        CommonModule,
+        MatIconModule,
+        FloatLabelModule,
+        InputGroupModule,
+        InputGroupAddonModule,
+        TooltipModule
+    ],
     templateUrl: './orden-ensayo-crear.component.html',
     styleUrl: './orden-ensayo-crear.component.scss',
     providers: [OrdenEnsayoServiceService, SectorServiceService, EquipoServiceService, UsuarioServiceService, CubaServiceService],
@@ -39,6 +57,7 @@ interface tipoAceite {
 export class OrdenEnsayoCrearComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
+        private route: Router,
         public ref: DynamicDialogRef,
         public config: DynamicDialogConfig,
         private service: OrdenEnsayoServiceService,
@@ -56,8 +75,10 @@ export class OrdenEnsayoCrearComponent implements OnInit {
     equipos: equipoDTO[] = [];
     tipo: tipoAceite[] = [{ tipo: 'Mineral' }, { tipo: 'Vegetal' }, { tipo: 'Sintetico' }];
     inhibido: tipoAceite[] = [{ tipo: 'Si' }, { tipo: 'No' }];
+    ensayos: tipoAceite[] = [{ tipo: 'Si' }, { tipo: 'FS-AGD-Corrosividad' }, { tipo: 'No' }];
     usuario: usuarioDTO;
     ngOnInit(): void {
+          this.verIr = false;
         this.form = this.formBuilder.group({
             sector: [
                 '',
@@ -107,10 +128,18 @@ export class OrdenEnsayoCrearComponent implements OnInit {
             agd: ['', {}],
             pasivador: ['', {}],
             contenidoFurano: ['', {}],
-            pcb: ['', {}]
+            pcb: ['', {}],
+            tipoEquipo: '',
+            marca: '',
+            modelo: '',
+            serie: ''
         });
         this.form.get('id_Equipo').disable();
         this.form.get('cuba').disable();
+        this.form.get('tipoEquipo').disable();
+        this.form.get('marca').disable();
+        this.form.get('modelo').disable();
+        this.form.get('serie').disable();
 
         this.sectorService.obtenerTodos().subscribe((y) => {
             this.sectores = y;
@@ -173,7 +202,8 @@ export class OrdenEnsayoCrearComponent implements OnInit {
 
                     usuarioLaboratista: '',
 
-                    emailLaboratista: ''
+                    emailLaboratista: '',
+                    tomaEnsayo: ''
                 };
 
                 this.service.crear(this.modelo).subscribe((res) => {
@@ -183,7 +213,14 @@ export class OrdenEnsayoCrearComponent implements OnInit {
                             id_Ensayo: res.id_OrdenEnsayo,
                             lista: ['agd', 'fisicoquimico', 'corrosividad', 'pasivador', 'contenidoFurano', 'pcb']
                         };
-                    } else {
+                    }
+                    if (todos == 'FS-AGD-Corrosividad') {
+                        this.ensayosRealizar = {
+                            id_Ensayo: res.id_OrdenEnsayo,
+                            lista: ['agd', 'fisicoquimico', 'corrosividad']
+                        };
+                    }
+                    if (todos == 'No') {
                         this.ensayosRealizar = {
                             id_Ensayo: res.id_OrdenEnsayo,
                             lista: []
@@ -216,14 +253,19 @@ export class OrdenEnsayoCrearComponent implements OnInit {
         });
     }
     todosAnalisis: boolean = true;
+    id_Equipo: number;  
     cambiarTodosAnalisis() {
         var todos = this.form.get('todos').value;
         if (todos == 'Si') {
             this.todosAnalisis = true;
-        } else {
+        } if (todos == 'No') {
             this.todosAnalisis = false;
         }
-        console.log(this.todosAnalisis);
+         if (todos == 'FS-AGD-Corrosividad') {
+            this.todosAnalisis = true;
+         }
+        
+     
     }
 
     obtenerEquipos() {
@@ -238,6 +280,25 @@ export class OrdenEnsayoCrearComponent implements OnInit {
                 this.cuba = y.filter((x) => x.enUso == false);
             });
         });
+    }
+    equipo: equipoDTO;
+    verIr: boolean = false;
+    completarEquipo() {
+        this.verIr = true;
+        var id = this.form.get('id_Equipo').value;
+        this.id_Equipo = id;
+        console.log(id);
+        this.equipoService.obtenerUno(id).subscribe((x) => {
+            this.equipo = x;
+            this.form.get('tipoEquipo').setValue(this.equipo.tipoEquipo);
+            this.form.get('marca').setValue(this.equipo.marca);
+            this.form.get('modelo').setValue(this.equipo.modelo);
+            this.form.get('serie').setValue(this.equipo.numeroSerie);
+        });
+    }
+    ir(id: number) {
+        this.route.navigate(['equipo/', id]);
+        this.ref.close(null);
     }
     onCancel() {
         this.ref.close(null);

@@ -56,8 +56,9 @@ export class PasivadorDetalleComponent implements OnInit {
     loading: boolean = false;
     modelo: pasivadorDTO;
     usuario:usuarioDTO
-      @Input() estado: string;
+     
     @Input() id: number;
+    @Input() puedeEditar: boolean = false;
     ngOnInit(): void {
         this.form = this.formBuilder.group({
             contenidodePasivador: [

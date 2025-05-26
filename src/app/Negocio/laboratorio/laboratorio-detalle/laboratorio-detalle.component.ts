@@ -45,13 +45,14 @@ export class LaboratorioDetalleComponent implements OnInit {
     ngOnInit(): void {
         this.activatedRoute.params.subscribe((params) => {
             const id = params['id'];
-            this.items = [
-                { label: 'Home', icon: 'pi pi-home', route: '/index', primary: false },
-                { label: 'Laboratorio', icon: 'pi pi-fw pi-user', route: '/laboratorio', primary: false },
-                { label: 'Detalle', icon: 'pi pi-fw pi-user', route: '/laboratorio/' + id, primary: true }
-            ];
+          
             this.service.obtenerUno(id).subscribe((data) => {
                 this.modelo = data;
+                  this.items = [
+                { label: 'Home', icon: 'pi pi-home', route: '/index', primary: false },
+                { label: 'Laboratorio', icon: 'pi pi-fw pi-user', route: '/laboratorio', primary: false },
+                { label: 'Detalle Laboratorio '+data.nombreLaboratorio, icon: 'pi pi-fw pi-user', route: '/laboratorio/' + id, primary: true }
+            ];
             });
         });
     }

@@ -214,7 +214,8 @@ export class OrdenEnsayoEditarComponent implements OnInit {
 
                     usuarioLaboratista: '',
 
-                    emailLaboratista: ''
+                    emailLaboratista: '',
+                    tomaEnsayo: ''
                 };
 
                 this.service.actualizar(this.modelo).subscribe((res) => {

@@ -51,7 +51,7 @@ export class ContenidoDetalleComponent implements OnInit {
  form: FormGroup;
     loading: boolean = false;
     @Input() id: number;
-      @Input() estado: string;
+      @Input() puedeEditar: boolean = false;
     usuario: usuarioDTO;
     ngOnInit(): void {
          this.form = this.formBuilder.group({

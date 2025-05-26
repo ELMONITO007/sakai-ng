@@ -21,6 +21,14 @@ export class OrdenEnsayoServiceService {
     public obtenerPorEquipo(id: number) {
     return this.http.get<ordenEnsayoDTO[]>(`${this.apiURL}/ReadByEquipo?id=${id}`);
   }
+
+    public VerificarEditarOE(id: number,id_OE: number) {
+    return this.http.get<boolean>(`${this.apiURL}/VerificarEditarOE?id=${id}&id_OE=${id_OE}`);
+  }
+
+   public VerificarCerrarOE(id: number,id_OE: number) {
+    return this.http.get<boolean>(`${this.apiURL}/VerificarCerrarOE?id=${id}&id_OE=${id_OE}`);
+  }
   public ReadbyLaboratista(id: string) {
     return this.http.get<ordenEnsayoDTO[]>(`${this.apiURL}/ReadbyLaboratista?id=${id}`);
   }
@@ -28,7 +36,7 @@ export class OrdenEnsayoServiceService {
     return this.http.get<ordenEnsayoDTO>(`${this.apiURL}/readBy?id=${id}`);
   }
   
-  public CerrarOrden(codigo: ordenEnsayoCreacionDTO) {
+  public CerrarOrden(codigo: ordenEnsayoDTO) {
     return this.http.post(`${this.apiURL}/CerrarOrden`, codigo);
   }
   

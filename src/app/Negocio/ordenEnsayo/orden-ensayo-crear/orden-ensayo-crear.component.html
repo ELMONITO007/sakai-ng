@@ -28,12 +28,52 @@
                 <mat-icon>gas_meter</mat-icon>
             </p-inputgroup-addon>
             <p-floatlabel>
-                <p-select [filter]="true" filterBy="codigo" formControlName="id_Equipo" [options]="equipos" optionLabel="codigo" optionValue="id_Equipo" placeholder="Seleccione un equipo*" class="w-full md:w-56" />
-
+                <p-select (onChange)="completarEquipo()" [filter]="true" filterBy="codigo" formControlName="id_Equipo" [options]="equipos" optionLabel="codigo" optionValue="id_Equipo" placeholder="Seleccione un equipo*" class="w-full md:w-56" />
+             &nbsp;   <p-button *ngIf="verIr" icon="pi pi-eye" (onClick)="ir(id_Equipo)"></p-button>
                 <label for="id_Equipo">Equipo*</label>
             </p-floatlabel>
         </p-inputgroup>
     </div>
+    <br /><br />
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>oil_barrel</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="tipoEquipo" formControlName="tipoEquipo" pTooltip="Ingrese el tipoEquipo" tooltipPosition="bottom" />
+                <label for="tipoEquipo">tipoEquipo</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>oil_barrel</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="marca" formControlName="marca" pTooltip="Ingrese el Marca" tooltipPosition="bottom" />
+                <label for="marca">Marca</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>oil_barrel</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="modelo" formControlName="modelo" pTooltip="Ingrese el Modelo" tooltipPosition="bottom" />
+                <label for="modelo">Modelo</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>oil_barrel</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="serie" formControlName="serie" pTooltip="Ingrese el Numero de Serie" tooltipPosition="bottom" />
+                <label for="serie">Numero de Serie</label>
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+
     <br />
     <br />
     <div class="flex flex-col md:flex-row gap-6">
@@ -62,13 +102,13 @@
                 <mat-icon>question_mark</mat-icon>
             </p-inputgroup-addon>
             <p-floatlabel>
-                <p-select (onChange)="cambiarTodosAnalisis()" formControlName="todos" [options]="inhibido" optionLabel="tipo" optionValue="tipo" placeholder="Seleccione SI o NO*" class="w-full md:w-56" />
+                <p-select (onChange)="cambiarTodosAnalisis()" formControlName="todos" [options]="ensayos" optionLabel="tipo" optionValue="tipo" placeholder="Seleccione SI o NO*" class="w-full md:w-56" />
 
                 <label for="todos">Todos los analisis*</label>
             </p-floatlabel>
         </p-inputgroup>
     </div>
-<br><br>
+    <br /><br />
     <div class="flex flex-col md:flex-row gap-6">
         <p-inputgroup>
             <p-inputgroup-addon>
@@ -92,19 +132,19 @@
                 <label for="ny" class="ml-2">Contenido Furano</label>
             </div>
             <div class="flex align-items-center">
-                <p-checkbox formControlName="corrosividad" label="Corrovisidad Aceite" name="analisis" value="Corrovisidad Aceite" [binary]="true"/>
+                <p-checkbox formControlName="corrosividad" label="Corrovisidad Aceite" name="analisis" value="Corrovisidad Aceite" [binary]="true" />
                 <label for="ny" class="ml-2">Corrovisidad Aceite</label>
             </div>
             <div class="flex align-items-center">
-                <p-checkbox formControlName="fisico" label="Físico-Químico" name="analisis" value="Físico-Químico" [binary]="true"/>
+                <p-checkbox formControlName="fisico" label="Físico-Químico" name="analisis" value="Físico-Químico" [binary]="true" />
                 <label for="ny" class="ml-2">Físico-Químico</label>
             </div>
             <div class="flex align-items-center">
-                <p-checkbox formControlName="pasivador" label="Pasivador" name="analisis" value="Pasivador" [binary]="true"/>
+                <p-checkbox formControlName="pasivador" label="Pasivador" name="analisis" value="Pasivador" [binary]="true" />
                 <label for="ny" class="ml-2">Pasivador</label>
             </div>
             <div class="flex align-items-center">
-                <p-checkbox formControlName="pcb" label="PCB" name="analisis" value="PCB" [binary]="true"/>
+                <p-checkbox formControlName="pcb" label="PCB" name="analisis" value="PCB" [binary]="true" />
                 <label for="ny" class="ml-2">PCB</label>
             </div>
         </div>

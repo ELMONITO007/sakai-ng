@@ -39,7 +39,7 @@
     </li>
     <br />
 
-    <p-button *ngIf="estado=='En Proceso'" icon="pi pi-trash" (onClick)="openDelete(modelo?.id_OrdenEnsayo)" severity="danger" label="Eliminar" [rounded]="true"></p-button>
+    <p-button *ngIf="puedeEditar" icon="pi pi-trash" (onClick)="openDelete(modelo?.id_OrdenEnsayo)" severity="danger" label="Eliminar" [rounded]="true"></p-button>
     <p-dialog [(visible)]="visibleDelete" appendTo="body" [modal]="true" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }" [style]="{ width: '40vw' }">
         <ng-template pTemplate="header">
             <div class="flex align-items-center">

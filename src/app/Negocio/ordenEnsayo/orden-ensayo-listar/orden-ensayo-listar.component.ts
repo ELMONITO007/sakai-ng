@@ -64,7 +64,7 @@ export class OrdenEnsayoListarComponent implements OnInit {
     ) {}
     ngOnInit(): void {
         // this.usuario = this.usuarioService.getUsuarioLogeado();
-
+this.modelo = [];
         this.service.ReadbyLaboratista('benitand').subscribe((data) => {
             for (let i = 0; i < data.length; i++) {
                 this.equipoService.obtenerUno(data[i].id_Equipo).subscribe((equipo) => {
@@ -148,7 +148,7 @@ export class OrdenEnsayoListarComponent implements OnInit {
     crear() {
         this.ref = this.dialogService.open(OrdenEnsayoCrearComponent, {
             width: '70%',
-            height: '50%',
+            height: '70%',
 
             maximizable: true,
             header: 'Crear Orden de Ensayo'

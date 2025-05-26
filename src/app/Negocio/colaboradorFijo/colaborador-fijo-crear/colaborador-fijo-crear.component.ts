@@ -18,11 +18,13 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { TooltipModule } from 'primeng/tooltip';
 import { ToolbarModule } from 'primeng/toolbar';
 import { DialogModule } from 'primeng/dialog';
+import { SectorServiceService } from '../../../Servicios/Sector-service.service';
+import { sectorDTO } from '../../../Entidades/sector';
 @Component({
     selector: 'app-colaborador-fijo-crear',
     standalone: true,
     imports: [ButtonModule, CardModule, TableModule, CommonModule, HttpClientModule, ToolbarModule, InputGroupModule,DialogModule, InputGroupAddonModule, TooltipModule, IconFieldModule, FormsModule, ReactiveFormsModule, InputIconModule, InputTextModule],
-    providers: [UsuarioServiceService, DialogService, ColaboradoresFijosServiceService],
+    providers: [UsuarioServiceService, DialogService, ColaboradoresFijosServiceService,SectorServiceService],
     templateUrl: './colaborador-fijo-crear.component.html',
     styleUrl: './colaborador-fijo-crear.component.scss'
 })
@@ -32,11 +34,13 @@ export class ColaboradorFijoCrearComponent implements OnInit {
         private service: ColaboradoresFijosServiceService,
         public config: DynamicDialogConfig,
         private formBuilder: FormBuilder,
-        public ref: DynamicDialogRef
+        public ref: DynamicDialogRef,
+        private sectorService: SectorServiceService,
     ) {}
 
     modelo: colaboradoresFijosDTO;
     usuarios: usuarioDTO[] = [];
+    sector:sectorDTO;
  
     selectedProduct:usuarioDTO;
     visible: boolean = false;
@@ -50,6 +54,10 @@ export class ColaboradorFijoCrearComponent implements OnInit {
         this.usuarioService.ReadColaboradorFaltante(this.config.data['id']).subscribe((data) => {
             this.usuarios = data;
         });
+        this.sectorService.obtenerUno(this.config.data['id']).subscribe((data) => {
+            this.sector = data;
+        });
+
 
        
     }

@@ -39,6 +39,7 @@ export class FisicoDetalleComponent implements OnInit {
     form: FormGroup;
     @Input() id: number;
     @Input() temperatura: string;
+    @Input() puedeEditar: boolean = false;
     loading: boolean = false;
     modelo: fisicoQuimicoDTO;
     usuario: usuarioDTO;

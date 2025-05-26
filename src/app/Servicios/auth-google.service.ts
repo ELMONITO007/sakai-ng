@@ -26,7 +26,7 @@ export class AuthGoogleService  {
 
     login() {
       this.oAuthService.initLoginFlow();
-      console.log( this.oAuthService.getIdentityClaims())
+
       
     }
     logout() {
@@ -35,5 +35,9 @@ export class AuthGoogleService  {
 
     getPRofile() {
       return this.oAuthService.getIdentityClaims();
+    }
+
+    getTOken() {
+      return   this.oAuthService.getIdToken();
     }
 }

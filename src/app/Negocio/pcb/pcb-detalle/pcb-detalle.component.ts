@@ -41,8 +41,9 @@ export class PcbDetalleComponent implements OnInit {
     usuario: usuarioDTO;
     loading: boolean = false;
     @Input() id: number;
+    @Input() puedeEditar: boolean = false;
     modelo: pcbDTO;
-  @Input() estado: string;
+ 
     ngOnInit(): void {
         this.form = this.formBuilder.group({
             contenidodePCB: [

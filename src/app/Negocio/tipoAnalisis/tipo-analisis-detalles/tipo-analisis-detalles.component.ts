@@ -44,13 +44,15 @@ export class TipoAnalisisDetallesComponent implements OnInit {
     ngOnInit(): void {
         this.activatedRoute.params.subscribe((params) => {
             const id = params['id'];
-            this.items = [
-                { label: 'Home', icon: 'pi pi-home', route: '/', primary: false },
-                { label: 'Tipo Analisis', icon: 'pi pi-fw pi-user', route: '/tipo', primary: false },
-                { label: 'Detalle', icon: 'pi pi-fw pi-user', route: '/tipo/' + id, primary: true }
-            ];
+          
             this.service.obtenerUno(id).subscribe((data) => {
                 this.modelo = data;
+
+                  this.items = [
+                { label: 'Home', icon: 'pi pi-home', route: '/', primary: false },
+                { label: 'Tipo Analisis', icon: 'pi pi-fw pi-user', route: '/tipo', primary: false },
+                { label: 'Detalle '+ data.nombreTipoAnalisis, icon: 'pi pi-fw pi-user', route: '/tipo/' + id, primary: true }
+            ];
             });
         });
     }

@@ -31,6 +31,10 @@ import { EquipoServiceService } from '../../../Servicios/Equipo-service.service'
 import { equipoDTO } from '../../../Entidades/equipo';
 import { laboratistaDTO } from '../../../Entidades/laboratista';
 import { laboratorioDTO } from '../../../Entidades/laboratorio';
+import { OrdenEnsayoRecepcionComponent } from '../orden-ensayo-recepcion/orden-ensayo-recepcion.component';
+import { UsuarioServiceService } from '../../../Servicios/Usuario-service.service';
+import { usuarioDTO } from '../../../Entidades/usuario';
+import { VerificarOEService } from '../../../Servicios/verificar-oe.service';
 
 export interface Analisis {
     nombre: string;
@@ -58,7 +62,7 @@ export interface Analisis {
         FisicoQuimicoComponent,
         BitacoraListarComponent
     ],
-    providers: [MessageService, DialogService, OrdenEnsayoServiceService, LaboratorioServiceService, EquipoServiceService],
+    providers: [MessageService, DialogService, OrdenEnsayoServiceService, LaboratorioServiceService, EquipoServiceService, UsuarioServiceService],
     templateUrl: './orden-ensayo-detalle.component.html',
     styleUrl: './orden-ensayo-detalle.component.scss'
 })
@@ -70,22 +74,36 @@ export class OrdenEnsayoDetalleComponent implements OnInit {
         private service: OrdenEnsayoServiceService,
         public dialogService: DialogService,
         private laboratorioService: LaboratorioServiceService,
-        private equipoService: EquipoServiceService
+        private equipoService: EquipoServiceService,
+        private usuarioService: UsuarioServiceService
     ) {}
     modelo: ordenEnsayoDTO;
     items: MenuItem[] = [];
     ref: DynamicDialogRef | undefined;
+    usuario: usuarioDTO;
     visibleDelete: boolean = false;
     loading: boolean = false;
     analisis: Analisis[] = [];
     equipo: equipoDTO;
     laboratorio: laboratorioDTO;
-
+    visibleCerrar: boolean = false;
+    puedeEditar: boolean = false;
+    puedeCerrar: boolean = false;
     ngOnInit(): void {
+        this.analisis = [];
         this.activatedRoute.params.subscribe((params) => {
             const id = params['id'];
-
+            this.usuarioService.getUsuarioLogeado().subscribe((usuario: usuarioDTO) => {
+                this.service.VerificarEditarOE(usuario.id_Usuario, id).subscribe((puedeEditar) => {
+                    this.puedeEditar = puedeEditar;
+                   
+                });
+                this.service.VerificarCerrarOE(usuario.id_Usuario, id).subscribe((puedeCerrar) => {
+                    this.puedeCerrar = puedeCerrar;
+                });
+            });
             this.service.obtenerUno(id).subscribe((data) => {
+                console.log(data);
                 this.laboratorioService.obtenerUno(data.id_Laboratorio).subscribe((labo) => {
                     this.laboratorio = labo;
                 });
@@ -138,5 +156,41 @@ export class OrdenEnsayoDetalleComponent implements OnInit {
     openDelete(id: number) {
         this.idDelete = id;
         this.visibleDelete = true;
+    }
+    closeCerrar() {
+        this.visibleCerrar = false;
+    }
+    idCerrar: number;
+    openCerrar(id: number) {
+        this.idCerrar = id;
+        this.visibleCerrar = true;
+    }
+    cerrar(id: ordenEnsayoDTO) {
+        this.usuarioService.getUsuarioLogeado().subscribe((usuario: usuarioDTO) => {
+            id.nombreUsuario = usuario.userName;
+            this.service.CerrarOrden(id).subscribe((data) => {
+                this.messageService.add({ severity: 'success', summary: 'Orden de Ensayo Cerrada', detail: 'La orden de Ensayo se ha cerrado correctamente', life: 3000 });
+                this.ngOnInit();
+                this.visibleCerrar = false;
+            });
+        });
+    }
+
+    recibirCuba(id: number) {
+        this.ref = this.dialogService.open(OrdenEnsayoRecepcionComponent, {
+            width: '70%',
+            height: '50%',
+            data: {
+                id: id
+            },
+            maximizable: true,
+            header: 'Recepcion de cuba'
+        });
+        this.ref.onClose.subscribe((d) => {
+            if (d !== null) {
+                this.messageService.add({ severity: 'success', summary: 'Orden Ensayo Editado', detail: 'La orden de Ensayo se ha editado correctamente', life: 3000 });
+                this.ngOnInit();
+            }
+        });
     }
 }

@@ -9,118 +9,133 @@
         </p-tablist>
         <p-tabpanels>
             <p-tabpanel value="0">
-                <p-card>
-                    <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
-                        <div class="text-500 w-full md:w-2 font-medium">Estado</div>
-                        <div class="text-900 w-full md:w-10">{{ modelo?.estado }}</div>
-                    </li>
-                    <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
-                        <div class="text-500 w-full md:w-2 font-medium">Equipo</div>
-                        <div class="text-900 w-full md:w-10">{{ equipo.marca }} {{ equipo.modelo }} ({{ equipo.codigo }})</div>
-                    </li>
-                    <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
-                        <div class="text-500 w-full md:w-2 font-medium">Laboratorio</div>
-                        <div class="text-900 w-full md:w-10">{{ laboratorio.nombreLaboratorio }}</div>
-                    </li>
-                    <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
-                        <div class="text-500 w-full md:w-2 font-medium">Creador</div>
-                        <div class="text-900 w-full md:w-10"><b>Usuario:</b> {{ modelo?.nombreUsuario }} &nbsp;&nbsp;<b>Email:</b> {{ modelo?.emailUsuario }}</div>
-                    </li>
+                <p-button *ngIf="puedeEditar" icon="pi pi-pencil" class="mr-2" (onClick)="editar(modelo.id_OrdenEnsayo)" label="Editar" [rounded]="true"></p-button>
 
-                    <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
-                        <div class="text-500 w-full md:w-2 font-medium">Fechas</div>
-                        <div class="text-900 w-full md:w-10">
-                            <b>Creación: </b>{{ modelo?.fechaCreacion }}&nbsp;&nbsp; <span *ngIf="modelo?.fechaFinalizacion != ''"><b>Finalización: </b>{{ modelo?.fechaFinalizacion }} </span>
+                <p-button *ngIf="puedeEditar" icon="pi pi-trash" (onClick)="openDelete(modelo.id_OrdenEnsayo)" severity="danger" label="Eliminar" [rounded]="true"></p-button>
+                &nbsp;
+                <p-button *ngIf="puedeEditar" icon="pi pi-filter" (onClick)="recibirCuba(modelo.id_OrdenEnsayo)" severity="info" label="Cargar Cuba" [rounded]="true"></p-button>
+                &nbsp;
+                <p-button *ngIf="puedeCerrar" icon="pi pi-times" (onClick)="openCerrar(modelo.id_OrdenEnsayo)" severity="warn" label="Cerrar" [rounded]="true"></p-button>
+                <br /><br />
+                <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
+                    <div class="text-500 w-full md:w-2 font-medium">Estado</div>
+                    <div class="text-900 w-full md:w-10">{{ modelo?.estado }}</div>
+                </li>
+                <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
+                    <div class="text-500 w-full md:w-2 font-medium">Equipo</div>
+                    <div class="text-900 w-full md:w-10">{{ equipo.marca }} {{ equipo.modelo }} ({{ equipo.codigo }})</div>
+                </li>
+                <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
+                    <div class="text-500 w-full md:w-2 font-medium">Laboratorio</div>
+                    <div class="text-900 w-full md:w-10">{{ laboratorio.nombreLaboratorio }}</div>
+                </li>
+                <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
+                    <div class="text-500 w-full md:w-2 font-medium">Creador</div>
+                    <div class="text-900 w-full md:w-10"><b>Usuario:</b> {{ modelo?.nombreUsuario }} &nbsp;&nbsp;<b>Email:</b> {{ modelo?.emailUsuario }}</div>
+                </li>
+
+                <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
+                    <div class="text-500 w-full md:w-2 font-medium">Fechas</div>
+                    <div class="text-900 w-full md:w-10">
+                        <b>Creación: </b>{{ modelo?.fechaCreacion }}&nbsp;&nbsp; <span *ngIf="modelo?.fechaFinalizacion != ''"><b>Finalización: </b>{{ modelo?.fechaFinalizacion }} </span>
+                    </div>
+                </li>
+
+                <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
+                    <div class="text-500 w-full md:w-2 font-medium">Cuba</div>
+                    <div class="text-900 w-full md:w-10">
+                        {{ modelo?.cuba }} <span *ngIf="modelo?.temperatura != '0'">({{ modelo?.temperatura }}°) </span>
+                    </div>
+                </li>
+                <li *ngIf="modelo?.fechaExtraccion != ''" class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
+                    <div class="text-500 w-full md:w-2 font-medium">Extracción</div>
+                    <div class="text-900 w-full md:w-10">
+                        <span> {{ modelo?.fechaExtraccion }} (toma de muestra {{ modelo?.tomaEnsayo }})</span>
+                    </div>
+                </li>
+                <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
+                    <div class="text-500 w-full md:w-2 font-medium">Observaciones</div>
+                    <div class="text-900 w-full md:w-10">{{ modelo?.observaciones }}</div>
+                </li>
+                <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
+                    <div class="text-500 w-full md:w-2 font-medium">TipoAceite</div>
+                    <div class="text-900 w-full md:w-10">{{ modelo?.tipoAceite }} (inhibido: {{ modelo?.inhibido }} )</div>
+                </li>
+
+                <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
+                    <div class="text-500 w-full md:w-2 font-medium">Laboratista</div>
+                    <div class="text-900 w-full md:w-10">{{ modelo?.nombreLaboratista }} {{ modelo?.emailLaboratista }}</div>
+                </li>
+
+                <br />
+
+                <p-dialog [(visible)]="visibleDelete" appendTo="body" [modal]="true" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }" [style]="{ width: '40vw' }">
+                    <ng-template pTemplate="header">
+                        <div class="flex align-items-center">
+                            <span class="flex align-items-center justify-content-center bg-cyan-100 text-cyan-800 mr-3 border-circle" style="width: 32px; height: 32px">
+                                <i class="pi pi-times text-lg"></i>
+                            </span>
+                            <span class="font-medium text-2xl text-900">Esta Seguro de Eliminar la Orden de Ensayo</span>
                         </div>
-                    </li>
-
-                    <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
-                        <div class="text-500 w-full md:w-2 font-medium">Extracción</div>
-                        <div class="text-900 w-full md:w-10">
-                            <span *ngIf="modelo?.fechaPedidoExtraccion != ''"><b>Pedido Extracción: </b>{{ modelo?.fechaPedidoExtraccion }} &nbsp;&nbsp;</span
-                            ><span *ngIf="modelo?.fechaPedidoExtraccion != ''"> <b>Extracción:</b> {{ modelo?.fechaExtraccion }}</span>
-                        </div>
-                    </li>
-                    <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
-                        <div class="text-500 w-full md:w-2 font-medium">Cuba</div>
-                        <div class="text-900 w-full md:w-10">
-                            {{ modelo?.cuba }} <span *ngIf="modelo?.temperatura != '0'">({{ modelo?.temperatura }}°) </span>
-                        </div>
-                    </li>
-
-                    <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
-                        <div class="text-500 w-full md:w-2 font-medium">Observaciones</div>
-                        <div class="text-900 w-full md:w-10">{{ modelo?.observaciones }}</div>
-                    </li>
-                    <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
-                        <div class="text-500 w-full md:w-2 font-medium">TipoAceite</div>
-                        <div class="text-900 w-full md:w-10">{{ modelo?.tipoAceite }} (inhibido: {{ modelo?.inhibido }} )</div>
-                    </li>
-                    <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
-                        <div class="text-500 w-full md:w-2 font-medium">Inhibido</div>
-                        <div class="text-900 w-full md:w-10"></div>
-                    </li>
-
-                    <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
-                        <div class="text-500 w-full md:w-2 font-medium">Laboratista</div>
-                        <div class="text-900 w-full md:w-10">{{ modelo?.nombreLaboratista }} {{ modelo?.emailLaboratista }}</div>
-                    </li>
+                    </ng-template>
+                    <p class="line-height-3 p-0 m-0">
+                        Esta por eliminar el OrdenEnsayo {{ modelo?.numeroOrden }}. <br />
+                        Esta acción no se puede deshacer. <br />
+                    </p>
 
                     <br />
-                    <p-button *ngIf="modelo.estado=='En Proceso'" icon="pi pi-pencil" class="mr-2" (onClick)="editar(modelo.id_OrdenEnsayo)" label="Editar" [outlined]="true" [rounded]="true"></p-button>
-                    <p-button  *ngIf="modelo.estado=='En Proceso'" icon="pi pi-trash" (onClick)="openDelete(modelo.id_OrdenEnsayo)" severity="danger" label="Eliminar" [rounded]="true" [outlined]="true"></p-button>
-                    <p-dialog [(visible)]="visibleDelete" appendTo="body" [modal]="true" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }" [style]="{ width: '40vw' }">
-                        <ng-template pTemplate="header">
-                            <div class="flex align-items-center">
-                                <span class="flex align-items-center justify-content-center bg-cyan-100 text-cyan-800 mr-3 border-circle" style="width: 32px; height: 32px">
-                                    <i class="pi pi-times text-lg"></i>
-                                </span>
-                                <span class="font-medium text-2xl text-900">Esta Seguro de Eliminar la Orden de Ensayo</span>
-                            </div>
-                        </ng-template>
-                        <p class="line-height-3 p-0 m-0">
-                            Esta por eliminar el OrdenEnsayo {{ modelo?.numeroOrden }}. <br />
-                            Esta acción no se puede deshacer. <br />
-                        </p>
+                    <div class="border-top-1 surface-border pt-3">
+                        <button pButton pRipple icon="pi pi-times" label="Cancel" (click)="closeDelete()" class="p-button-text"></button>
+                        <button pButton pRipple icon="pi pi-check" (click)="eliminar(idDelete)" label="Guardar"></button>
+                    </div>
+                </p-dialog>
 
-                        <br />
-                        <div class="border-top-1 surface-border pt-3">
-                            <button pButton pRipple icon="pi pi-times" (click)="eliminar(idDelete)" label="Cancel" class="p-button-text"></button>
-                            <button pButton pRipple icon="pi pi-check" (click)="closeDelete()" label="Save"></button>
+                <p-dialog [(visible)]="visibleCerrar" appendTo="body" [modal]="true" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }" [style]="{ width: '40vw' }">
+                    <ng-template pTemplate="header">
+                        <div class="flex align-items-center">
+                            <span class="flex align-items-center justify-content-center bg-cyan-100 text-cyan-800 mr-3 border-circle" style="width: 32px; height: 32px">
+                                <i class="pi pi-times text-lg"></i>
+                            </span>
+                            <span class="font-medium text-2xl text-900">Esta Seguro de Cerrar la Orden de Ensayo</span>
                         </div>
-                    </p-dialog>
-                </p-card>
+                    </ng-template>
+                    <p class="line-height-3 p-0 m-0">
+                        Esta por Cerrar el OrdenEnsayo {{ modelo?.numeroOrden }}. <br />
+                        Esta acción se puede deshacer. <br />
+                    </p>
+
+                    <br />
+                    <div class="border-top-1 surface-border pt-3">
+                        <button pButton pRipple icon="pi pi-times" (click)="closeCerrar()" label="Cancel" class="p-button-text"></button>
+                        <button pButton pRipple icon="pi pi-check" (click)="cerrar(modelo)" label="Guardar"></button>
+                    </div>
+                </p-dialog>
             </p-tabpanel>
 
             <p-tabpanel value="1">
                 <p-tabs>
                     <p-tablist>
                         @for (tab of analisis; track tab.orden) {
-                            <p-tab value="{{tab.orden}}">{{ tab.nombre.toLocaleUpperCase() }}</p-tab>
+                            <p-tab value="{{ tab.orden }}">{{ tab.nombre.toLocaleUpperCase() }}</p-tab>
                         }
                     </p-tablist>
 
                     <p-tabpanels>
-
-                         @for (tab of analisis; track tab.orden) {
-                             <p-tabpanel value="{{tab.orden}}">
-                                <app-agd [id]="modelo.id_OrdenEnsayo" [estado]="modelo.estado" *ngIf="tab.nombre=='agd'"></app-agd>
-                                <app-contenido-furano [id]="modelo.id_OrdenEnsayo" [estado]="modelo.estado" *ngIf="tab.nombre=='contenidofurano'"></app-contenido-furano>
-                                <app-corrosividad [id]="modelo.id_OrdenEnsayo" [estado]="modelo.estado" *ngIf="tab.nombre=='corrosividad'"></app-corrosividad>
-                                <app-fisico-quimico [id]="modelo.id_OrdenEnsayo" [estado]="modelo.estado" [temperatura]="modelo.temperatura" *ngIf="tab.nombre=='fisicoquimico'"></app-fisico-quimico>
-                                <app-pasivador [id]="modelo.id_OrdenEnsayo" [estado]="modelo.estado" *ngIf="tab.nombre=='pasivador'"></app-pasivador>
-                                <app-pcb [id]="modelo.id_OrdenEnsayo" [estado]="modelo.estado" *ngIf="tab.nombre=='pcb'"></app-pcb>
-
-                             </p-tabpanel>
+                        @for (tab of analisis; track tab.orden) {
+                            <p-tabpanel value="{{ tab.orden }}">
+                                <app-agd [id]="modelo.id_OrdenEnsayo" [puedeEditar]="puedeEditar" *ngIf="tab.nombre == 'agd'"></app-agd>
+                                <app-contenido-furano [id]="modelo.id_OrdenEnsayo" [puedeEditar]="puedeEditar" *ngIf="tab.nombre == 'contenidofurano'"></app-contenido-furano>
+                                <app-corrosividad [id]="modelo.id_OrdenEnsayo" [puedeEditar]="puedeEditar" *ngIf="tab.nombre == 'corrosividad'"></app-corrosividad>
+                                <app-fisico-quimico [id]="modelo.id_OrdenEnsayo" [puedeEditar]="puedeEditar" [temperatura]="modelo.temperatura" *ngIf="tab.nombre == 'fisicoquimico'"></app-fisico-quimico>
+                                <app-pasivador [id]="modelo.id_OrdenEnsayo" [puedeEditar]="puedeEditar" *ngIf="tab.nombre == 'pasivador'"></app-pasivador>
+                                <app-pcb [id]="modelo.id_OrdenEnsayo" [puedeEditar]="puedeEditar" *ngIf="tab.nombre == 'pcb'"></app-pcb>
+                            </p-tabpanel>
                         }
-
-                       
-                     
                     </p-tabpanels>
                 </p-tabs>
             </p-tabpanel>
             <p-tabpanel value="2">
-              <app-bitacora-listar [id]="modelo.id_OrdenEnsayo" ></app-bitacora-listar>
+                <app-bitacora-listar [id]="modelo.id_OrdenEnsayo"></app-bitacora-listar>
             </p-tabpanel>
         </p-tabpanels>
     </p-tabs>

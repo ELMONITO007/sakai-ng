@@ -52,7 +52,7 @@ export class AgdDetalleComponent implements OnInit {
     ref: DynamicDialogRef | undefined;
     usuario:usuarioDTO;
     visibleDelete: boolean = false;
-  @Input() estado: string;
+  @Input() puedeEditar: boolean = false;
     @Input() id: number ;
     ngOnInit(): void {
          this.form = this.formBuilder.group({

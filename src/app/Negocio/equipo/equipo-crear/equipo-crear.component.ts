@@ -42,7 +42,7 @@ export class EquipoCrearComponent implements OnInit {
     modelo: equipoDTO;
     inhibido: lista[] = [{ item: 'Si' }, { item: 'No' }];
     tipoEquipo: lista[] = [{ item: 'Transformador' }, { item: 'ransformador Corriente' }, { item: 'Reactores' }, { item: 'Transformador Auxiliar' }];
-    estado: lista[] = [{ item: 'Activo' }, { item: 'Inactivo' }, { item: 'En Mantenimiento' }, { item: 'En Reparacion' }];
+    estado: lista[] = [{ item: 'Reserva Fria' }, { item: 'Reserva Caliente' }, { item: 'Scrapt' }];
     hoy: string;
     tipoAceite: lista[] = [{ item: 'Mineral' }, { item: 'Siliconado' }, { item: 'Sintetico' }, { item: 'Vegetal' }];
     sectores: sectorDTO[] = [];

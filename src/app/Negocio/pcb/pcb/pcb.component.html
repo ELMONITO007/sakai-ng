@@ -1,6 +1,6 @@
 <app-pcb-editar *ngIf="editar" [id]="id"></app-pcb-editar>
 <app-pcb-editar *ngIf="vacio" [id]="id"></app-pcb-editar>
-<app-pcb-detalle *ngIf="detalle" [id]="id"></app-pcb-detalle>
+<app-pcb-detalle [puedeEditar]="puedeEditar" [id]="id"></app-pcb-detalle>
 <p-divider></p-divider>
 <p-button *ngIf="!vacio && editar" icon="pi pi-times" (onClick)="verDetalles()" class="mr-2"  label="Cancelar" [severity]="'warn'" [rounded]="true"></p-button>
-<p-button *ngIf="!vacio && detalle && estado=='En Proceso'" icon="pi pi-pencil" (onClick)="editarAgd()" class="mr-2"  label="Editar" [severity]="'warn'" [rounded]="true"></p-button>
+<p-button *ngIf="!vacio && detalle && puedeEditar" icon="pi pi-pencil" (onClick)="editarAgd()" class="mr-2"  label="Editar" [severity]="'warn'" [rounded]="true"></p-button>

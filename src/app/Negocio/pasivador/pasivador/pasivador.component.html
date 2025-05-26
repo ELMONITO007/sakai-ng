@@ -1,9 +1,9 @@
 
 <app-pasivador-editar *ngIf="editar" [id]="id"></app-pasivador-editar>
 <app-pasivador-editar *ngIf="vacio" [id]="id"></app-pasivador-editar>
-<app-pasivador-detalle *ngIf="detalle" [id]="id"></app-pasivador-detalle>
+<app-pasivador-detalle *ngIf="detalle" [id]="id" [puedeEditar]="puedeEditar" ></app-pasivador-detalle>
 
 <p-divider></p-divider>
 <p-button *ngIf="!vacio && editar" icon="pi pi-times" (onClick)="verDetalles()" class="mr-2"  label="Cancelar" [severity]="'warn'" [rounded]="true"></p-button>
 
-<p-button *ngIf="!vacio && detalle && estado=='En Proceso'" icon="pi pi-pencil" (onClick)="editarAgd()" class="mr-2"  label="Editar" [severity]="'warn'" [rounded]="true"></p-button>
+<p-button *ngIf="!vacio && detalle && puedeEditar" icon="pi pi-pencil" (onClick)="editarAgd()" class="mr-2"  label="Editar" [severity]="'warn'" [rounded]="true"></p-button>

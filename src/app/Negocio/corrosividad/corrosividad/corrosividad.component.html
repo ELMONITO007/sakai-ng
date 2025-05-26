@@ -1,6 +1,6 @@
 <app-corrosividad-editar *ngIf="editar" [id]="id"></app-corrosividad-editar>
 <app-corrosividad-editar *ngIf="vacio" [id]="id"></app-corrosividad-editar>
-<app-corrosividad-detalle *ngIf="detalle" [id]="id"></app-corrosividad-detalle>
+<app-corrosividad-detalle *ngIf="detalle" [puedeEditar]="puedeEditar" [id]="id"></app-corrosividad-detalle>
 <p-divider></p-divider>
 <p-button *ngIf="!vacio && editar" icon="pi pi-times" (onClick)="verDetalles()" class="mr-2" label="Cancelar" [severity]="'warn'" [rounded]="true"></p-button>
-<p-button *ngIf="!vacio && detalle && this.estado=='En Proceso'" icon="pi pi-pencil" (onClick)="edit()" class="mr-2" label="Editar" [severity]="'warn'" [rounded]="true"></p-button>
+<p-button *ngIf="!vacio && detalle && puedeEditar" icon="pi pi-pencil" (onClick)="edit()" class="mr-2" label="Editar" [severity]="'warn'" [rounded]="true"></p-button>

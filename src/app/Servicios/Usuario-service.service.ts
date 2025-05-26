@@ -5,6 +5,8 @@ import { usuarioDTO, usuarioCreacionDTO } from '../Entidades/usuario';
 import { environment } from '../environments/environment';
 import { AuthGoogleService } from './auth-google.service';
 import { Router } from '@angular/router';
+export interface tokenDTO {
+    token: string;}
 
 @Injectable({ providedIn: 'root' })
 export class UsuarioServiceService {
@@ -54,20 +56,25 @@ export class UsuarioServiceService {
     }
 
     usuarioLogueado: usuarioDTO;
-   
+
     existe: string;
 
-    getUsuarioLogeado(): Observable< usuarioDTO>  {
-  
+    getUsuarioLogeado(): Observable<usuarioDTO> {
         const plainUser = this.auth.getPRofile();
         var email = plainUser['email'];
         var user;
-         return   this.obtenerUnoemail(email)
-            
-      
-      
+        return this.obtenerUnoemail(email);
     }
     public login(codigo: usuarioDTO) {
         return this.http.post<usuarioDTO>(`${this.apiURL}/login`, codigo);
+    }
+
+    token:tokenDTO
+    public VerificarToken() {
+     this.token = { token: this.auth.getTOken() }
+    return this.http.put<tokenDTO>(`${this.apiURL}/VerificarToken`,this.token );
+  
+
+      
     }
 }

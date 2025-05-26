@@ -1,0 +1,51 @@
+<br><br>
+<form (submit)="onSubmit()" [formGroup]="form">
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <span class="material-symbols-outlined"> ° </span>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-inputnumber formControlName="temperatura" inputId="locale-user" [minFractionDigits]="2" />
+
+                <label for="temperatura">Temperatura</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>calendar_today</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText type="date" id="fechaExtraccion"  formControlName="fechaExtraccion" pTooltip="Ingrese el fecha " tooltipPosition="bottom" [max]="hoy" />
+
+                <label for="fechaExtraccion">Fecha de Extracción*</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>gas_meter</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-select formControlName="tomaEnsayo" [options]="ubicacion" optionLabel="tipo" optionValue="tipo" pTooltip="Seleccione de donde tomo la muestra" tooltipPosition="bottom" class="w-full md:w-56" />
+
+                <label for="tomaEnsayo">Toma de muestra*</label>
+            </p-floatlabel>
+        </p-inputgroup>
+       
+    </div>
+    <br />
+       <br />
+     <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>info</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="observaciones" formControlName="observaciones" pTooltip="Ingrese el Observaciones" tooltipPosition="bottom" />
+                <label for="observaciones">Observaciones</label>
+            </p-floatlabel>
+        </p-inputgroup>
+    <br />
+    <br />
+    <p-button label="Guardar" icon="pi pi-check" type="submit" severity="success" [loading]="loading" [disabled]="!form.valid"></p-button>&nbsp;
+    <p-button label="Cancelar" icon="pi pi-times" (click)="cancel()" severity="danger" [loading]="loading"></p-button>
+</form>

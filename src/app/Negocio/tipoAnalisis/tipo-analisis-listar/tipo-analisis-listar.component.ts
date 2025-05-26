@@ -50,8 +50,8 @@ export class TipoAnalisisListarComponent implements OnInit {
         });
 
         this.items = [
-            { label: 'Home', icon: 'pi pi-home', route: '' },
-            { label: 'Tipo Analisis', icon: 'pi pi-fw pi-user', route: '/tipoAnalisis' }
+            { label: 'Home', icon: 'pi pi-home', route: '',primary: false },
+            { label: 'Tipo Analisis', icon: 'pi pi-fw pi-user', route: '/tipoAnalisis',primary: true },
         ];
     }
     exportCSV() {

@@ -20,14 +20,14 @@ export class AgdComponent implements OnInit {
     vacio: boolean = false;
     detalle: boolean = true;
     @Input() id: number;
-    @Input() estado: string;
+    @Input() puedeEditar:boolean = false;
 
     constructor(private service: AgdServiceService) {}
 
     ngOnInit(): void {
         this.service.obtenerTodos(this.id).subscribe((data) => {
     
-            if (data.hidrogeno == null && data.oxigeno == null && data.nitrogeno == null && data.dioxidodeCarbono == null && this.estado=="En Proceso") {
+            if (data.hidrogeno == null && data.oxigeno == null && data.nitrogeno == null && data.dioxidodeCarbono == null && this.puedeEditar) {
                 this.vacio = true;
                 
                 this.detalle = false;
@@ -35,11 +35,16 @@ export class AgdComponent implements OnInit {
                  
 
             }
-            if(this.estado!="En Proceso"){
+            if( data.hidrogeno != null && data.oxigeno != null && data.nitrogeno != null && data.dioxidodeCarbono != null && this.puedeEditar ){
                 this.editar = false;
                 this.vacio = false;
                 this.detalle = true;
-                 console.log(this.estado);
+                 
+            }
+            if(!this.puedeEditar){
+                this.editar = false;
+                this.vacio = false;
+                this.detalle = true;
             }
         });
     }
@@ -50,14 +55,8 @@ export class AgdComponent implements OnInit {
         this.detalle = true;
     }
     editarAgd() {
-        if (this.estado == "En Proceso") {
-        this.editar = true;
+         this.editar = true;
         this.vacio = false;
-        this.detalle = false;}
-        else {
-            this.editar = false;
-            this.vacio = false;
-            this.detalle = false;
-        }
+        this.detalle = false;
     }
 }

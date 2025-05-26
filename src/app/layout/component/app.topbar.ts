@@ -15,7 +15,7 @@ import { LayoutService } from '../service/layout.service';
             <button class="layout-menu-button layout-topbar-action" (click)="layoutService.onMenuToggle()">
                 <i class="pi pi-bars"></i>
             </button>
-            <a class="layout-topbar-logo" routerLink="/">
+            <a class="layout-topbar-logo" routerLink="/index">
             <img src="http://www.transener.com.ar/wp-content/uploads/2018/06/Transener-logo-1.png" alt="Image" height="40" width="150" class="mr-0 lg:mr-6">
             <img src="http://www.transba.com.ar/wp-content/uploads/2018/05/Transba-logo.png" alt="Image" height="40" width="150" class="mr-0 lg:mr-6">
              

@@ -48,6 +48,7 @@ export class CorrosividadDetalleComponent implements OnInit {
     form: FormGroup;
     loading: boolean = false;
     @Input() id: number;
+    @Input() puedeEditar: boolean = false;
     modelo: corrosividadDTO;
     usuario: usuarioDTO;
       @Input() estado: string;

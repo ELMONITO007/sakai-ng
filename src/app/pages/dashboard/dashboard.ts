@@ -1,39 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { NotificationsWidget } from './components/notificationswidget';
+import { Component } from '@angular/core';
 
-import { RecentSalesWidget } from './components/recentsaleswidget';
-import { BestSellingWidget } from './components/bestsellingwidget';
-import { RevenueStreamWidget } from './components/revenuestreamwidget';
-import { EstadisticasComponent } from "./estadisticas/estadisticas.component";
-import { EquiposComponent } from "./equipos/equipos.component";
 import { AuthGoogleService } from '../../Servicios/auth-google.service';
 import { UsuarioServiceService } from '../../Servicios/Usuario-service.service';
 import { usuarioDTO } from '../../Entidades/usuario';
-import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-dashboard',
     standalone: true,
-        imports: [],
+    imports: [CommonModule],
     templateUrl: './dashboard.component.html',
-    providers:[AuthGoogleService]
-
-    
-
-
+    providers: [UsuarioServiceService]
 })
-export class Dashboard  {
-Usuario:usuarioDTO;
-constructor( 
-    private authGoogleService: AuthGoogleService,
+export class Dashboard {
+    Usuario: usuarioDTO;
+    constructor(private usuarioService: UsuarioServiceService) {
+        var result;
 
-   ) {
-   
-console.log(this.authGoogleService.getPRofile())
-
-
-  
-}
-   
-
+        this.usuarioService.getUsuarioLogeado().subscribe((data: any) => {
+            this.Usuario = data;
+        });
+    }
 }

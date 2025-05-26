@@ -24,20 +24,26 @@ export class PcbComponent implements OnInit {
     vacio: boolean = false;
     detalle: boolean = true;
     @Input() id: number;
-      @Input() estado: string;
+   @Input() puedeEditar:boolean = false;
 
     constructor(private service: PCBServiceService) {}
 
     ngOnInit(): void {
         this.service.obtenerTodos(this.id).subscribe((data) => {
         
-            if (data.fechaEnsayo == null && data.contenidodePCB == 0 && this.estado=="En Proceso") {
+            if (data.fechaEnsayo == null && data.contenidodePCB == 0 && this.puedeEditar) {
                 this.vacio = true;
                 this.detalle = false;
                 this.editar = false;
 
             }
-            if(this.estado!="En Proceso"){
+           if( data.fechaEnsayo != null && data.contenidodePCB != null  && this.puedeEditar ){
+                this.editar = false;
+                this.vacio = false;
+                this.detalle = true;
+                 
+            }
+            if(!this.puedeEditar){
                 this.editar = false;
                 this.vacio = false;
                 this.detalle = true;

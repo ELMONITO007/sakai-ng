@@ -24,12 +24,14 @@ import { colaboradoresFijosDTO } from '../../../Entidades/colaboradoresFijos';
 import { ColaboradoresFijosServiceService } from '../../../Servicios/ColaboradoresFijos-service.service';
 import { RefreshIcon } from 'primeng/icons';
 import { ColaboradorFijoCrearComponent } from '../../colaboradorFijo/colaborador-fijo-crear/colaborador-fijo-crear.component';
+import { SectorServiceService } from '../../../Servicios/Sector-service.service';
+import { sectorDTO } from '../../../Entidades/sector';
 
 @Component({
     selector: 'app-usuario-colaborar-fijo',
     standalone: true,
     imports: [ButtonModule, CardModule, TableModule, HttpClientModule, ToolbarModule, IconFieldModule, BreadcrumbRouterComponent, InputIconModule, InputTextModule, DialogModule, MessageModule, ToastModule],
-    providers: [UsuarioServiceService, DialogService, MessageService, ColaboradoresFijosServiceService],
+    providers: [UsuarioServiceService, DialogService, MessageService, ColaboradoresFijosServiceService,SectorServiceService],
     templateUrl: './usuario-colaborar-fijo.component.html',
     styleUrl: './usuario-colaborar-fijo.component.scss'
 })
@@ -40,6 +42,7 @@ export class UsuarioColaborarFijoComponent implements OnInit {
     visibleDelete: boolean = false;
     loading: boolean = false;
     colaborador: colaboradoresFijosDTO;
+    sector:sectorDTO;
     ref: DynamicDialogRef | undefined;
     @ViewChild('dt1') dt1!: Table;
     constructor(
@@ -48,7 +51,10 @@ export class UsuarioColaborarFijoComponent implements OnInit {
         public dialogService: DialogService,
         private messageService: MessageService,
         private route: Router,
-        private activeRoute: ActivatedRoute
+        private activeRoute: ActivatedRoute,
+    
+        private sectorService: SectorServiceService
+        
     ) {}
 
     ngOnInit(): void {
@@ -56,12 +62,13 @@ export class UsuarioColaborarFijoComponent implements OnInit {
             this.usuarioService.ReadColaborador(params['id']).subscribe((data) => {
                 this.usuarios = data;
                 this.loading = false;
+                this.sectorService.obtenerUno(params['id']).subscribe((sector) => {
                 this.items = [
                     { label: 'Home', icon: 'pi pi-home', route: '', primary: false },
                     { label: 'Sector', icon: 'pi pi-fw pi-user', route: '/sector', primary: false },
-                    { label: 'Colaboradores Fijos', icon: 'pi pi-fw pi-user', route: '/colaborador/' + params['id'], primary: true }
+                    { label: 'Colaboradores Fijos '+sector.codigo, icon: 'pi pi-fw pi-user', route: '/colaborador/' + params['id'], primary: true }
                 ];
-            });
+            }); });
         });
     }
     visible: boolean = false;

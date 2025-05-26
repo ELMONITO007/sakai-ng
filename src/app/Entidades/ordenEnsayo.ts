@@ -24,6 +24,7 @@ export interface ordenEnsayoDTO{
   nombreLaboratista:string,
   usuarioLaboratista:string,
   emailLaboratista:string,
+  tomaEnsayo:string,
 }
 
 
@@ -53,6 +54,7 @@ export interface ordenEnsayoCreacionDTO{
   nombreLaboratista:string,
   usuarioLaboratista:string,
   emailLaboratista:string,
+   tomaEnsayo:string,
 }
 
 export interface ordenEnsayoVistaCreadorDTO{

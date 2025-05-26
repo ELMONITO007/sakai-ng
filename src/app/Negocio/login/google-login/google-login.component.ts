@@ -40,7 +40,7 @@ export class GoogleLoginComponent implements OnInit {
     usuario: usuarioDTO;
     existe: string = '';
     ngOnInit() {
-      
+      this.authGoogleService.logout();
         const plainUser = this.authGoogleService.getPRofile();
         console.log('Existe', plainUser);
 
