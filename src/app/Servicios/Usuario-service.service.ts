@@ -6,7 +6,8 @@ import { environment } from '../environments/environment';
 import { AuthGoogleService } from './auth-google.service';
 import { Router } from '@angular/router';
 export interface tokenDTO {
-    token: string;}
+    token: string;
+}
 
 @Injectable({ providedIn: 'root' })
 export class UsuarioServiceService {
@@ -65,16 +66,47 @@ export class UsuarioServiceService {
         var user;
         return this.obtenerUnoemail(email);
     }
+
     public login(codigo: usuarioDTO) {
         return this.http.post<usuarioDTO>(`${this.apiURL}/login`, codigo);
     }
 
-    token:tokenDTO
+    token: usuarioDTO;
     public VerificarToken() {
-     this.token = { token: this.auth.getTOken() }
-    return this.http.put<tokenDTO>(`${this.apiURL}/VerificarToken`,this.token );
-  
-
-      
+        var t = { token: this.auth.getTOken() };
+        this.token = {
+            id_Usuario: 0,
+            nombre: '',
+            apellido: '',
+            email: '',
+            userName: '',
+            contraseña: '',
+            puesto: '',
+            bloqueado: false,
+            cantidadIntentos: 0,
+            token: t.token
+        };
+        return this.http.put<tokenDTO>(`${this.apiURL}/VerificarToken`, this.token);
     }
+
+    public isLogin(): any {
+        const token = this.auth.getTOken();
+        if (token != null || token != undefined || token != '') {
+            this.VerificarToken().subscribe((y) => {
+                if (y) {
+                    return true;
+                } else {
+                    this.DeslogearUser();
+                    this.router.navigate(['/login']);
+                    return false;
+                }
+            });
+        } else {
+            this.DeslogearUser();
+            this.router.navigate(['/login']);
+            return false;
+        }
+    }
+
+
 }

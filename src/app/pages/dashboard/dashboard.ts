@@ -10,11 +10,16 @@ import { CommonModule } from '@angular/common';
     standalone: true,
     imports: [CommonModule],
     templateUrl: './dashboard.component.html',
-    providers: [UsuarioServiceService]
+    providers: [UsuarioServiceService,
+       AuthGoogleService
+    ]
 })
 export class Dashboard {
     Usuario: usuarioDTO;
-    constructor(private usuarioService: UsuarioServiceService) {
+    constructor(private usuarioService: UsuarioServiceService,
+      
+    ) {
+        console.log('Dashboard component initialized');
         var result;
 
         this.usuarioService.getUsuarioLogeado().subscribe((data: any) => {

@@ -8,6 +8,7 @@ export interface usuarioDTO{
   puesto:string,
   bloqueado:boolean,
   cantidadIntentos:number,
+  token?: string,
 }
 
 

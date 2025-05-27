@@ -21,6 +21,7 @@ import { OrdenEnsayoDetalleComponent } from './app/Negocio/ordenEnsayo/orden-ens
 import { GoogleLoginComponent } from './app/Negocio/login/google-login/google-login.component';
 import { WaitingLoginComponent } from './app/Negocio/login/waiting-login/waiting-login.component';
 import { LandingPageComponent } from './app/pages/landing/landing-page/landing-page.component';
+import { Access } from './app/pages/auth/access';
 
 export const appRoutes: Routes = [
     {path:'login',component:GoogleLoginComponent},
@@ -53,8 +54,9 @@ export const appRoutes: Routes = [
             
         ]
     },
-    { path: 'landing', component: Landing },
+    
     { path: 'notfound', component: Notfound },
+    {path: 'noAuth', component: Access },
     { path: 'auth', loadChildren: () => import('./app/pages/auth/auth.routes') },
     { path: '**', redirectTo: '/notfound' }
 ];
