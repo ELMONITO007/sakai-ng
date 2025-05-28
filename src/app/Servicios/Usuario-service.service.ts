@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { catchError, Observable, throwError } from 'rxjs';
 import { usuarioDTO, usuarioCreacionDTO } from '../Entidades/usuario';
 import { environment } from '../environments/environment';
 import { AuthGoogleService } from './auth-google.service';
@@ -18,10 +18,10 @@ export class UsuarioServiceService {
     ) {}
     private apiURL = environment.apiURL + '/usuario';
 
-    public obtenerTodos() {
-        return this.http.get<usuarioDTO[]>(`${this.apiURL}/index`);
-    }
-
+ public obtenerTodos(): Observable<usuarioDTO[]> { 
+    return this.http.get<usuarioDTO[]>(`${this.apiURL}/index`, { withCredentials: true });
+                                                            
+}
     public ReadColaborador(id: number) {
         return this.http.get<usuarioDTO[]>(`${this.apiURL}/ReadColaborador?id=${id}`);
     }
@@ -89,6 +89,14 @@ export class UsuarioServiceService {
         return this.http.put<tokenDTO>(`${this.apiURL}/VerificarToken`, this.token);
     }
 
+    getToken(): string {
+        let usuarioInternoLocalStorage!: usuarioDTO;
+        let usuarioLocalStorage = localStorage.getItem('user');
+        if (usuarioLocalStorage) usuarioInternoLocalStorage = JSON.parse(usuarioLocalStorage);
+
+        return usuarioInternoLocalStorage.token;
+    }
+
     public isLogin(): any {
         const token = this.auth.getTOken();
         if (token != null || token != undefined || token != '') {
@@ -107,6 +115,4 @@ export class UsuarioServiceService {
             return false;
         }
     }
-
-
 }
