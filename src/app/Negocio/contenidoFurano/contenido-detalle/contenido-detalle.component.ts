@@ -27,10 +27,11 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { TooltipModule } from 'primeng/tooltip';
 import { UsuarioServiceService } from '../../../Servicios/Usuario-service.service';
 import { usuarioDTO } from '../../../Entidades/usuario';
+import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
     selector: 'app-contenido-detalle',
-       imports: [ButtonModule, CardModule, HttpClientModule, InputTextModule,DialogModule,ToastModule, MatIconModule,
+       imports: [ButtonModule, CardModule, HttpClientModule, InputTextModule,DialogModule,ToastModule, MatIconModule,DialogModule,SkeletonModule, 
         FormsModule, ReactiveFormsModule,MatIconModule, CommonModule, FloatLabelModule, InputGroupModule, InputGroupAddonModule, TooltipModule],
 
     providers: [MessageService, ContenidoFuranoServiceService,UsuarioServiceService],
@@ -136,5 +137,21 @@ export class ContenidoDetalleComponent implements OnInit {
     openDelete(id: number) {
         this.idDelete = id;
         this.visibleDelete = true;
+    }
+
+
+     diag: any;
+    visible3: boolean = false;
+    diagnostico(id: number) {
+      this.visible3 = true;
+        this.loading = true;
+  
+      this.service.ObtenerDiagnostico(id).subscribe((x:any) => {
+        if (x != null) {
+          this.loading = false;
+          this.diag = x.candidates[0].content.parts[0].text;
+      
+        }
+      });
     }
 }

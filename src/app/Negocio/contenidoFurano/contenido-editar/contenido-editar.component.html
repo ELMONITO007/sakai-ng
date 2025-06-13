@@ -11,6 +11,17 @@
                 <label for="hMF">HMF</label>
             </p-floatlabel>
         </p-inputgroup>
+
+            <p-inputgroup>
+            <p-inputgroup-addon>
+                <span class="material-symbols-outlined"> ppm </span>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+               <p-inputnumber formControlName="fAL" inputId="locale-user" [minFractionDigits]="2" />
+                <label for="fAL">FAL</label>
+            </p-floatlabel>
+        </p-inputgroup>
+
         <p-inputgroup>
             <p-inputgroup-addon>
                 <span class="material-symbols-outlined"> ppm </span>
@@ -22,15 +33,7 @@
                 <label for="aCF">ACF</label>
             </p-floatlabel>
         </p-inputgroup>
-        <p-inputgroup>
-            <p-inputgroup-addon>
-                <span class="material-symbols-outlined"> ppm </span>
-            </p-inputgroup-addon>
-            <p-floatlabel>
-                <p-inputnumber formControlName="fOL" inputId="locale-user" [minFractionDigits]="2" />
-                <label for="fOL">FOL</label>
-            </p-floatlabel>
-        </p-inputgroup>
+       
     </div>
 
     <br />
@@ -45,13 +48,13 @@
                 <label for="mEF">MEF</label>
             </p-floatlabel>
         </p-inputgroup>
-        <p-inputgroup>
+     <p-inputgroup>
             <p-inputgroup-addon>
                 <span class="material-symbols-outlined"> ppm </span>
             </p-inputgroup-addon>
             <p-floatlabel>
-               <p-inputnumber formControlName="fAL" inputId="locale-user" [minFractionDigits]="2" />
-                <label for="fAL">FAL</label>
+                <p-inputnumber formControlName="fOL" inputId="locale-user" [minFractionDigits]="2" />
+                <label for="fOL">FOL</label>
             </p-floatlabel>
         </p-inputgroup>
         <p-inputgroup>

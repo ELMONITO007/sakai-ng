@@ -1,64 +1,25 @@
 <form [formGroup]="form">
     <br />
+     <br />
     <div class="flex flex-col md:flex-row gap-6">
         <p-inputgroup>
             <p-inputgroup-addon>
-                <span class="material-symbols-outlined"> ppm </span>
+                <span class="material-symbols-outlined">kV </span>
             </p-inputgroup-addon>
             <p-floatlabel>
-                <p-inputnumber formControlName="contenidoAgua" inputId="locale-user" [minFractionDigits]="2" readonly="readonly" />
+                <p-inputnumber formControlName="rigidezDialectrica" inputId="locale-user" [minFractionDigits]="2" readonly/>
 
-                <label for="contenidoAgua">Contenido Agua</label>
+                <label for="rigidezDialectrica">Rigidez Dielectrica</label>
             </p-floatlabel>
         </p-inputgroup>
         <p-inputgroup>
             <p-inputgroup-addon>
-                <mat-icon>info</mat-icon>
+                <span class="material-symbols-outlined">90°</span>
             </p-inputgroup-addon>
             <p-floatlabel>
-                <input readonly="readonly" pInputText id="observacionesContenidoAgua" formControlName="observacionesContenidoAgua" pTooltip="Ingrese el ObservacionesContenidoAgua" tooltipPosition="bottom" />
-                <label for="observacionesContenidoAgua">Observaciones</label>
-            </p-floatlabel>
-        </p-inputgroup>
-        <p-inputgroup>
-            <p-inputgroup-addon>
-                <span class="material-symbols-outlined">KOH/g </span>
-            </p-inputgroup-addon>
-            <p-floatlabel>
-                <p-inputnumber readonly="readonly" formControlName="indiceAcidez" inputId="locale-user" [minFractionDigits]="2" />
-                <label for="indiceAcidez">Indice Acidez</label>
-            </p-floatlabel>
-        </p-inputgroup>
-        <p-inputgroup>
-            <p-inputgroup-addon>
-                <mat-icon>info</mat-icon>
-            </p-inputgroup-addon>
-            <p-floatlabel>
-                <input readonly="readonly" pInputText id="observacionesIndiceAcidez" formControlName="observacionesIndiceAcidez" pTooltip="Ingrese el ObservacionesIndiceAcidez" tooltipPosition="bottom" />
-                <label for="observacionesIndiceAcidez">Observaciones</label>
-            </p-floatlabel>
-        </p-inputgroup>
-    </div>
-    <br />
-    <br />
-    <div class="flex flex-col md:flex-row gap-6">
-        <p-inputgroup>
-            <p-inputgroup-addon>
-                <span class="material-symbols-outlined"> %peso </span>
-            </p-inputgroup-addon>
-            <p-floatlabel>
-                <p-inputnumber readonly="readonly" formControlName="inhibidor" inputId="locale-user" [minFractionDigits]="2" />
+                <p-inputnumber formControlName="tangenteDelta" inputId="locale-user" [minFractionDigits]="5" readonly/>
 
-                <label for="inhibidor">Inhibidor</label>
-            </p-floatlabel>
-        </p-inputgroup>
-        <p-inputgroup>
-            <p-inputgroup-addon>
-                <mat-icon>info</mat-icon>
-            </p-inputgroup-addon>
-            <p-floatlabel>
-                <input readonly="readonly" pInputText id="observacionesInhibidor" formControlName="observacionesInhibidor" pTooltip="Ingrese el ObservacionesInhibidor" tooltipPosition="bottom" />
-                <label for="observacionesInhibidor">Observaciones</label>
+                <label for="tangenteDelta">Tangente delta a 90° C (IEC 60247)</label>
             </p-floatlabel>
         </p-inputgroup>
 
@@ -67,18 +28,20 @@
                 <span class="material-symbols-outlined"> din/cm </span>
             </p-inputgroup-addon>
             <p-floatlabel>
-                <p-inputnumber readonly="readonly" formControlName="tensionInterfasial" inputId="locale-user" [minFractionDigits]="2" />
+                <p-inputnumber formControlName="tensionInterfasial" inputId="locale-user" [minFractionDigits]="2" readonly/>
 
-                <label for="tensionInterfasial">Tensión Interfasial</label>
+                <label for="tensionInterfasial">Tensión interfasial (ASTM D 971)</label>
             </p-floatlabel>
         </p-inputgroup>
+
         <p-inputgroup>
             <p-inputgroup-addon>
-                <mat-icon>info</mat-icon>
+                <span class="material-symbols-outlined"> ppm </span>
             </p-inputgroup-addon>
             <p-floatlabel>
-                <input readonly="readonly" pInputText id="observacionesTensionInterfasial" formControlName="observacionesTensionInterfasial" pTooltip="Ingrese el ObservacionesTensionInterfasial" tooltipPosition="bottom" />
-                <label for="observacionesTensionInterfasial">Observaciones</label>
+                <p-inputnumber  formControlName="humedadAceite" inputId="locale-user" [minFractionDigits]="2"  readonly/>
+
+                <label for="humedadAceite">Humedad en aceite (ASTM D 1533)</label>
             </p-floatlabel>
         </p-inputgroup>
     </div>
@@ -87,72 +50,57 @@
     <div class="flex flex-col md:flex-row gap-6">
         <p-inputgroup>
             <p-inputgroup-addon>
-                <span readonly="readonly" class="material-symbols-outlined">kV </span>
+                <span class="material-symbols-outlined">KOH/g </span>
             </p-inputgroup-addon>
             <p-floatlabel>
-                <p-inputnumber formControlName="rigidezDielectrica" inputId="locale-user" [minFractionDigits]="2" />
-
-                <label for="rigidezDielectrica">Rigidez Dielectrica</label>
-            </p-floatlabel>
-        </p-inputgroup>
-        <p-inputgroup>
-            <p-inputgroup-addon>
-                <mat-icon>info</mat-icon>
-            </p-inputgroup-addon>
-            <p-floatlabel>
-                <input readonly="readonly" pInputText id="observacionesRigidezDielectrica" formControlName="observacionesRigidezDielectrica" pTooltip="Ingrese el ObservacionesRigidezDielectrica" tooltipPosition="bottom" />
-                <label for="observacionesRigidezDielectrica">Observaciones</label>
+                <p-inputnumber formControlName="indiceNeutralizacion" inputId="locale-user" [minFractionDigits]="2" readonly/>
+                <label for="indiceNeutralizacion">Índice de neutralización (ASTM D 974)</label>
             </p-floatlabel>
         </p-inputgroup>
 
         <p-inputgroup>
             <p-inputgroup-addon>
-                <span class="material-symbols-outlined">90°</span>
+                <span class="material-symbols-outlined"> %peso </span>
             </p-inputgroup-addon>
             <p-floatlabel>
-                <p-inputnumber readonly="readonly" formControlName="tangente" inputId="locale-user" [minFractionDigits]="5" />
+                <p-inputnumber formControlName="contenidoInhibador" inputId="locale-user" [minFractionDigits]="2" readonly/>
 
-                <label for="tangente">Tangente</label>
-            </p-floatlabel>
-        </p-inputgroup>
-        <p-inputgroup>
-            <p-inputgroup-addon>
-                <mat-icon>info</mat-icon>
-            </p-inputgroup-addon>
-            <p-floatlabel>
-                <input readonly="readonly" pInputText id="observacionesTangente" formControlName="observacionesTangente" pTooltip="Ingrese el ObservacionesTangente" tooltipPosition="bottom" />
-                <label for="observacionesTangente">Observaciones</label>
+                <label for="inhibidor">Contenido de inhibidor (IEC 60666)</label>
             </p-floatlabel>
         </p-inputgroup>
     </div>
     <br />
     <br />
+
     <div class="flex flex-col md:flex-row gap-6">
         <p-inputgroup>
             <p-inputgroup-addon>
-                <span class="material-symbols-outlined">ASTM</span>
+                <span class="material-symbols-outlined">ISO4406</span>
             </p-inputgroup-addon>
             <p-floatlabel>
-                <p-inputnumber readonly="readonly" formControlName="color" inputId="locale-user" [minFractionDigits]="2" />
+                <p-inputnumber formControlName="contenidoParticulas" inputId="locale-user" [minFractionDigits]="2" readonly/>
 
-                <label for="color">Color</label>
+                <label for="contenidoParticulas">Contenido de partículas (IEC 60970)</label>
             </p-floatlabel>
         </p-inputgroup>
+
         <p-inputgroup>
             <p-inputgroup-addon>
-                <mat-icon>info</mat-icon>
+                <span class="material-symbols-outlined">ppm</span>
             </p-inputgroup-addon>
             <p-floatlabel>
-                <input readonly="readonly" pInputText id="observacionesColor" formControlName="observacionesColor" pTooltip="Ingrese el ObservacionesColor" tooltipPosition="bottom" />
-                <label for="observacionesColor">Observaciones</label>
+                <p-inputnumber formControlName="contenidoBifenilos" inputId="locale-user" [minFractionDigits]="2" readonly/>
+
+                <label for="contenidoBifenilos">Contenido de BIFENILOS POLICLORADOS (PCB) (ASTM D4059)</label>
             </p-floatlabel>
         </p-inputgroup>
+
         <p-inputgroup>
             <p-inputgroup-addon>
                 <mat-icon>water_drop</mat-icon>
             </p-inputgroup-addon>
             <p-floatlabel>
-                <p-inputnumber readonly="readonly" formControlName="aguaCorregida" inputId="locale-user" [minFractionDigits]="2" />
+                <p-inputnumber formControlName="aguaCorregida" inputId="locale-user" [minFractionDigits]="2" readonly/>
                 <label for="aguaCorregida">Agua Corregida</label>
             </p-floatlabel>
         </p-inputgroup>
@@ -161,7 +109,7 @@
                 <mat-icon>invert_colors</mat-icon>
             </p-inputgroup-addon>
             <p-floatlabel>
-                <p-inputnumber readonly="readonly" formControlName="aguaRelativa" inputId="locale-user" [minFractionDigits]="2" />
+                <p-inputnumber formControlName="aguaRelativa" inputId="locale-user" [minFractionDigits]="2" readonly/>
                 <label for="aguaRelativa">Agua Relativa</label>
             </p-floatlabel>
         </p-inputgroup>
@@ -197,6 +145,8 @@
     <br />
 
     <p-button *ngIf="puedeEditar" icon="pi pi-trash" (onClick)="openDelete(modelo?.id_FisicoQuimico)" severity="danger" label="Eliminar" [rounded]="true"></p-button>
+    &nbsp;
+  <button pButton pRipple label="Diagnostico" (click)="diagnostico(modelo.id_FisicoQuimico)"></button>
     <p-dialog [(visible)]="visibleDelete" appendTo="body" [modal]="true" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }" [style]="{ width: '40vw' }">
         <ng-template pTemplate="header">
             <div class="flex align-items-center">
@@ -217,4 +167,25 @@
             <button pButton pRipple icon="pi pi-check" (click)="closeDelete()" label="Save"></button>
         </div>
     </p-dialog>
+
+    <p-dialog [(visible)]="visible3" appendTo="body" [modal]="true"  [style]="{width: '65vw'}" header="Diagnostico del Analísis Fisico Quimico"
+    [draggable]="false" [resizable]="true" [maximizable]="true">
+ 
+    <div *ngIf="loading">
+      <h5>Generando el reporte, esto puede demorar unos minutos</h5>
+    <p-skeleton styleClass="mb-2" />
+    <p-skeleton styleClass="mb-2" />
+    <p-skeleton styleClass="mb-2" />
+  </div>
+        <p class="text-700 line-height-3 m-0 p-5 w-full md:w-8" id="just-line-break" >
+          {{diag}}
+        </p>
+   
+    <ng-template pTemplate="footer">
+        <div class="border-top-1 surface-border pt-3">
+            <button pButton pRipple icon="pi pi-times" (click)="visible3 = false" label="Cancel" class="p-button-text"></button>
+           
+        </div>
+    </ng-template>
+</p-dialog>
 </form>

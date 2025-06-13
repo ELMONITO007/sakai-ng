@@ -211,7 +211,7 @@ export class OrdenEnsayoCrearComponent implements OnInit {
                     if (todos == 'Si') {
                         this.ensayosRealizar = {
                             id_Ensayo: res.id_OrdenEnsayo,
-                            lista: ['agd', 'fisicoquimico', 'corrosividad', 'pasivador', 'contenidoFurano', 'pcb']
+                            lista: ['agd', 'fisicoquimico', 'corrosividad', 'contenidoFurano']
                         };
                     }
                     if (todos == 'FS-AGD-Corrosividad') {

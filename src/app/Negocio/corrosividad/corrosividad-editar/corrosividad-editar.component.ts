@@ -21,6 +21,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { DatePickerModule } from 'primeng/datepicker';
 import { UsuarioServiceService } from '../../../Servicios/Usuario-service.service';
 import { usuarioDTO } from '../../../Entidades/usuario';
+import { InputNumber, InputNumberModule } from 'primeng/inputnumber';
 export const MY_DATE_FORMATS = {
     parse: {
         dateInput: 'DD/MM/YYYY'
@@ -41,7 +42,7 @@ export const MY_DATE_FORMATS = {
         HttpClientModule,
         DatePickerModule,
         InputTextModule,
-        CheckboxModule,
+        CheckboxModule,InputNumberModule,
         FileUploadModule,
         MatIconModule,
         FormsModule,
@@ -75,10 +76,15 @@ export class CorrosividadEditarComponent implements OnInit {
         const month = new Date().getMonth();
         const day = new Date().getDate();
 
-        this.hoy = new Date(currentYear, month, day);
+        this.hoy = new Date(currentYear, month, day).toISOString().split('T')[0];
         this.form = this.formBuilder.group({
-            corrosivoASTM: ['', {}],
-            corrosivoDIN: ['', {}],
+           determinacionCorrosivoCobre: ['', {}],
+            determinacionCorrosivoPlata: ['', {}],
+            potencialmenteCorrosivoCobre: ['', {}],
+            potencialmenteCorrosivoPapel: ['', {}],
+            contendioDBDS: ['', {}],
+            contenidoPasivador: ['', {}],
+            observaciones: ['', {}],
 
             fechaEnsayo: [
                 this.hoy,
@@ -97,9 +103,15 @@ export class CorrosividadEditarComponent implements OnInit {
                 var fecha = anio + '/' + mes + '/' + dia;
 
                 this.form.get('fechaEnsayo')?.setValue(new Date(fecha).toISOString().split('T')[0]);
-                this.form.get('corrosivoASTM')?.setValue(this.modelo.corrosivoASTM);
-                this.form.get('corrosivoDIN')?.setValue(this.modelo.corrosivoDIN);
-
+                this.form.get('determinacionCorrosivoCobre')?.setValue(this.modelo.determinacionCorrosivoCobre);
+                this.form.get('determinacionCorrosivoPlata')?.setValue(this.modelo.determinacionCorrosivoPlata);
+                this.form.get('potencialmenteCorrosivoCobre')?.setValue(this.modelo.potencialmenteCorrosivoCobre);
+                this.form.get('potencialmenteCorrosivoPapel')?.setValue(this.modelo.potencialmenteCorrosivoPapel);
+                this.form.get('contendioDBDS')?.setValue(this.modelo.contendioDBDS);
+                this.form.get('contenidoPasivador')?.setValue(this.modelo.contenidoPasivador);
+                this.form.get('linkArchivo')?.setValue(this.modelo.linkArchivo);
+                this.form.get('observaciones')?.setValue(this.modelo.observaciones);
+               
                 this.form.get('fechaEnsayo')?.setValue(new Date(fecha).toISOString().split('T')[0]);
 
                 this.form.get('linkArchivo')?.setValue(this.modelo.linkArchivo);
@@ -111,8 +123,11 @@ export class CorrosividadEditarComponent implements OnInit {
         this.loading = true;
         this.usuarioService.getUsuarioLogeado().subscribe((x) => {
             this.usuario = x;
-            var astm = this.form.get('corrosivoASTM').value;
-            var din = this.form.get('corrosivoDIN').value;
+
+            var astm = this.form.get('determinacionCorrosivoCobre').value;
+            var din = this.form.get('determinacionCorrosivoPlata').value;
+            var cobre= this.form.get('potencialmenteCorrosivoCobre').value;
+            var papel = this.form.get('potencialmenteCorrosivoPapel').value;
             if (astm == '') {
                 astm = false;
             }
@@ -120,12 +135,24 @@ export class CorrosividadEditarComponent implements OnInit {
             if (din == '') {
                 din = false;
             }
+            if (cobre == '') {
+                cobre = false;
+            }
+            if (papel == '') {
+                papel = false;
+            }
             this.modelo = {
                 id_Corrosividad: id,
+                determinacionCorrosivoCobre: astm,
+                determinacionCorrosivoPlata:din ,
+                potencialmenteCorrosivoCobre: cobre,
+                potencialmenteCorrosivoPapel:papel,
+                contendioDBDS: Number.parseFloat( this.form.get('contendioDBDS').value),
+                contenidoPasivador: Number.parseFloat(this.form.get('contenidoPasivador').value),
+                observaciones: this.form.get('observaciones').value,
 
-                corrosivoASTM: astm,
 
-                corrosivoDIN: din,
+               
 
                 id_OrdenEnsayo: this.id,
 
@@ -141,7 +168,7 @@ export class CorrosividadEditarComponent implements OnInit {
             });
         });
     }
-    hoy: Date;
+    hoy: string;
     public fileTmp: any;
 
     archivoRaw: string;

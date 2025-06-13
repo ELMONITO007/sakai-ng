@@ -1,109 +1,45 @@
 <p-toast></p-toast>
 
-
-  
-<form [formGroup]="form" >
-  
-  <br />  
-    <div class="flex flex-col md:flex-row gap-6">
-        <p-inputgroup>
-            <p-inputgroup-addon>
-                <span class="material-symbols-outlined">
-                    H₂
-                    </span>
-            </p-inputgroup-addon>
-            <p-floatlabel>
-                <p-inputnumber  formControlName="hidrogeno" inputId="locale-user" [minFractionDigits]="1" readonly="readonly" />
-             
-                <label style="font-size: 16px;" for="hidrogeno">Hidrogeno</label>
-            </p-floatlabel>
-        </p-inputgroup>
-        <p-inputgroup>
-            <p-inputgroup-addon>
-                <span class="material-symbols-outlined">
-                    CH₄
-                    </span>
-            </p-inputgroup-addon>
-            <p-floatlabel>
-                <p-inputnumber  formControlName="metano" inputId="locale-user" [minFractionDigits]="1" readonly="readonly" />
-             
-                <label style="font-size: 16px;" for="metano">Metano</label>
-            </p-floatlabel>
-        </p-inputgroup>
-        <p-inputgroup>
-            <p-inputgroup-addon>
-                <span class="material-symbols-outlined">
-                    C₂H₆
-                    </span>
-            </p-inputgroup-addon>
-            <p-floatlabel>
-                <p-inputnumber  formControlName="etano" inputId="locale-user" [minFractionDigits]="1" readonly="readonly" />
-                
-                <label style="font-size: 16px;" for="etano">Etano</label>
-            </p-floatlabel>
-        </p-inputgroup>
-        <p-inputgroup>
-            <p-inputgroup-addon>
-                <span class="material-symbols-outlined">
-                    C₂H₄
-                    </span>
-            </p-inputgroup-addon>
-            <p-floatlabel>
-                <p-inputnumber  formControlName="etileno" inputId="locale-user" [minFractionDigits]="1"  readonly="readonly"/>
-                <label style="font-size: 16px;" for="etileno">Etileno</label>
-            </p-floatlabel>
-        </p-inputgroup>
-    </div>
-    
-    <br />
+<form [formGroup]="form">
     <br />
     <div class="flex flex-col md:flex-row gap-6">
         <p-inputgroup>
             <p-inputgroup-addon>
-                <span class="material-symbols-outlined">
-                    C₂H₂
-                    </span>
+                <span class="material-symbols-outlined"> H₂ </span>
             </p-inputgroup-addon>
             <p-floatlabel>
-                <p-inputnumber  formControlName="acetileno" inputId="locale-user" [minFractionDigits]="1" readonly="readonly"/>
+                <p-inputnumber formControlName="hidrogeno" inputId="locale-user" [minFractionDigits]="1" readonly="readonly" />
 
-                <label style="font-size: 16px;" for="acetileno">Acetileno</label>
+                <label style="font-size: 16px" for="hidrogeno">Hidrogeno</label>
             </p-floatlabel>
         </p-inputgroup>
         <p-inputgroup>
             <p-inputgroup-addon>
-                <span class="material-symbols-outlined">
-                    CO
-                    </span>
+                <span class="material-symbols-outlined"> CH₄ </span>
             </p-inputgroup-addon>
             <p-floatlabel>
-                <p-inputnumber  formControlName="monoxidodeCarbono" inputId="locale-user" [minFractionDigits]="1" readonly="readonly"/>
-                <label style="font-size: 16px;" for="monoxidodeCarbono">Monóxido de Carbono</label>
+                <p-inputnumber formControlName="metano" inputId="locale-user" [minFractionDigits]="1" readonly="readonly" />
+
+                <label style="font-size: 16px" for="metano">Metano</label>
             </p-floatlabel>
         </p-inputgroup>
         <p-inputgroup>
             <p-inputgroup-addon>
-                <span class="material-symbols-outlined">
-                    CO₂
-                    </span>
+                <span class="material-symbols-outlined"> C₂H₆ </span>
             </p-inputgroup-addon>
             <p-floatlabel>
-                <p-inputnumber formControlName="dioxidodeCarbono" inputId="locale-user" [minFractionDigits]="1" readonly="readonly"/>
-                <label style="font-size: 16px;" for="dioxidodeCarbono">Dióxido de Carbono</label>
+                <p-inputnumber formControlName="etano" inputId="locale-user" [minFractionDigits]="1" readonly="readonly" />
+
+                <label style="font-size: 16px" for="etano">Etano</label>
             </p-floatlabel>
         </p-inputgroup>
         <p-inputgroup>
             <p-inputgroup-addon>
-                <span class="material-symbols-outlined">
-                    N₂
-                    </span>
+                <span class="material-symbols-outlined"> C₂H₄ </span>
             </p-inputgroup-addon>
             <p-floatlabel>
-
-
-                <p-inputnumber  formControlName="nitrogeno" inputId="locale-user" [minFractionDigits]="1" readonly="readonly"/>
-
-                <label style="font-size: 16px;" for="nitrogeno">Nitrógeno</label>
+                <p-inputnumber formControlName="etileno" inputId="locale-user" [minFractionDigits]="1" readonly="readonly" />
+                <label style="font-size: 16px" for="etileno">Etileno</label>
             </p-floatlabel>
         </p-inputgroup>
     </div>
@@ -113,39 +49,74 @@
     <div class="flex flex-col md:flex-row gap-6">
         <p-inputgroup>
             <p-inputgroup-addon>
-                <span class="material-symbols-outlined">
-                    O₂
-                    </span>
+                <span class="material-symbols-outlined"> C₂H₂ </span>
             </p-inputgroup-addon>
             <p-floatlabel>
-                <p-inputnumber readonly="readonly"  formControlName="oxigeno" inputId="locale-user" [minFractionDigits]="1" />
-                <label style="font-size: 16px;" for="oxigeno">Oxígeno</label>
+                <p-inputnumber formControlName="acetileno" inputId="locale-user" [minFractionDigits]="1" readonly="readonly" />
+
+                <label style="font-size: 16px" for="acetileno">Acetileno</label>
             </p-floatlabel>
         </p-inputgroup>
         <p-inputgroup>
             <p-inputgroup-addon>
-                <span class="material-symbols-outlined">
-                  ppm
-                    </span>
+                <span class="material-symbols-outlined"> CO </span>
             </p-inputgroup-addon>
             <p-floatlabel>
+                <p-inputnumber formControlName="monoxidodeCarbono" inputId="locale-user" [minFractionDigits]="1" readonly="readonly" />
+                <label style="font-size: 16px" for="monoxidodeCarbono">Monóxido de Carbono</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <span class="material-symbols-outlined"> CO₂ </span>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-inputnumber formControlName="dioxidodeCarbono" inputId="locale-user" [minFractionDigits]="1" readonly="readonly" />
+                <label style="font-size: 16px" for="dioxidodeCarbono">Dióxido de Carbono</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <span class="material-symbols-outlined"> N₂ </span>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-inputnumber formControlName="nitrogeno" inputId="locale-user" [minFractionDigits]="1" readonly="readonly" />
 
+                <label style="font-size: 16px" for="nitrogeno">Nitrógeno</label>
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+
+    <br />
+    <br />
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <span class="material-symbols-outlined"> O₂ </span>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-inputnumber readonly="readonly" formControlName="oxigeno" inputId="locale-user" [minFractionDigits]="1" />
+                <label style="font-size: 16px" for="oxigeno">Oxígeno</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <span class="material-symbols-outlined"> ppm </span>
+            </p-inputgroup-addon>
+            <p-floatlabel>
                 <p-inputnumber readonly="readonly" formControlName="gasesTotales" inputId="locale-user" [minFractionDigits]="1" />
 
-             
-                <label  style="font-size: 16px;" for="gasesTotales">GT</label>
+                <label style="font-size: 16px" for="gasesTotales">GT</label>
             </p-floatlabel>
         </p-inputgroup>
         <p-inputgroup>
             <p-inputgroup-addon>
-                <span class="material-symbols-outlined">
-                    %
-                    </span>
+                <span class="material-symbols-outlined"> % </span>
             </p-inputgroup-addon>
             <p-floatlabel>
                 <p-inputnumber readonly="readonly" formControlName="totaldeGasesCombustibles" inputId="locale-user" [minFractionDigits]="1" />
-                           
-                <label  style="font-size: 16px;" for="totaldeGasesCombustibles">TGC</label>
+
+                <label style="font-size: 16px" for="totaldeGasesCombustibles">TGC</label>
             </p-floatlabel>
         </p-inputgroup>
         <p-inputgroup>
@@ -153,9 +124,8 @@
                 <mat-icon>calendar_today</mat-icon>
             </p-inputgroup-addon>
             <p-floatlabel>
-                <input   pInputText type="date" id="fechaEnsayo" formControlName="fechaEnsayo" pTooltip="Ingrese el fecha de Fabricacion" tooltipPosition="bottom" readonly="readonly" />
+                <input pInputText type="date" id="fechaEnsayo" formControlName="fechaEnsayo" pTooltip="Ingrese el fecha de Fabricacion" tooltipPosition="bottom" readonly="readonly" />
 
-            
                 <label for="fechaEnsayo">Fecha Ensayo</label>
             </p-floatlabel>
         </p-inputgroup>
@@ -173,45 +143,103 @@
                 <label for="observaciones">Observaciones</label>
             </p-floatlabel>
         </p-inputgroup>
-        
     </div>
     <br />
     <br />
 </form>
 
- 
-    <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
-        <div class="text-500 w-full md:w-2 font-medium">Fecha de Subida</div>
-        <div class="text-900 w-full md:w-10">{{ modelo?.fechaSubida }}</div>
-    </li>
-   
-    <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
-        <div class="text-500 w-full md:w-2 font-medium">Link Archivo</div>
-        <div class="text-900 w-full md:w-10"><p-button (onClick)="link(modelo?.linkArchivo)" icon="pi pi-file"></p-button> </div>
-    </li>
-    <br />
+<li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
+    <div class="text-500 w-full md:w-2 font-medium">Fecha de Subida</div>
+    <div class="text-900 w-full md:w-10">{{ modelo?.fechaSubida }}</div>
+</li>
 
-    <p-button *ngIf="puedeEditar" icon="pi pi-trash" (onClick)="openDelete(modelo?.id_Agd)" severity="danger" label="Eliminar" [rounded]="true" ></p-button>
-    <p-dialog [(visible)]="visibleDelete" appendTo="body" [modal]="true" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }" [style]="{ width: '40vw' }">
-        <ng-template pTemplate="header">
-            <div class="flex align-items-center">
-                <span class="flex align-items-center justify-content-center bg-cyan-100 text-cyan-800 mr-3 border-circle" style="width: 32px; height: 32px">
-                    <i class="pi pi-times text-lg"></i>
-                </span>
-                <span class="font-medium text-2xl text-900">Esta Seguro de Eliminar el Agd</span>
-            </div>
-        </ng-template>
-        <p class="line-height-3 p-0 m-0">
-            Esta por eliminar el Agd <br />
-            Esta acción no se puede deshacer. <br />
-        </p>
+<li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
+    <div class="text-500 w-full md:w-2 font-medium">Link Archivo</div>
+    <div class="text-900 w-full md:w-10"><p-button (onClick)="link(modelo?.linkArchivo)" icon="pi pi-file"></p-button></div>
+</li>
+<br />
 
-        <br />
-        <div class="border-top-1 surface-border pt-3">
-            <button pButton pRipple icon="pi pi-times" (click)="eliminar(idDelete)" label="Cancel" class="p-button-text"></button>
-            <button pButton pRipple icon="pi pi-check" (click)="closeDelete()" label="Save"></button>
+<p-button *ngIf="puedeEditar" icon="pi pi-trash" (onClick)="openDelete(modelo?.id_Agd)" severity="danger" label="Eliminar" [rounded]="true"></p-button>
+ &nbsp;
+        <button pButton pRipple label="Diagnostico" (click)="diagnostico(modelo.id_Agd)" [rounded]="true"></button>
+
+        &nbsp;
+        <button pButton pRipple label="Ration Method" (click)="ratioMethod(modelo.id_Agd)" [rounded]="true" severity="success"></button>
+<p-dialog [(visible)]="visibleDelete" appendTo="body" [modal]="true" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }" [style]="{ width: '40vw' }">
+    <ng-template pTemplate="header">
+        <div class="flex align-items-center">
+            <span class="flex align-items-center justify-content-center bg-cyan-100 text-cyan-800 mr-3 border-circle" style="width: 32px; height: 32px">
+                <i class="pi pi-times text-lg"></i>
+            </span>
+            <span class="font-medium text-2xl text-900">Esta Seguro de Eliminar el Agd</span>
         </div>
-    </p-dialog>
+    </ng-template>
+    <p class="line-height-3 p-0 m-0">
+        Esta por eliminar el Agd <br />
+        Esta acción no se puede deshacer. <br />
+    </p>
 
+    <br />
+    <div class="border-top-1 surface-border pt-3">
+        <button pButton pRipple icon="pi pi-times" (click)="eliminar(idDelete)" label="Cancel" class="p-button-text"></button>
+        <button pButton pRipple icon="pi pi-check" (click)="closeDelete()" label="Save"></button>
+       
+        <p-dialog [(visible)]="visible">
+            <ng-template pTemplate="header">
+                <div>
+                    <h2>Esta Seguro de quitar el AGD</h2>
+                    <div class="flex align-items-center gap-2">
+                        <p-button label="Aceptar" (click)="eliminar(modelo.id_Agd)" severity="success"></p-button>
+                        <p-button label="Cancelar" (click)="closeDialog()" severity="danger"></p-button>
+                    </div>
+                </div>
+            </ng-template>
+        </p-dialog>
 
+        <p-dialog [(visible)]="visible3" appendTo="body" [modal]="true" [style]="{ width: '65vw' }" header="Diagnostico del Analísis gases disueltos" [draggable]="false" [resizable]="true" [maximizable]="true">
+            <p class="text-700 line-height-3 m-0 p-5 w-full md:w-8" id="just-line-break">
+                <span *ngFor="let gas of keyGas">
+                    {{ gas }}
+                    <br />
+                </span>
+            </p>
+            <div *ngIf="loading">
+                <h5>Generando el reporte, esto puede demorar unos minutos</h5>
+                <p-skeleton styleClass="mb-2" />
+                <p-skeleton styleClass="mb-2" />
+                <p-skeleton styleClass="mb-2" />
+            </div>
+            <p class="text-700 line-height-3 m-0 p-5 w-full md:w-8" id="just-line-break">
+                {{ diag }}
+            </p>
 
+            <ng-template pTemplate="footer">
+                <div class="border-top-1 surface-border pt-3">
+                    <button pButton pRipple icon="pi pi-times" (click)="visible3 = false" label="Cancel" class="p-button-text"></button>
+                </div>
+            </ng-template>
+        </p-dialog>
+
+        <p-dialog [(visible)]="visible4" appendTo="body" [modal]="true" [style]="{ width: '65vw' }" header="Diagnostico utilizando Ration Method" [draggable]="false" [resizable]="true" [maximizable]="true">
+            <div *ngIf="loading2">
+                <h5>Generando el reporte, esto puede demorar unos minutos</h5>
+                <p-skeleton styleClass="mb-2" />
+                <p-skeleton styleClass="mb-2" />
+                <p-skeleton styleClass="mb-2" />
+            </div>
+            <h5>{{ resultadoRM }}</h5>
+            <p class="text-700 line-height-3 m-0 p-5 w-full md:w-8" id="just-line-break">
+                <span *ngFor="let gas of rm">
+                    {{ gas }}
+                    <br />
+                </span>
+            </p>
+
+            <ng-template pTemplate="footer">
+                <div class="border-top-1 surface-border pt-3">
+                    <button pButton pRipple icon="pi pi-times" (click)="visible3 = false" label="Cancel" class="p-button-text"></button>
+                </div>
+            </ng-template>
+        </p-dialog>
+    </div>
+</p-dialog>

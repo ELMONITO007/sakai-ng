@@ -69,15 +69,42 @@ export class AppMenu {
                             items: [
                                 {
                                     label: 'AGD',
-                                    icon: 'pi pi-fw pi-caret-down',
+                                    icon: 'pi pi-fw ',
                                     items: [
                                         {
                                             label: 'General',
-                                            icon: 'pi pi-fw pi-sign-in',
-                                            routerLink: ['/login']
+                                         
+                                            routerLink: ['/reporte/agd']
+                                        },
+                                        {
+                                            label: 'Cocientes',
+                                         
+                                            routerLink: ['/reporte/cocientes']
+                                        },
+                                        {
+                                            label: 'Elevado',
+                                          
+                                            routerLink: ['/reporte/agdElevado']
+                                        },
+                                        {
+                                            label: 'Presiones',
+                                          
+                                            routerLink: ['/reporte/agdPresiones']
                                         }
+
                                     ]
-                                }
+                                },
+                                {
+                                    label: 'Duval',
+                                    icon: 'pi pi-fw ',
+                                    routerLink: ['/reporte/duval']
+                                },
+                                {label: 'Fisico Quimico',
+                                    icon: 'pi pi-fw ',
+                                    routerLink: ['/reporte/fisicoQuimico']
+                                }  
+
+                                
                             ]
                         }
                     ]

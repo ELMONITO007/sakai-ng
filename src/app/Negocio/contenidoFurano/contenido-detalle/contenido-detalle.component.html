@@ -73,6 +73,8 @@
 <br />
 
 <p-button  *ngIf="puedeEditar" icon="pi pi-trash" (onClick)="openDelete(modelo?.id_ContenidoFurano)" severity="danger" label="Eliminar" [rounded]="true" ></p-button>
+ &nbsp;
+    <button pButton pRipple label="Diagnostico" (click)="diagnostico(modelo.id_ContenidoFurano)" [rounded]="true"></button>
 <p-dialog [(visible)]="visibleDelete" appendTo="body" [modal]="true" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }" [style]="{ width: '40vw' }">
     <ng-template pTemplate="header">
         <div class="flex align-items-center">
@@ -92,4 +94,24 @@
         <button pButton pRipple icon="pi pi-times" (click)="eliminar(idDelete)" label="Cancel" class="p-button-text"></button>
         <button pButton pRipple icon="pi pi-check" (click)="closeDelete()" label="Save"></button>
     </div>
+</p-dialog>
+ <p-dialog [(visible)]="visible3" appendTo="body" [modal]="true"  [style]="{width: '65vw'}" header="Diagnostico del Analísis gases disueltos"
+    [draggable]="false" [resizable]="true" [maximizable]="true">
+ 
+       <div *ngIf="loading">
+      <h5>Generando el reporte, esto puede demorar unos minutos</h5>
+    <p-skeleton styleClass="mb-2" />
+    <p-skeleton styleClass="mb-2" />
+    <p-skeleton styleClass="mb-2" />
+  </div>
+        <p class="text-700 line-height-3 m-0 p-5 w-full md:w-8" id="just-line-break" >
+          {{diag}}
+        </p>
+   
+    <ng-template pTemplate="footer">
+        <div class="border-top-1 surface-border pt-3">
+            <button pButton pRipple icon="pi pi-times" (click)="visible3 = false" label="Cancel" class="p-button-text"></button>
+           
+        </div>
+    </ng-template>
 </p-dialog>

@@ -35,6 +35,8 @@ import { OrdenEnsayoRecepcionComponent } from '../orden-ensayo-recepcion/orden-e
 import { UsuarioServiceService } from '../../../Servicios/Usuario-service.service';
 import { usuarioDTO } from '../../../Entidades/usuario';
 import { VerificarOEService } from '../../../Servicios/verificar-oe.service';
+import { SkeletonModule } from 'primeng/skeleton';
+import { OrdenEnsayoQRComponent } from '../orden-ensayo-qr/orden-ensayo-qr.component';
 
 export interface Analisis {
     nombre: string;
@@ -55,7 +57,7 @@ export interface Analisis {
         TabsModule,
         CardModule,
         HttpClientModule,
-        DialogModule,
+        DialogModule,SkeletonModule,OrdenEnsayoQRComponent,
         AgdComponent,
         ContenidoFuranoComponent,
         CorrosividadComponent,
@@ -81,6 +83,7 @@ export class OrdenEnsayoDetalleComponent implements OnInit {
     items: MenuItem[] = [];
     ref: DynamicDialogRef | undefined;
     usuario: usuarioDTO;
+    skeleton: boolean = true;
     visibleDelete: boolean = false;
     loading: boolean = false;
     analisis: Analisis[] = [];
@@ -118,12 +121,37 @@ export class OrdenEnsayoDetalleComponent implements OnInit {
                     { label: 'OrdenEnsayo', icon: 'pi pi-fw pi-user', route: '/ordenEnsayo', primary: false },
                     { label: 'Detalle OE N° ' + data.numeroOrden, icon: 'pi pi-fw pi-user', route: '/ordenEnsayo' + id, primary: true }
                 ];
+              
             });
             this.service.Ensayos(id).subscribe((ensayo) => {
                 for (let i = 0; i < ensayo.length; i++) {
+                    if (ensayo[i] != 'Pasivador') {
+                        
+                    
                     this.analisis.push({ nombre: ensayo[i], modulo: '<app-' + ensayo[i] + ' [id]="modelo.id_OrdenEnsayo"></app-' + ensayo[i] + '>', orden: i });
+               }
                 }
+                  this.skeleton = false;
             });
+            
+        });
+
+    }
+    qr(id: number) {
+        this.ref = this.dialogService.open(OrdenEnsayoQRComponent, {
+            width: '30%',
+            height: '70%',
+            data: {
+                id: id
+            },
+            maximizable: true,
+           
+        });
+        this.ref.onClose.subscribe((d) => {
+            if (d !== null) {
+                this.messageService.add({ severity: 'success', summary: 'Orden Ensayo QR', detail: 'El QR se ha generado correctamente', life: 3000 });
+                this.ngOnInit();
+            }
         });
     }
     editar(id: number) {

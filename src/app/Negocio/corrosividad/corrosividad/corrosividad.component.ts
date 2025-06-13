@@ -24,6 +24,7 @@ export class CorrosividadComponent implements OnInit {
     constructor(private service: CorrosividadServiceService) {}
     ngOnInit(): void {
         this.service.obtenerTodos(this.id).subscribe((data) => {
+            console.log(this.puedeEditar);
             if (data.fechaSubida == null && this.puedeEditar) {
                 this.vacio = true;
                 this.detalle = false;

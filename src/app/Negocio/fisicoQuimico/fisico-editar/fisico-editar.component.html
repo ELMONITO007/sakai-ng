@@ -3,62 +3,22 @@
     <div class="flex flex-col md:flex-row gap-6">
         <p-inputgroup>
             <p-inputgroup-addon>
-                <span class="material-symbols-outlined"> ppm </span>
+                <span class="material-symbols-outlined">kV </span>
             </p-inputgroup-addon>
             <p-floatlabel>
-                <p-inputnumber (ngModelChange)="completarAgua()" formControlName="contenidoAgua" inputId="locale-user" [minFractionDigits]="2" />
+                <p-inputnumber formControlName="rigidezDialectrica" inputId="locale-user" [minFractionDigits]="2"  pTooltip="Rigidez dieléctrica (IEC 60156)" tooltipPosition="bottom"/>
 
-                <label for="contenidoAgua">Contenido Agua</label>
+                <label for="rigidezDialectrica">Rigidez Dielectrica</label>
             </p-floatlabel>
         </p-inputgroup>
         <p-inputgroup>
             <p-inputgroup-addon>
-                <mat-icon>info</mat-icon>
+                <span class="material-symbols-outlined">90°</span>
             </p-inputgroup-addon>
             <p-floatlabel>
-                <input pInputText id="observacionesContenidoAgua" formControlName="observacionesContenidoAgua" pTooltip="Ingrese el ObservacionesContenidoAgua" tooltipPosition="bottom" />
-                <label for="observacionesContenidoAgua">Observaciones</label>
-            </p-floatlabel>
-        </p-inputgroup>
-        <p-inputgroup>
-            <p-inputgroup-addon>
-                <span class="material-symbols-outlined">KOH/g </span>
-            </p-inputgroup-addon>
-            <p-floatlabel>
-                <p-inputnumber formControlName="indiceAcidez" inputId="locale-user" [minFractionDigits]="2" />
-                <label for="indiceAcidez">Indice Acidez</label>
-            </p-floatlabel>
-        </p-inputgroup>
-        <p-inputgroup>
-            <p-inputgroup-addon>
-                <mat-icon>info</mat-icon>
-            </p-inputgroup-addon>
-            <p-floatlabel>
-                <input pInputText id="observacionesIndiceAcidez" formControlName="observacionesIndiceAcidez" pTooltip="Ingrese el ObservacionesIndiceAcidez" tooltipPosition="bottom" />
-                <label for="observacionesIndiceAcidez">Observaciones</label>
-            </p-floatlabel>
-        </p-inputgroup>
-    </div>
-    <br />
-    <br />
-    <div class="flex flex-col md:flex-row gap-6">
-        <p-inputgroup>
-            <p-inputgroup-addon>
-                <span class="material-symbols-outlined"> %peso </span>
-            </p-inputgroup-addon>
-            <p-floatlabel>
-                <p-inputnumber formControlName="inhibidor" inputId="locale-user" [minFractionDigits]="2" />
+                <p-inputnumber formControlName="tangenteDelta" inputId="locale-user" [minFractionDigits]="5"  pTooltip="Tangente delta a 90° C (IEC 60247)" tooltipPosition="bottom"/>
 
-                <label for="inhibidor">Inhibidor</label>
-            </p-floatlabel>
-        </p-inputgroup>
-        <p-inputgroup>
-            <p-inputgroup-addon>
-                <mat-icon>info</mat-icon>
-            </p-inputgroup-addon>
-            <p-floatlabel>
-                <input pInputText id="observacionesInhibidor" formControlName="observacionesInhibidor" pTooltip="Ingrese el ObservacionesInhibidor" tooltipPosition="bottom" />
-                <label for="observacionesInhibidor">Observaciones</label>
+                <label for="tangenteDelta">Tangente</label>
             </p-floatlabel>
         </p-inputgroup>
 
@@ -67,18 +27,20 @@
                 <span class="material-symbols-outlined"> din/cm </span>
             </p-inputgroup-addon>
             <p-floatlabel>
-                <p-inputnumber formControlName="tensionInterfasial" inputId="locale-user" [minFractionDigits]="2" />
+                <p-inputnumber formControlName="tensionInterfasial" inputId="locale-user" [minFractionDigits]="2" pTooltip="Tensión interfasial (ASTM D 971)" tooltipPosition="bottom" />
 
-                <label for="tensionInterfasial">Tensión Interfasial</label>
+                <label for="tensionInterfasial">Tensión interfasial</label>
             </p-floatlabel>
         </p-inputgroup>
+
         <p-inputgroup>
             <p-inputgroup-addon>
-                <mat-icon>info</mat-icon>
+                <span class="material-symbols-outlined"> ppm </span>
             </p-inputgroup-addon>
             <p-floatlabel>
-                <input pInputText id="observacionesTensionInterfasial" formControlName="observacionesTensionInterfasial" pTooltip="Ingrese el ObservacionesTensionInterfasial" tooltipPosition="bottom" />
-                <label for="observacionesTensionInterfasial">Observaciones</label>
+                <p-inputnumber (ngModelChange)="completarAgua()" formControlName="humedadAceite" inputId="locale-user" [minFractionDigits]="2" pTooltip="Humedad en aceite (ASTM D 1533)" tooltipPosition="bottom"  />
+
+                <label for="humedadAceite">Humedad</label>
             </p-floatlabel>
         </p-inputgroup>
     </div>
@@ -87,69 +49,53 @@
     <div class="flex flex-col md:flex-row gap-6">
         <p-inputgroup>
             <p-inputgroup-addon>
-                <span class="material-symbols-outlined">kV </span>
+                <span class="material-symbols-outlined">KOH/g </span>
             </p-inputgroup-addon>
             <p-floatlabel>
-                <p-inputnumber formControlName="rigidezDielectrica" inputId="locale-user" [minFractionDigits]="2" />
-
-                <label for="rigidezDielectrica">Rigidez Dielectrica</label>
-            </p-floatlabel>
-        </p-inputgroup>
-        <p-inputgroup>
-            <p-inputgroup-addon>
-                <mat-icon>info</mat-icon>
-            </p-inputgroup-addon>
-            <p-floatlabel>
-                <input pInputText id="observacionesRigidezDielectrica" formControlName="observacionesRigidezDielectrica" pTooltip="Ingrese el ObservacionesRigidezDielectrica" tooltipPosition="bottom" />
-                <label for="observacionesRigidezDielectrica">Observaciones</label>
+                <p-inputnumber formControlName="indiceNeutralizacion" inputId="locale-user" [minFractionDigits]="2" pTooltip="Índice de neutralización (ASTM D 974)" tooltipPosition="bottom" />
+                <label for="indiceNeutralizacion">Índice neutralización</label>
             </p-floatlabel>
         </p-inputgroup>
 
         <p-inputgroup>
             <p-inputgroup-addon>
-                <span class="material-symbols-outlined">90°</span>
+                <span class="material-symbols-outlined"> %peso </span>
             </p-inputgroup-addon>
             <p-floatlabel>
-                <p-inputnumber formControlName="tangente" inputId="locale-user" [minFractionDigits]="5" />
+                <p-inputnumber formControlName="contenidoInhibador" inputId="locale-user" [minFractionDigits]="2" pTooltip="Contenido de inhibidor (IEC 60666)" tooltipPosition="bottom"/>
 
-                <label for="tangente">Tangente</label>
+                <label for="inhibidor">Inhibidor</label>
             </p-floatlabel>
         </p-inputgroup>
         <p-inputgroup>
             <p-inputgroup-addon>
-                <mat-icon>info</mat-icon>
+                <span class="material-symbols-outlined">ISO4406</span>
             </p-inputgroup-addon>
             <p-floatlabel>
-                <input pInputText id="observacionesTangente" formControlName="observacionesTangente" pTooltip="Ingrese el ObservacionesTangente" tooltipPosition="bottom" />
-                <label for="observacionesTangente">Observaciones</label>
+                <p-inputnumber formControlName="contenidoParticulas" inputId="locale-user" [minFractionDigits]="2" pTooltip="Contenido de partículas (IEC 60970)" tooltipPosition="bottom"/>
+
+                <label for="contenidoParticulas">Contenido de partículas</label>
             </p-floatlabel>
         </p-inputgroup>
     </div>
     <br />
     <br />
+
     <div class="flex flex-col md:flex-row gap-6">
         <p-inputgroup>
             <p-inputgroup-addon>
-                <span class="material-symbols-outlined">ASTM</span>
+                <span class="material-symbols-outlined">ppm</span>
             </p-inputgroup-addon>
             <p-floatlabel>
-                <p-inputnumber formControlName="color" inputId="locale-user" [minFractionDigits]="2" />
+                <p-inputnumber formControlName="contenidoBifenilos" inputId="locale-user" [minFractionDigits]="2"  pTooltip="Contenido de bifelino policlorados(PCB) (ASTM D4059)" tooltipPosition="bottom"/>
 
-                <label for="color">Color</label>
+                <label for="contenidoBifenilos">Contenido PCB </label>
             </p-floatlabel>
         </p-inputgroup>
+
         <p-inputgroup>
             <p-inputgroup-addon>
-                <mat-icon>info</mat-icon>
-            </p-inputgroup-addon>
-            <p-floatlabel>
-                <input pInputText id="observacionesColor" formControlName="observacionesColor" pTooltip="Ingrese el ObservacionesColor" tooltipPosition="bottom" />
-                <label for="observacionesColor">Observaciones</label>
-            </p-floatlabel>
-        </p-inputgroup>
-        <p-inputgroup>
-            <p-inputgroup-addon>
-            <mat-icon>water_drop</mat-icon>
+                <mat-icon>water_drop</mat-icon>
             </p-inputgroup-addon>
             <p-floatlabel>
                 <p-inputnumber formControlName="aguaCorregida" inputId="locale-user" [minFractionDigits]="2" />
@@ -158,47 +104,43 @@
         </p-inputgroup>
         <p-inputgroup>
             <p-inputgroup-addon>
-                   <mat-icon>invert_colors</mat-icon>
+                <mat-icon>invert_colors</mat-icon>
             </p-inputgroup-addon>
             <p-floatlabel>
-        
-                  <p-inputnumber formControlName="aguaRelativa" inputId="locale-user" [minFractionDigits]="2" />
+                <p-inputnumber formControlName="aguaRelativa" inputId="locale-user" [minFractionDigits]="2" />
                 <label for="aguaRelativa">Agua Relativa</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>calendar_today</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText type="date" id="fechaEnsayo" formControlName="fechaEnsayo" pTooltip="Ingrese el fecha " tooltipPosition="bottom" [max]="hoy" />
+
+                <label for="fechaEnsayo">Fecha Ensayo</label>
             </p-floatlabel>
         </p-inputgroup>
     </div>
     <br />
     <br />
     <div class="flex flex-col md:flex-row gap-6">
+        
+
         <p-inputgroup>
             <p-inputgroup-addon>
-                <mat-icon>calendar_today</mat-icon>
-            </p-inputgroup-addon>
-            <p-floatlabel>
-                <input   pInputText type="date" id="fechaEnsayo" formControlName="fechaEnsayo" pTooltip="Ingrese el fecha " tooltipPosition="bottom" [max]="hoy" />
-
-         
-                <label for="fechaEnsayo">Fecha Ensayo</label>
-            </p-floatlabel>
-        </p-inputgroup>
-
-         <p-inputgroup>
-            <p-inputgroup-addon>
-                <mat-icon>science</mat-icon>
+                <mat-icon>info</mat-icon>
             </p-inputgroup-addon>
             <p-floatlabel>
                 <input pInputText id="observaciones" formControlName="observaciones" pTooltip="Ingrese el Observaciones" tooltipPosition="bottom" />
                 <label for="observaciones">Observaciones</label>
             </p-floatlabel>
         </p-inputgroup>
-
     </div>
-<br>
-    
-      <div class="flex flex-col md:flex-row gap-6">
-       
+    <br />
+
+    <div class="flex flex-col md:flex-row gap-6">
         <p-inputgroup>
-         
             <p-floatlabel>
                 <p-fileUpload
                     name="demo[]"
@@ -216,7 +158,6 @@
                         </ul>
                     </ng-template>
                 </p-fileUpload>
-              
             </p-floatlabel>
         </p-inputgroup>
     </div>

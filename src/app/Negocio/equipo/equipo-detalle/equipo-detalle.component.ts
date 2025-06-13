@@ -18,11 +18,12 @@ import { equipoDTO, equipoCreacionDTO } from '../../../Entidades/equipo';
 import { EquipoCrearComponent } from '../equipo-crear/equipo-crear.component';
 import { EquipoEditarComponent } from '../equipo-editar/equipo-editar.component';
 import { EquipoServiceService } from '../../../Servicios/Equipo-service.service';
+import { PercentilComponent } from '../../../Transaccionales/percentil/percentil.component';
 
 @Component({
     selector: 'app-equipo-detalle',
-    imports: [ButtonModule, InputTextModule, ToastModule, MessageModule, TabsModule, CardModule, HttpClientModule, BreadcrumbRouterComponent, DialogModule],
-    providers: [MessageService, DialogService, EquipoServiceService],
+    imports: [ButtonModule, InputTextModule, ToastModule, MessageModule, TabsModule, CardModule, HttpClientModule, BreadcrumbRouterComponent, DialogModule, PercentilComponent],
+    providers: [MessageService, DialogService, EquipoServiceService,PercentilComponent],
     standalone: true,
     templateUrl: './equipo-detalle.component.html',
     styleUrl: './equipo-detalle.component.scss'

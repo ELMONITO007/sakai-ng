@@ -1,0 +1,110 @@
+<form [formGroup]="formGroup">
+    <div class="flex flex-col">
+      
+            <p-toolbar [style]="{ 'border-radius': '1rem', padding: '1.5rem 1rem 1rem 1.5rem' }">
+                <ng-template #start>
+                    <p-dropdown (onChange)="AgregarGrafico()" [style]="{ width: '100%' }" [options]="categories" id="ver" [required] optionLabel="name" optionValue="name" formControlName="agregar" placeholder="Comparar"></p-dropdown>
+                    <p-button icon="pi pi-print" (onClick)="print()" class="mr-2" severity="secondary" text />
+                    <p-button icon="pi pi-filter-slash" severity="secondary" text (onClick)="ngOnInit()" />
+                </ng-template>
+
+                <ng-template #center>
+                    <p-floatlabel>
+                        <label style="margin-left: 1rem" htmlFor="Empresa">Ver</label>
+                        <div class="p-float-label">
+                            <p-dropdown (onChange)="onChange()" [style]="{ width: '100%' }" class="formTriple" [options]="categories" id="ver" [required] optionLabel="name" optionValue="name" formControlName="verTodo" placeholder="Ver"></p-dropdown>
+                        </div>
+                    </p-floatlabel>
+                    &nbsp;&nbsp;&nbsp;
+                    <p-floatlabel>
+                        <label style="margin-left: 1rem" htmlFor="Empresa">Sector</label>
+                        <div class="p-float-label">
+                            <p-dropdown [style]="{ width: '100%' }" class="formTriple" [options]="Sector" id="Empresa" [required] optionLabel="tipo" optionValue="tipo" placeholder="Sector"></p-dropdown>
+                        </div>
+                    </p-floatlabel>
+                    &nbsp;&nbsp;&nbsp;
+                    <p-floatlabel>
+                        <label style="margin-left: 1rem" htmlFor="Empresa">Tipo de Equipo</label>
+                        <div class="p-float-label">
+                            <p-dropdown [style]="{ width: '100%' }" class="formTriple" [options]="tipoEquipo" id="Empresa" [required] optionLabel="tipo" optionValue="tipo" placeholder="Tipo de Equipo"></p-dropdown>
+                        </div>
+                    </p-floatlabel>
+
+                    &nbsp;&nbsp;&nbsp;
+                    <p-floatlabel>
+                        <p-calendar selectionMode="range" [style]="{ width: '100%' }" [readonlyInput]="true" class="formTriple" />
+                        <label style="margin-left: 1rem" htmlFor="Empresa">Por rango de Fecha*</label>
+                    </p-floatlabel>
+                </ng-template>
+
+                <ng-template #end></ng-template>
+            </p-toolbar>
+       
+    </div>
+<br>
+    <p-accordion  class="w-full"
+        expandIcon="pi pi-plus"
+        collapseIcon="pi pi-minus">
+          <p-accordionTab>
+          <ng-template pTemplate="header">
+            <span class="flex align-items-center gap-2 w-full">
+              <span class="font-bold white-space-nowrap">
+               Ver Datos
+              </span>
+          
+            </span>
+          </ng-template>
+        <p-table
+            #normasTable
+            [value]="tabla"
+            styleClass="p-datatable-sm"
+            p-datatable-striped
+            p-datatable-gridlines
+            #dt1
+            [rowHover]="true"
+            [rows]="10"
+            [showCurrentPageReport]="true"
+            [rowsPerPageOptions]="[5, 10, 25, 50]"
+            currentPageReportTemplate="Mostrando {first} de {last} de un total de {totalRecords} registros"
+            [paginator]="true"
+        >
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Fecha</th>
+                    <th>Equipo</th>
+                    <th>Volumen</th>
+                    <th>Valor</th>
+                    
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-orden>
+                <tr class="cursor-pointer hover:!bg-neutral-200/20" (click)="ir(orden.id_Bitacora)">
+                    <td>{{ orden.fecha }}</td>
+                    <td>{{ orden.equipo }}</td>
+                    <td>{{ orden.volumen }}</td>
+                    <td>{{ orden.valor }}</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                    <td [colSpan]="5">No se encontraron normas registradas</td>
+                </tr>
+            </ng-template>
+        </p-table>
+          </p-accordionTab>
+    </p-accordion>
+    <br>
+    <div>
+        <p-card>
+            <p-chart *ngIf="CO2Seleccionado" type="bar" [data]="basicDataCO2" [options]="basicOptionsCO2" />
+            <p-divider></p-divider>
+            <p-chart *ngIf="COSeleccionado" type="bar" [data]="basicDataCO" [options]="basicOptionsCO" />
+            <p-chart *ngIf="H2Seleccionado" type="bar" [data]="basicDataH2" [options]="basicOptionsH2" />
+            <p-chart *ngIf="CH4Seleccionado" type="bar" [data]="basicDataCH4" [options]="basicOptionsCH4" />
+            <p-chart *ngIf="C2H6Seleccionado" type="bar" [data]="basicDataC2H6" [options]="basicOptionsC2H6" />
+            <p-chart *ngIf="C2H4Seleccionado" type="bar" [data]="basicDataC2H4" [options]="basicOptionsC2H4" />
+            <p-chart *ngIf="C2H2Seleccionado" type="bar" [data]="basicDataC2H2" [options]="basicOptionsC2H2" />
+            <p-chart *ngIf="TGCSeleccionado" type="bar" [data]="basicDataTGC" [options]="basicOptionsTGC" />
+        </p-card>
+    </div>
+</form>

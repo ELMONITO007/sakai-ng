@@ -2,35 +2,87 @@
     <br />
 
     <div class="flex flex-col md:flex-row gap-6">
-        <p-inputgroup>
-            <div class="flex flex-wrap gap-4">
-                <div class="flex items-center">
-                    <p-checkBox name="DIN" value="DIN" formControlName="corrosivoDIN" inputId="ingredient1" binary="true" />
-                    <label for="ingredient1" class="ml-2">DIN</label>
-                </div>
+        <div class="flex flex-col md:flex-row gap-6">
+            <p-inputgroup>
+                <div class="flex flex-wrap gap-4">
+                    <div class="flex items-center">
+                        <p-checkBox name="DIN" value="DIN" formControlName="determinacionCorrosivoCobre" inputId="ingredient1" binary="true"  />
+                        <label for="ingredient1" class="ml-2">Determinación de Azufre Corrosivo al Cobre (ASTN D1275)</label>
+                    </div>
 
-                <div class="flex items-center">
-                    <p-checkBox name="ASTM" value="ASTM" formControlName="corrosivoASTM" inputId="ingredient2" binary="true" />
-                    <label for="ingredient2" class="ml-2">ASTM</label>
+                    <div class="flex items-center">
+                        <p-checkBox name="ASTM" value="ASTM" formControlName="determinacionCorrosivoPlata" inputId="ingredient2" binary="true"  />
+                        <label for="ingredient2" class="ml-2">Determinación de Azufre Corrosivo a la Plata</label>
+                    </div>
                 </div>
-            </div>
+            </p-inputgroup>
+        </div>
+        <br />
+        <br />
+        <div class="flex flex-col md:flex-row gap-6">
+            <p-inputgroup>
+                <div class="flex flex-wrap gap-4">
+                    <div class="flex items-center">
+                        <p-checkBox name="DIN" value="DIN" formControlName="potencialmenteCorrosivoCobre" inputId="ingredient1" binary="true"  />
+                        <label for="ingredient1" class="ml-2">Azufre Potencialmente Corrosivo (Cobre) (IEC 62535)</label>
+                    </div>
+
+                    <div class="flex items-center">
+                        <p-checkBox name="ASTM" value="ASTM" formControlName="potencialmenteCorrosivoPapel" inputId="ingredient2" binary="true"  />
+                        <label for="ingredient2" class="ml-2">Azufre Potencialmente Corrosivo (Papel) (IEC 62535)</label>
+                    </div>
+                </div>
+            </p-inputgroup>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <span class="material-symbols-outlined"> ppm </span>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-inputnumber  formControlName="contendioDBDS" inputId="locale-user" [minFractionDigits]="2" />
+                <label for="aguaCorregida">Contenido de DBDS (IEC 62697-1)</label>
+            </p-floatlabel>
+        </p-inputgroup>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                <span class="material-symbols-outlined"> ppm </span>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-inputnumber  formControlName="contenidoPasivador" inputId="locale-user" [minFractionDigits]="2" />
+                <label for="aguaCorregida">Contenido de Pasivador (IRGAMET 39) (IEC 60666)</label>
+            </p-floatlabel>
         </p-inputgroup>
         <p-inputgroup>
             <p-inputgroup-addon>
                 <mat-icon>calendar_today</mat-icon>
             </p-inputgroup-addon>
             <p-floatlabel>
-
-            
-                <input  pInputText type="date" id="fechaEnsayo" formControlName="fechaEnsayo" pTooltip="Ingrese el fecha " tooltipPosition="bottom"  />
+                <input pInputText type="date" id="fechaEnsayo" formControlName="fechaEnsayo" pTooltip="Ingrese el fecha " tooltipPosition="bottom" />
 
                 <label for="fechaEnsayo">Fecha Ensayo</label>
             </p-floatlabel>
         </p-inputgroup>
     </div>
-    <br />
-    <br />
 
+    <br />
+    <br />
+<div class="flex flex-col md:flex-row gap-6">
+     <p-inputgroup>
+            <p-inputgroup-addon>
+                <mat-icon>info</mat-icon>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <input pInputText id="observaciones" formControlName="observaciones" pTooltip="Ingrese observaciones" tooltipPosition="bottom" />
+                <label for="observaciones">Observaciones</label>
+            </p-floatlabel>
+        </p-inputgroup>
+      </div>
+    <br />
+    <br />
     <div class="flex flex-col md:flex-row gap-6">
         <p-inputgroup>
             <p-floatlabel>

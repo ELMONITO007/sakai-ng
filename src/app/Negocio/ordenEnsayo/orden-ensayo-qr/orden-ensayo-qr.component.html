@@ -1,0 +1,16 @@
+
+
+
+<div class="qr-container">
+  <qrcode #qrCode 
+          [qrdata]="qrCodeValue" 
+          [width]="256" 
+          [errorCorrectionLevel]="'M'"></qrcode>
+          <p class="qr-text">OE-{{id}}</p>
+          
+
+  <p-button label="Descargar QR" icon="pi pi-print" (click)="print()"></p-button>
+</div>
+
+
+

@@ -5,22 +5,59 @@
         <p-inputgroup>
             <div class="flex flex-wrap gap-4">
                 <div class="flex items-center">
-                    <p-checkBox name="DIN" value="DIN" formControlName="corrosivoDIN" inputId="ingredient1" binary="true" readonly/>
-                    <label for="ingredient1" class="ml-2">DIN</label>
+                    <p-checkBox name="DIN" value="DIN" formControlName="determinacionCorrosivoCobre" inputId="ingredient1" binary="true" readonly />
+                    <label for="ingredient1" class="ml-2">Determinación de Azufre Corrosivo al Cobre (ASTN D1275)</label>
                 </div>
 
                 <div class="flex items-center">
-                    <p-checkBox name="ASTM" value="ASTM" formControlName="corrosivoASTM" inputId="ingredient2" binary="true" readonly/>
-                    <label for="ingredient2" class="ml-2">ASTM</label>
+                    <p-checkBox name="ASTM" value="ASTM" formControlName="determinacionCorrosivoPlata" inputId="ingredient2" binary="true" readonly />
+                    <label for="ingredient2" class="ml-2">Determinación de Azufre Corrosivo a la Plata</label>
                 </div>
             </div>
         </p-inputgroup>
-      
     </div>
     <br />
     <br />
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            <div class="flex flex-wrap gap-4">
+                <div class="flex items-center">
+                    <p-checkBox name="DIN" value="DIN" formControlName="potencialmenteCorrosivoCobre" inputId="ingredient1" binary="true" readonly />
+                    <label for="ingredient1" class="ml-2">Azufre Potencialmente Corrosivo (Cobre) (IEC 62535)</label>
+                </div>
 
-      <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
+                <div class="flex items-center">
+                    <p-checkBox name="ASTM" value="ASTM" formControlName="potencialmenteCorrosivoPapel" inputId="ingredient2" binary="true" readonly />
+                    <label for="ingredient2" class="ml-2">Azufre Potencialmente Corrosivo (Papel) (IEC 62535)</label>
+                </div>
+            </div>
+        </p-inputgroup>
+    </div>
+    <br />
+    <br />
+    <div class="flex flex-col md:flex-row gap-6">
+        <p-inputgroup>
+            <p-inputgroup-addon>
+             <span class="material-symbols-outlined"> ppm </span>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-inputnumber readonly="readonly" formControlName="contendioDBDS" inputId="locale-user" [minFractionDigits]="2" />
+                <label for="aguaCorregida">Contenido de DBDS (IEC 62697-1)</label>
+            </p-floatlabel>
+        </p-inputgroup>
+          <p-inputgroup>
+            <p-inputgroup-addon>
+             <span class="material-symbols-outlined"> ppm </span>
+            </p-inputgroup-addon>
+            <p-floatlabel>
+                <p-inputnumber readonly="readonly" formControlName="contenidoPasivador" inputId="locale-user" [minFractionDigits]="2" />
+                <label for="aguaCorregida">"Contenido de Pasivador (IRGAMET 39) (IEC 60666)"</label>
+            </p-floatlabel>
+        </p-inputgroup>
+    </div>
+    <br />
+    <br />
+    <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
         <div class="text-500 w-full md:w-2 font-medium">Fecha de Ensayo</div>
         <div class="text-900 w-full md:w-10">{{ modelo?.fechaEnsayo }}</div>
     </li>
@@ -28,16 +65,20 @@
         <div class="text-500 w-full md:w-2 font-medium">Fecha de Subida</div>
         <div class="text-900 w-full md:w-10">{{ modelo?.fechaSubida }}</div>
     </li>
-   
+ <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
+        <div class="text-500 w-full md:w-2 font-medium">Observaciones</div>
+        <div class="text-900 w-full md:w-10">{{ modelo?.observaciones }}</div>
+    </li>
     <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
         <div class="text-500 w-full md:w-2 font-medium">Link Archivo</div>
-        <div class="text-900 w-full md:w-10"><p-button (onClick)="link(modelo?.linkArchivo)" icon="pi pi-file"></p-button> </div>
+        <div class="text-900 w-full md:w-10"><p-button (onClick)="link(modelo?.linkArchivo)" icon="pi pi-file"></p-button></div>
     </li>
-    <br />
-   
+
     <br />
 
-     <p-button *ngIf="puedeEditar" icon="pi pi-trash" (onClick)="openDelete(modelo?.id_Corrosividad)" severity="danger" label="Eliminar" [rounded]="true" ></p-button>
+    <br />
+
+    <p-button *ngIf="puedeEditar" icon="pi pi-trash" (onClick)="openDelete(modelo?.id_Corrosividad)" severity="danger" label="Eliminar" [rounded]="true"></p-button>
     <p-dialog [(visible)]="visibleDelete" appendTo="body" [modal]="true" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }" [style]="{ width: '40vw' }">
         <ng-template pTemplate="header">
             <div class="flex align-items-center">

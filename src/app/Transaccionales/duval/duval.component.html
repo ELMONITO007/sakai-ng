@@ -1,0 +1,48 @@
+<form [formGroup]="formGroup">
+    <div  class="flex flex-col">
+       
+            <p-toolbar [style]="{ 'border-radius': '1rem', padding: '1.5rem 1rem 1rem 1.5rem' }">
+                <ng-template #start>
+                   
+                    <p-button icon="pi pi-print" (onClick)="print()" class="mr-2" severity="secondary" text />
+                    <p-button icon="pi pi-filter-slash" severity="secondary" text (onClick)="ngOnInit()" />
+                </ng-template>
+
+                <ng-template #center>
+                  
+                    &nbsp;&nbsp;&nbsp;
+                    <p-floatlabel>
+                        <label style="margin-left: 1rem" htmlFor="Empresa">Sector</label>
+                        <div class="p-float-label">
+                            <p-dropdown [style]="{ width: '100%' }" class="formTriple" [options]="Sector" id="Empresa" [required] optionLabel="tipo" optionValue="tipo" placeholder="Sector"></p-dropdown>
+                        </div>
+                    </p-floatlabel>
+                    &nbsp;&nbsp;&nbsp;
+                    <p-floatlabel>
+                        <label style="margin-left: 1rem" htmlFor="Empresa">Tipo de Equipo</label>
+                        <div class="p-float-label">
+                            <p-dropdown [style]="{ width: '100%' }" class="formTriple" [options]="tipoEquipo" id="Empresa" [required] optionLabel="tipo" optionValue="tipo" placeholder="Tipo de Equipo"></p-dropdown>
+                        </div>
+                    </p-floatlabel>
+
+                    &nbsp;&nbsp;&nbsp;
+                    <p-floatlabel>
+                        <p-calendar selectionMode="range" [style]="{ width: '100%' }" [readonlyInput]="true" class="formTriple" />
+                        <label style="margin-left: 1rem" htmlFor="Empresa">Por rango de Fecha*</label>
+                    </p-floatlabel>
+                </ng-template>
+
+                <ng-template #end></ng-template>
+            </p-toolbar>
+        </div>
+        
+    <br>
+    <div class="card" style="background-color: beige;">
+          <canvas id="canvas"  width=650 height=500></canvas>
+    </div>
+
+
+      
+       
+  
+</form>

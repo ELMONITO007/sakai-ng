@@ -61,55 +61,53 @@ export class FisicoEditarComponent implements OnInit {
 
         this.hoy = new Date(currentYear, month, day).toISOString().split('T')[0];
         this.form = this.formBuilder.group({
-            contenidoAgua: [
+            rigidezDialectrica: [
                 '',
                 {
                     validators: [Validators.required]
                 }
             ],
-            observacionesContenidoAgua: ['', {}],
-            indiceAcidez: [
+            tangenteDelta: [
                 '',
                 {
                     validators: [Validators.required]
                 }
             ],
-            observacionesIndiceAcidez: ['', {}],
-            inhibidor: [
-                '',
-                {
-                    validators: [Validators.required]
-                }
-            ],
-            observacionesInhibidor: ['', {}],
             tensionInterfasial: [
                 '',
                 {
                     validators: [Validators.required]
                 }
             ],
-            observacionesTensionInterfasial: ['', {}],
-            rigidezDielectrica: [
+            indiceNeutralizacion: [
                 '',
                 {
                     validators: [Validators.required]
                 }
             ],
-            observacionesRigidezDielectrica: ['', {}],
-            tangente: [
+            contenidoInhibador: [
                 '',
                 {
                     validators: [Validators.required]
                 }
             ],
-            observacionesTangente: ['', {}],
-            color: [
+            contenidoParticulas: [
                 '',
                 {
                     validators: [Validators.required]
                 }
             ],
-            observacionesColor: ['', {}],
+            contenidoBifenilos: [
+                '',
+                {
+                    validators: [Validators.required]
+                }
+            ],
+            humedadAceite: [ '',
+                {
+                    validators: [Validators.required]
+                }
+            ],
             aguaCorregida: ['', {}],
             aguaRelativa: ['', {}],
 
@@ -125,29 +123,32 @@ export class FisicoEditarComponent implements OnInit {
         this.service.obtenerTodos(this.id).subscribe((x) => {
             this.modelo = x;
 
-            if (x.fechaEnsayo != null && x.indiceAcidez != null && x.inhibidor != null && x.tensionInterfasial != null && x.rigidezDielectrica != null && x.tangente != null && x.color != null && x.aguaCorregida != null && x.aguaRelativa != null) {
+            if (
+                x.fechaEnsayo != null &&
+                x.contenidoBifenilos != null &&
+                x.indiceNeutralizacion != null &&
+                x.tensionInterfasial != null &&
+                x.rigidezDialectrica != null &&
+                x.tangenteDelta != null &&
+                x.contenidoInhibador != null &&
+                x.aguaCorregida != null &&
+                x.aguaRelativa != null
+            ) {
                 var dia = this.modelo.fechaEnsayo.slice(0, 2);
                 var mes = this.modelo.fechaEnsayo.slice(3, 5);
                 var anio = this.modelo.fechaEnsayo.slice(6, 10);
                 var fecha = anio + '/' + mes + '/' + dia;
 
-                this.form.get('contenidoAgua')?.setValue(this.modelo.contenidoAgua);
-                this.form.get('observacionesContenidoAgua')?.setValue(this.modelo.observacionesContenidoAgua);
-                this.form.get('indiceAcidez')?.setValue(this.modelo.indiceAcidez);
-                this.form.get('observacionesIndiceAcidez')?.setValue(this.modelo.observacionesIndiceAcidez);
-                this.form.get('inhibidor')?.setValue(this.modelo.inhibidor);
-                this.form.get('observacionesInhibidor')?.setValue(this.modelo.observacionesInhibidor);
+                this.form.get('rigidezDialectrica')?.setValue(this.modelo.rigidezDialectrica);
+                this.form.get('tangenteDelta')?.setValue(this.modelo.tangenteDelta);
                 this.form.get('tensionInterfasial')?.setValue(this.modelo.tensionInterfasial);
-                this.form.get('observacionesTensionInterfasial')?.setValue(this.modelo.observacionesTensionInterfasial);
-                this.form.get('rigidezDielectrica')?.setValue(this.modelo.rigidezDielectrica);
-                this.form.get('observacionesRigidezDielectrica')?.setValue(this.modelo.observacionesRigidezDielectrica);
-                this.form.get('tangente')?.setValue(this.modelo.tangente);
-                this.form.get('observacionesTangente')?.setValue(this.modelo.observacionesTangente);
-                this.form.get('color')?.setValue(this.modelo.color);
-                this.form.get('observacionesColor')?.setValue(this.modelo.observacionesColor);
+                this.form.get('indiceNeutralizacion')?.setValue(this.modelo.indiceNeutralizacion);
+                this.form.get('contenidoInhibador')?.setValue(this.modelo.contenidoInhibador);
+                this.form.get('contenidoParticulas')?.setValue(this.modelo.contenidoParticulas);
+                this.form.get('contenidoBifenilos')?.setValue(this.modelo.contenidoBifenilos);
                 this.form.get('aguaCorregida')?.setValue(this.modelo.aguaCorregida);
-
                 this.form.get('aguaRelativa')?.setValue(this.modelo.aguaRelativa);
+                this.form.get('humedadAceite')?.setValue(this.modelo.humedadAceite);
 
                 this.form.get('fechaEnsayo')?.setValue(new Date(fecha).toISOString().split('T')[0]);
                 this.form.get('linkArchivo')?.setValue(this.modelo.linkArchivo);
@@ -162,12 +163,12 @@ export class FisicoEditarComponent implements OnInit {
     completarAgua() {
         this.temp = Number.parseInt(this.temperatura) * -0.04;
         var exp = Math.exp(this.temp);
-        var agua = Number.parseFloat(this.form.get('contenidoAgua').value);
+        var agua = Number.parseFloat(this.form.get('humedadAceite').value);
         var aguaCorregida = agua * exp * 2.24;
         this.form.get('aguaCorregida').setValue(aguaCorregida);
         //agua corregida
         var t = Number.parseInt(this.temperatura);
-        var agua = Number.parseFloat(this.form.get('contenidoAgua').value);
+        var agua = Number.parseFloat(this.form.get('humedadAceite').value);
         var NPTA = 100;
         var NACHR = 0;
         var tempK = 273.15 + t;
@@ -186,34 +187,14 @@ export class FisicoEditarComponent implements OnInit {
                 id_FisicoQuimico: id,
 
                 id_OrdenEnsayo: this.id,
-
-                contenidoAgua: this.form.get('contenidoAgua').value,
-
-                observacionesContenidoAgua: this.form.get('observacionesContenidoAgua').value,
-
-                indiceAcidez: this.form.get('indiceAcidez').value,
-
-                observacionesIndiceAcidez: this.form.get('observacionesIndiceAcidez').value,
-
-                inhibidor: this.form.get('inhibidor').value,
-
-                observacionesInhibidor: this.form.get('observacionesInhibidor').value,
-
+                rigidezDialectrica: this.form.get('rigidezDialectrica').value,
+                tangenteDelta: this.form.get('tangenteDelta').value,
                 tensionInterfasial: this.form.get('tensionInterfasial').value,
-
-                observacionesTensionInterfasial: this.form.get('observacionesTensionInterfasial').value,
-
-                rigidezDielectrica: this.form.get('rigidezDielectrica').value,
-
-                observacionesRigidezDielectrica: this.form.get('observacionesRigidezDielectrica').value,
-
-                tangente: this.form.get('tangente').value,
-
-                observacionesTangente: this.form.get('observacionesTangente').value,
-
-                color: this.form.get('color').value,
-
-                observacionesColor: this.form.get('observacionesColor').value,
+                indiceNeutralizacion: this.form.get('indiceNeutralizacion').value,
+                contenidoInhibador: this.form.get('contenidoInhibador').value,
+                contenidoParticulas: this.form.get('contenidoParticulas').value,
+                contenidoBifenilos: this.form.get('contenidoBifenilos').value,
+                humedadAceite: this.form.get('humedadAceite').value,
 
                 aguaCorregida: this.form.get('aguaCorregida').value,
 

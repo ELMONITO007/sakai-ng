@@ -1,14 +1,16 @@
 <p-toast></p-toast>
-<p-card>
+
+
+
+<p-card >
     <app-breadcrumb-router [items]="items"></app-breadcrumb-router>
 
     <p-toolbar styleClass="mb-6">
         <ng-template #start>
             <div class="flex">
-              
-    <p-button type="button" icon="pi pi-chevron-left" (click)="prev()" [disabled]="isFirstPage()" text />
-    <p-button type="button" icon="pi pi-refresh" (click)="reset()" text />
-    <p-button type="button" icon="pi pi-chevron-right" (click)="next()" [disabled]="isLastPage()" text />
+                <p-button type="button" icon="pi pi-chevron-left" (click)="prev()" [disabled]="isFirstPage()" text />
+                <p-button type="button" icon="pi pi-refresh" (click)="reset()" text />
+                <p-button type="button" icon="pi pi-chevron-right" (click)="next()" [disabled]="isLastPage()" text />
 
                 <p-button label="Limpiar" icon="pi pi-filter-slash" severity="primary" (click)="clear(dt1)" [rounded]="true" [outlined]="true" />
                 &nbsp;
@@ -16,12 +18,10 @@
                 <p-button label="Nuevo" icon="pi pi-plus" severity="secondary" (onClick)="crear()" [rounded]="true" [outlined]="true" />
                 &nbsp;
                 <p-button label="Exportar" icon="pi pi-file-excel" severity="info" (onClick)="exportExcel(dt1)" [rounded]="true" [outlined]="true" />
-           &nbsp;
-             
-           <p-button *ngIf="soloAbiertos" label="Ver cerrados" icon="pi pi-times" severity="warn" (onClick)="mostrarTodo(false)" [rounded]="true" [outlined]="true" />
+                &nbsp;
+
+                <p-button *ngIf="soloAbiertos" label="Ver cerrados" icon="pi pi-times" severity="warn" (onClick)="mostrarTodo(false)" [rounded]="true" [outlined]="true" />
                 <p-button *ngIf="!soloAbiertos" label="Ver abiertos" icon="pi pi-check" severity="warn" (onClick)="mostrarTodo(true)" [rounded]="true" [outlined]="true" />
-               
-               
             </div>
         </ng-template>
 
@@ -35,14 +35,14 @@
         </ng-template>
     </p-toolbar>
 
-    <p-table
+    <p-table *ngIf="!skeleton"
         styleClass="p-datatable-gridlines"
         #dt1
         [value]="modelo"
         dataKey="id"
         [rows]="10"
-            [first]="first"
-             (onPage)="pageChange($event)"
+        [first]="first"
+        (onPage)="pageChange($event)"
         showGridlines
         stripedRows
         [rowsPerPageOptions]="[10, 25, 50]"
@@ -55,8 +55,6 @@
     >
         <ng-template #header>
             <tr>
-                
-
                 <th pResizableColumn pSortableColumn="numeroOrden">
                     <div class="flex items-center">
                         Orden N°
@@ -87,14 +85,14 @@
 
                 <th pResizableColumn pSortableColumn="fechaExtraccion">
                     <div class="flex items-center">
-                       Extracción
+                        Extracción
                         <p-columnFilter type="text" field="fechaExtraccion" display="menu" />
                     </div>
                 </th>
 
                 <th pResizableColumn pSortableColumn="fechaFinalizacion">
                     <div class="flex items-center">
-                      Finalización
+                        Finalización
                         <p-columnFilter type="text" field="fechaFinalizacion" display="menu" />
                     </div>
                 </th>
@@ -106,8 +104,6 @@
                     </div>
                 </th>
 
-              
-
                 <th pResizableColumn>
                     <div class="flex items-center">Acciones</div>
                 </th>
@@ -117,7 +113,7 @@
             <tr>
                 <td class="cursor-pointer hover:!bg-neutral-200/20" (click)="ir(orden.id_OrdenEnsayo)">{{ orden.numeroOrden }}</td>
                 <td class="cursor-pointer hover:!bg-neutral-200/20" (click)="ir(orden.id_OrdenEnsayo)">{{ orden.equipo }}</td>
-       
+
                 <td class="cursor-pointer hover:!bg-neutral-200/20" (click)="ir(orden.id_OrdenEnsayo)">{{ orden.usuario }}</td>
 
                 <td class="cursor-pointer hover:!bg-neutral-200/20" (click)="ir(orden.id_OrdenEnsayo)">{{ orden.fechaCreacion }}</td>
@@ -125,7 +121,6 @@
                 <td class="cursor-pointer hover:!bg-neutral-200/20" (click)="ir(orden.id_OrdenEnsayo)">{{ orden.fechaFinalizacion }}</td>
                 <td class="cursor-pointer hover:!bg-neutral-200/20" (click)="ir(orden.id_OrdenEnsayo)">{{ orden.nombreSector }}</td>
 
-                
                 <td>
                     <p-button icon="pi pi-pencil" class="mr-2" (onClick)="editar(orden.id_OrdenEnsayo)" [rounded]="true" [outlined]="true" size="small" />
                     <p-button icon="pi pi-trash" (onClick)="openDelete(orden.id_OrdenEnsayo)" severity="danger" [rounded]="true" [outlined]="true" size="small" />
@@ -158,4 +153,94 @@
             </tr>
         </ng-template>
     </p-table>
+
+   
+    <p-table *ngIf="skeleton"  styleClass="p-datatable-gridlines"
+        #dt1
+        [value]="modelo"
+        dataKey="id"
+        [rows]="10"
+        [first]="first"
+        (onPage)="pageChange($event)"
+        showGridlines
+        stripedRows
+        [rowsPerPageOptions]="[10, 25, 50]"
+        [loading]="loading"
+        [paginator]="true"
+        [tableStyle]="{ 'min-width': '35rem' }"
+        [resizableColumns]="true"
+        [globalFilterFields]="['numeroOrden', 'equipo', 'estado', 'usuario', 'fechaCreacion', 'fechaExtraccion', 'fechaFinalizacion', 'estado']"
+        currentPageReportTemplate="Mostrando {first} de {last} de un total de {totalRecords} registros"
+       
+      >
+        <ng-template #header>
+            <tr>
+                <th pResizableColumn pSortableColumn="numeroOrden">
+                    <div class="flex items-center">
+                        Orden N°
+                        <p-columnFilter type="text" field="numeroOrden" display="menu" />
+                    </div>
+                </th>
+
+                <th pResizableColumn pSortableColumn="equipo">
+                    <div class="flex items-center">
+                        Equipo
+                        <p-columnFilter type="text" field="equipo" display="menu" />
+                    </div>
+                </th>
+
+                <th pResizableColumn pSortableColumn="usuario">
+                    <div class="flex items-center">
+                        Creador
+                        <p-columnFilter type="text" field="usuario" display="menu" />
+                    </div>
+                </th>
+
+                <th pResizableColumn pSortableColumn="fechaCreacion">
+                    <div class="flex items-center">
+                        Creación
+                        <p-columnFilter type="text" field="fechaCreacion" display="menu" />
+                    </div>
+                </th>
+
+                <th pResizableColumn pSortableColumn="fechaExtraccion">
+                    <div class="flex items-center">
+                        Extracción
+                        <p-columnFilter type="text" field="fechaExtraccion" display="menu" />
+                    </div>
+                </th>
+
+                <th pResizableColumn pSortableColumn="fechaFinalizacion">
+                    <div class="flex items-center">
+                        Finalización
+                        <p-columnFilter type="text" field="fechaFinalizacion" display="menu" />
+                    </div>
+                </th>
+
+                <th pResizableColumn pSortableColumn="nombreSector">
+                    <div class="flex items-center">
+                        Sector
+                        <p-columnFilter type="text" field="nombreSector" display="menu" />
+                    </div>
+                </th>
+
+                <th pResizableColumn>
+                    <div class="flex items-center">Acciones</div>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-product>
+            <tr>
+                <td><p-skeleton /></td>
+                <td><p-skeleton /></td>
+                <td><p-skeleton /></td>
+                <td><p-skeleton /></td>
+                <td><p-skeleton /></td>
+                <td><p-skeleton /></td>
+                <td><p-skeleton /></td>
+                <td><p-skeleton /></td>
+            </tr>
+        </ng-template>
+    </p-table>
+
 </p-card>

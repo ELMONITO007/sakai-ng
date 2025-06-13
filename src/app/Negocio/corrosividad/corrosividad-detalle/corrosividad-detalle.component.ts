@@ -29,10 +29,11 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { TooltipModule } from 'primeng/tooltip';
 import { UsuarioServiceService } from '../../../Servicios/Usuario-service.service';
 import { usuarioDTO } from '../../../Entidades/usuario';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @Component({
     selector: 'app-corrosividad-detalle',
-    imports: [ButtonModule, CardModule, HttpClientModule, InputTextModule,DialogModule, CheckboxModule, FileUploadModule, MatIconModule, FormsModule, ReactiveFormsModule, CommonModule, FloatLabelModule, InputGroupModule, InputGroupAddonModule, TooltipModule],
+    imports: [ButtonModule, CardModule, HttpClientModule, InputTextModule,DialogModule, CheckboxModule,InputNumberModule, FileUploadModule, MatIconModule, FormsModule, ReactiveFormsModule, CommonModule, FloatLabelModule, InputGroupModule, InputGroupAddonModule, TooltipModule],
 
     providers: [MessageService, DialogService, CorrosividadServiceService,UsuarioServiceService],
     templateUrl: './corrosividad-detalle.component.html',
@@ -54,8 +55,13 @@ export class CorrosividadDetalleComponent implements OnInit {
       @Input() estado: string;
     ngOnInit(): void {
         this.form = this.formBuilder.group({
-            corrosivoASTM: ['', {}],
-            corrosivoDIN: ['', {}],
+            determinacionCorrosivoCobre: ['', {}],
+            determinacionCorrosivoPlata: ['', {}],
+            potencialmenteCorrosivoCobre: ['', {}],
+            potencialmenteCorrosivoPapel: ['', {}],
+            contendioDBDS: ['', {}],
+            contenidoPasivador: ['', {}],
+            observaciones: ['', {}],
 
             fechaEnsayo: ['', {}],
             linkArchivo: ['', {}]
@@ -63,8 +69,13 @@ export class CorrosividadDetalleComponent implements OnInit {
         this.service.obtenerTodos(this.id).subscribe((x) => {
             this.modelo = x;
             if (this.modelo.fechaEnsayo != null) {
-                this.form.get('corrosivoASTM')?.setValue(this.modelo.corrosivoASTM);
-                this.form.get('corrosivoDIN')?.setValue(this.modelo.corrosivoDIN);
+                this.form.get('determinacionCorrosivoCobre')?.setValue(this.modelo.determinacionCorrosivoCobre);
+                this.form.get('determinacionCorrosivoPlata')?.setValue(this.modelo.determinacionCorrosivoPlata);
+                this.form.get('potencialmenteCorrosivoCobre')?.setValue(this.modelo.potencialmenteCorrosivoCobre);
+                this.form.get('potencialmenteCorrosivoPapel')?.setValue(this.modelo.potencialmenteCorrosivoPapel);
+                this.form.get('contendioDBDS')?.setValue(this.modelo.contendioDBDS);
+                this.form.get('contenidoPasivador')?.setValue(this.modelo.contenidoPasivador);
+                this.form.get('observaciones')?.setValue(this.modelo.observaciones);
 
                 this.form.get('fechaEnsayo')?.setValue(new Date(this.modelo.fechaEnsayo).toISOString().split('T')[0]);
                 this.form.get('linkArchivo')?.setValue(this.modelo.linkArchivo);

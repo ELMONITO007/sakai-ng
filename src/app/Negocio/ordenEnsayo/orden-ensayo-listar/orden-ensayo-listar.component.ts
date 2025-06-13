@@ -26,11 +26,12 @@ import { LaboratorioServiceService } from '../../../Servicios/Laboratorio-servic
 import { sectorDTO } from '../../../Entidades/sector';
 import { EquipoServiceService } from '../../../Servicios/Equipo-service.service';
 import { CommonModule } from '@angular/common';
+import {  SkeletonModule } from 'primeng/skeleton';
 
 @Component({
     selector: 'app-orden-ensayo-listar',
     standalone: true,
-    imports: [ButtonModule, CommonModule, CardModule, TableModule, HttpClientModule, ToolbarModule, IconFieldModule, BreadcrumbRouterComponent, InputIconModule, InputTextModule, DialogModule, MessageModule, ToastModule],
+    imports: [ButtonModule, CommonModule,SkeletonModule, CardModule, TableModule, HttpClientModule, ToolbarModule, IconFieldModule, BreadcrumbRouterComponent, InputIconModule, InputTextModule, DialogModule, MessageModule, ToastModule],
     providers: [OrdenEnsayoServiceService, DialogService, MessageService, UsuarioServiceService, LaboratorioServiceService, EquipoServiceService],
     templateUrl: './orden-ensayo-listar.component.html',
     styleUrl: './orden-ensayo-listar.component.scss'
@@ -49,6 +50,7 @@ export class OrdenEnsayoListarComponent implements OnInit {
     usuario: usuarioDTO;
     first = 0;
     soloAbiertos = true;
+    skeleton: boolean = true;
 
     rows = 10;
     constructor(
@@ -83,11 +85,14 @@ this.modelo = [];
                     }
                 });
             }
+            setTimeout(() => {
+              this.skeleton = false;},3000);
         });
         this.items = [
             { label: 'Home', icon: 'pi pi-home', route: '', primary: false },
             { label: 'OrdenEnsayo', icon: 'pi pi-fw pi-user', route: '/ordenEnsayo', primary: true }
         ];
+      
     }
     exportCSV() {
         this.dt1.exportCSV();

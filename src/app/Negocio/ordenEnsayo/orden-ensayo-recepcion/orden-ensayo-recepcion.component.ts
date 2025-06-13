@@ -100,6 +100,7 @@ export class OrdenEnsayoRecepcionComponent implements OnInit {
         this.ref.close(null);
     }
     onSubmit() {
+        this.loading = true;
         this.usuarioService.getUsuarioLogeado().subscribe((usuario: usuarioDTO) => {
             this.service.obtenerUno(this.config.data['id']).subscribe((orden: ordenEnsayoDTO) => {
                 this.t = this.form.get('temperatura').value;

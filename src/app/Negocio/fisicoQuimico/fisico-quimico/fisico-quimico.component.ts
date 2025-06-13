@@ -31,12 +31,12 @@ export class FisicoQuimicoComponent implements OnInit {
  ngOnInit(): void {
 
         this.service.obtenerTodos(this.id).subscribe((data) => {
-            if (data.fechaEnsayo == null && data.rigidezDielectrica == null && data.aguaRelativa == null && data.tensionInterfasial == null && this.puedeEditar) {
+            if (data.fechaEnsayo == null && data.contenidoBifenilos == null && data.aguaRelativa == null && data.tensionInterfasial == null && this.puedeEditar) {
                 this.vacio = true;
                 this.detalle = false;
                 this.editar = false;
             }
-             if( data.fechaEnsayo != null && data.rigidezDielectrica != null && data.aguaRelativa != null && data.tensionInterfasial != null && this.puedeEditar ){
+             if( data.fechaEnsayo != null && data.contenidoBifenilos != null && data.aguaRelativa != null && data.tensionInterfasial != null && this.puedeEditar ){
                 this.editar = false;
                 this.vacio = false;
                 this.detalle = true;
