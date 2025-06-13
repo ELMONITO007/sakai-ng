@@ -119,7 +119,7 @@ export class OrdenEnsayoDetalleComponent implements OnInit {
                 this.items = [
                     { label: 'Home', icon: 'pi pi-home', route: '/index', primary: false },
                     { label: 'OrdenEnsayo', icon: 'pi pi-fw pi-user', route: '/ordenEnsayo', primary: false },
-                    { label: 'Detalle OE N° ' + data.numeroOrden, icon: 'pi pi-fw pi-user', route: '/ordenEnsayo' + id, primary: true }
+                    { label: 'Detalle OE N° ' + data.numeroOrden, icon: 'pi pi-fw pi-user', route: '/ordenEnsayo/' + id, primary: true }
                 ];
               
             });
@@ -141,6 +141,7 @@ export class OrdenEnsayoDetalleComponent implements OnInit {
         this.ref = this.dialogService.open(OrdenEnsayoQRComponent, {
             width: '30%',
             height: '70%',
+            closable: true,
             data: {
                 id: id
             },

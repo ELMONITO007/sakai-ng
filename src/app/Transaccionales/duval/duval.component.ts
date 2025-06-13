@@ -6,6 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { CardModule } from 'primeng/card';
 import { CheckboxModule } from 'primeng/checkbox';
+import { DialogModule } from 'primeng/dialog';
 import { DividerModule } from 'primeng/divider';
 import { DropdownModule } from 'primeng/dropdown';
 import { FloatLabelModule } from 'primeng/floatlabel';
@@ -32,7 +33,7 @@ interface tipo {
             CardModule,
             CommonModule,
             CheckboxModule,
-    
+    DialogModule,
             AccordionModule,
             TabViewModule,
             CalendarModule,
@@ -427,5 +428,28 @@ export class DuvalComponent implements OnInit {
         ctx.font = '10px Arial';
         ctx.fillStyle = 'black';
         ctx.fillText(label, x - 11, y + 6); // Ajusta la posición del texto respecto al punto
+    }
+visible3: boolean = false;
+loading: boolean = true;
+texto:string;
+
+    diagnostico() {
+        this.visible3 = true;
+
+
+
+
+
+
+
+        // Simulación de una llamada a un servicio para obtener el diagnóstico
+        setTimeout(() => {
+            this.loading = false;
+            // Aquí puedes asignar el diagnóstico obtenido a una variable
+            // Por ejemplo: this.diag = 'Diagnóstico obtenido del servicio';
+        }, 4000); // Simula un retraso de 2 segundos
+
+
+
     }
 }

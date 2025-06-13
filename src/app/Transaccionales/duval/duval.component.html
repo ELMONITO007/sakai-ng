@@ -42,7 +42,109 @@
     </div>
 
 
-      
+       <p-dialog [(visible)]="visible3" appendTo="body" [modal]="true" [style]="{ width: '65vw' }" header="Diagnostico del Analísis gases disueltos" [draggable]="false" [resizable]="true" [maximizable]="true">
+          
+            <div *ngIf="loading">
+                <h5>Generando el reporte, esto puede demorar unos minutos</h5>
+                <p-skeleton styleClass="mb-2" />
+                <p-skeleton styleClass="mb-2" />
+                <p-skeleton styleClass="mb-2" />
+            </div>
+            <p *ngIf="!loading" class="text-700 line-height-3 m-0 p-5 w-full md:w-8" id="just-line-break">
+                
+
+       
+1. ¿Qué es esta imagen?
+<br>
+<br>Esta imagen muestra un Triángulo de Duval, una herramienta de diagnóstico gráfico utilizada en el Análisis de Gases Disueltos (DGA). Se aplica para interpretar los resultados de los gases generados en el aceite aislante de equipos eléctricos, como los transformadores de potencia. El objetivo es identificar el tipo de falla que podría estar ocurriendo dentro del equipo.
+<br>
+<br>El triángulo utiliza los porcentajes relativos de tres gases clave:&#10;&#13;
+<br>
+<br>% CH4 (Metano): En el eje izquierdo.&#10;&#13;
+<br>
+<br>% C2H4 (Etileno): En el eje derecho.&#10;&#13;
+<br>
+<br>% C2H2 (Acetileno): En el eje inferior (base).&#10;&#13;
+<br>
+<br>La posición de un punto en el gráfico, determinada por la concentración de estos tres gases, indica la naturaleza de la falla.&#10;&#13;
+<br>
+<br>2. Diagnóstico de las Zonas del Triángulo&#10;&#13;
+<br>
+<br>El triángulo está dividido en varias zonas, cada una correspondiendo a un tipo de falla específico:&#10;&#13;
+<br>
+<br>PD (Partial Discharge - Descargas Parciales): Descargas eléctricas de baja energía que no llegan a formar un puente completo entre electrodos. Típicamente, producen hidrógeno y algo de metano.
+<br>
+<br>T1 (Thermal Fault < 300 °C - Falla Térmica de baja temperatura): Sobrecalentamiento del papel aislante o del aceite por debajo de 300 °C.
+<br>
+<br>T2 (Thermal Fault 300-700 °C - Falla Térmica de temperatura media): Sobrecalentamiento del aceite y/o papel en un rango de temperatura más elevado.
+<br>
+<br>T3 (Thermal Fault > 700 °C - Falla Térmica de alta temperatura): Sobrecalentamiento severo, a menudo en los conductores metálicos, que puede llevar a la carbonización del aceite (coking).
+<br>
+<br>D1 (Discharges of Low Energy - Descargas de Baja Energía): Arcos eléctricos de baja energía (chispas o "sparking"). Generan principalmente acetileno e hidrógeno.
+<br>
+<br>D2 (Discharges of High Energy - Descargas de Alta Energía): Arcos eléctricos de alta energía, que son fallas más severas y destructivas. Producen grandes cantidades de acetileno.
+<br>
+<br>DT (Thermal and Electrical Faults - Fallas Mixtas): Una combinación de fallas térmicas y descargas eléctricas.
+<br>
+<br>3. Interpretación de los Puntos en el Gráfico
+<br>
+<br>Los puntos de colores representan mediciones reales de gases de diferentes equipos o momentos. A continuación se detalla el diagnóstico para cada punto según su ubicación en el triángulo:
+<br>
+<br>Punto T1RO (Rojo):
+<br>
+<br>Ubicación: Zona T1.
+<br>
+<br>Diagnóstico: Falla térmica de baja temperatura (< 300 °C).
+<br>
+<br>Punto T2RO (Verde):
+<br>
+<br>Ubicación: Zona T2.
+<br>
+<br>Diagnóstico: Falla térmica de temperatura media (300 °C - 700 °C).
+<br>
+<br>Punto T3RI (Rosa):
+<br>
+<br>Ubicación: Zona T3.
+<br>
+<br>Diagnóstico: Falla térmica de alta temperatura (> 700 °C).
+<br>
+<br>Punto T1RI (Azul):
+<br>
+<br>Ubicación: Zona D2.
+<br>
+<br>Diagnóstico: Descarga de alta energía (arco eléctrico severo).
+<br>
+<br>Punto T2RI (Naranja):
+<br>
+<br>Ubicación: Zona D2.
+<br>
+<br>Diagnóstico: Descarga de alta energía (arco eléctrico severo).
+<br>
+<br>Punto T3RO (Púrpura):
+<br>
+<br>Ubicación: Zona D1.
+<br>
+<br>Diagnóstico: Descarga de baja energía (chispas o arco de baja intensidad).
+<br>
+<br>Observación importante: Las etiquetas de los puntos (como T1RI, T2RI) pueden ser identificadores de la muestra o del equipo y no necesariamente coinciden con el tipo de falla. El diagnóstico correcto se obtiene de la zona del gráfico en la que se encuentra el punto. Por ejemplo, el punto "T1RI" indica una falla de tipo "D2", no una "T1".
+<br>
+<br>Resumen del Diagnóstico
+<br>
+<br>El gráfico muestra los resultados de seis análisis de gases diferentes, indicando una variedad de condiciones de falla:
+<br>
+<br>Tres fallas son de origen térmico con diferentes niveles de severidad (T1, T2, T3).
+<br>
+<br>Tres fallas son de origen eléctrico (arcos), dos de ellas de alta energía (D2) y una de baja energía (D1), lo que sugiere problemas graves en los equipos correspondientes.
+            </p>
+
+          
+                <div  *ngIf="!loading" class="border-top-1 surface-border pt-3" style="text-align: center;">
+                    <img src="img/duvalTest.png" alt="Duval Triangle" style="width: 100%; height: auto;" />
+                   
+                </div>
+          
+        </p-dialog>
        
   
+        <p-button label="Generar Reporte" icon="pi pi-file" (onClick)="diagnostico()" class="mt-3" severity="secondary" ></p-button>
 </form>

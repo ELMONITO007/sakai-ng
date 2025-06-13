@@ -28,6 +28,7 @@ import { AgdElevadoComponent } from './app/Transaccionales/agd-elevado/agd-eleva
 import { AgdPresionesComponent } from './app/Transaccionales/agd-presiones/agd-presiones.component';
 import { DuvalComponent } from './app/Transaccionales/duval/duval.component';
 import { FisicoQuimicoComponent } from './app/Transaccionales/fisico-quimico/fisico-quimico.component';
+import { SistesisComponent } from './app/Transaccionales/sistesis/sistesis.component';
 
 export const appRoutes: Routes = [
     { path: 'login', component: GoogleLoginComponent },
@@ -62,6 +63,7 @@ export const appRoutes: Routes = [
             { path: 'reporte/agdPresiones', component: AgdPresionesComponent },
               {path:'reporte/duval',component:DuvalComponent},
                   {path:'reporte/fisicoQuimico',component:FisicoQuimicoComponent},
+                    {path:'reporte/sintesis',component:SistesisComponent},
         ]
     },
 

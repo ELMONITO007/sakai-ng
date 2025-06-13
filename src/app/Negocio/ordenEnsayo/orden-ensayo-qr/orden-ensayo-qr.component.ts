@@ -20,11 +20,12 @@ export class OrdenEnsayoQRComponent implements OnInit {
      public ref: DynamicDialogRef, 
         public config: DynamicDialogConfig,
  private elementRef: ElementRef
+ 
     ) {}
 
     ngOnInit(): void {
         this.id = this.config.data['id'];
-        this.qrCodeValue = 'http://localhost:4200/ordenEnsayo/' + this.config.data['id'];
+        this.qrCodeValue = 'https://backendentrevistarrhh.transener.com.ar/' + this.config.data['id'];
     }
 
   print() {

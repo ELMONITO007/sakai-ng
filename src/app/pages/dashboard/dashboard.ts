@@ -4,11 +4,16 @@ import { AuthGoogleService } from '../../Servicios/auth-google.service';
 import { UsuarioServiceService } from '../../Servicios/Usuario-service.service';
 import { usuarioDTO } from '../../Entidades/usuario';
 import { CommonModule } from '@angular/common';
+import { BestSellingWidget } from './components/bestsellingwidget';
+import { NotificationsWidget } from './components/notificationswidget';
+import { RecentSalesWidget } from './components/recentsaleswidget';
+import { RevenueStreamWidget } from './components/revenuestreamwidget';
+import { EstadisticasComponent } from './estadisticas/estadisticas.component';
 
 @Component({
     selector: 'app-dashboard',
     standalone: true,
-    imports: [CommonModule],
+    imports: [ RecentSalesWidget, BestSellingWidget, RevenueStreamWidget, NotificationsWidget,CommonModule,EstadisticasComponent],
     templateUrl: './dashboard.component.html',
     providers: [UsuarioServiceService,
        AuthGoogleService

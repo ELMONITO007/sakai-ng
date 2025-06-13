@@ -89,7 +89,7 @@ this.modelo = [];
               this.skeleton = false;},3000);
         });
         this.items = [
-            { label: 'Home', icon: 'pi pi-home', route: '', primary: false },
+            { label: 'Home', icon: 'pi pi-home', route: '/index', primary: false },
             { label: 'OrdenEnsayo', icon: 'pi pi-fw pi-user', route: '/ordenEnsayo', primary: true }
         ];
       
